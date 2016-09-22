@@ -9,8 +9,10 @@
     <title>React App</title>
   </head>
   <body>
-    <div class="main navExpanded">
-        <header>
+    <div id="root">
+    </div>
+<!--     <div class="main navExpanded">
+ --><!--         <header>
           <div class="container">
             <div class="navbar-header">
               <img class="job-ufo-logo" />
@@ -29,9 +31,9 @@
               </div>
             </div>
           </div>
-        </header>
+        </header> -->
 
-      <div class="sidebar-wrapper">
+<!--       <div class="sidebar-wrapper">
           <div class="sidebar">
             <ul>
               <li>
@@ -51,8 +53,8 @@
               </li>
             </ul>
           </div>
-      </div>
-      <div class="content-wrapper">
+      </div> -->
+<!--       <div class="content-wrapper">
           <div class="content">
               <div class="tab-panel">
                 <input type="radio" name="odin" checked="checked" id="vkl1"/><label for="vkl1" class="tab-title">offentlich</label><input type="radio" name="odin" id="vkl2"/><label for="vkl2" class="tab-title">vorbereitet</label><input type="radio" name="odin" id="vkl3"/><label for="vkl3" class="tab-title">geschlossen</label>
@@ -235,24 +237,26 @@
                             </div> 
                         </div>
                   </div>
-    <!--                   <div class="filter-dropdown">
+                    <div class="filter-dropdown">
                         <span id="filter">Filter</span>
                         <i class="fa fa-angle-down rotate" aria-hidden="true"></i>
                         <div class="filter-dropdown-content">
                           <p>Hello World!</p>
                         </div>
-                      </div> -->
+                      </div>
                     <div class="tab">    
                         <h2 class="jobs-counter">16 <b>JOBS</b> ÖFFENTLICH</h2>
                     </div>
                     <div class="tab">    
                         <h2 class="jobs-counter">16 <b>JOBS</b> ÖFFENTLICH</h2>
                     </div>
+                                                        <div id="root"></div>
+
               </div>
               </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -268,10 +272,11 @@
       // $("#filter").click(function(e) {
       //     $('.filter-dropdown-content').toggleClass("opened")
       // })
-      $("#toggle").click(function(e) {
-        $('.main').toggleClass("navExpanded")
-      })
+      // $("#toggle").click(function(e) {
+      //   $('.main').toggleClass("navExpanded")
+      // })
       $(".job-item").click(function(e) {
+        console.log('here')
         $(".job-item.active").removeClass("active")
         $(this).toggleClass("active")
       })

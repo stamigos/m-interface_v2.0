@@ -90,8 +90,8 @@ class FilterDropdown extends Component {
 
 export default FilterDropdown;
 
-ReactDOM.render(
-  <FilterDropdown />,
-  document.getElementById('filters')
-);
+// ReactDOM.render(
+//   <FilterDropdown />,
+//   document.getElementById('filters')
+// );
 
