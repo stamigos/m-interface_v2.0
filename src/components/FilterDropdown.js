@@ -9,19 +9,6 @@ class FilterElement extends Component {
   }
 }
 class Filter extends Component {
-  // constructor(props){
-  //   super(props)
-  //   this.state = this.getState();
-  //   this.onSelectChange = this.onSelectChange.bind(this)
-  // }
-  // getState() {
-  //   return {
-  //     jobTypeFilter: 'Alle jobs',
-  //     locationFilter: 'Ort',
-  //     subsidiaryFilter: 'Filiale',
-  //     expanded: true
-  //   }
-  // }
   render() {
     return (
           <select className="filter-field">
@@ -38,7 +25,6 @@ class FilterDropdown extends Component {
     this.state = this.getState();
     this.onResetClick = this.onResetClick.bind(this)
     this.onExpandClick = this.onExpandClick.bind(this)
-    // this.onSelectChange = this.onSelectChange.bind(this)
   }
   getState() {
     return {
@@ -48,18 +34,7 @@ class FilterDropdown extends Component {
       collapsed: true
     }
   }
-  // onSelectChange(event) {
-  //   console.log(event.target.value)
-  //   this.setState({
-  //     optionValue: event.target.value
-  //   })
-  // }
   onResetClick() {
-    // this.setState({
-    //   jobTypeFilter: 'Alle jobs',
-    //   locationFilter: 'Ort',
-    //   subsidiaryFilter: 'Filiale'
-    // })
     this.setState({      
       jobTypeFilter: 'Alle jobs',
       locationFilter: 'Ort',
@@ -89,9 +64,4 @@ class FilterDropdown extends Component {
 }
 
 export default FilterDropdown;
-
-// ReactDOM.render(
-//   <FilterDropdown />,
-//   document.getElementById('filters')
-// );
 

@@ -5,7 +5,6 @@ import List from 'react-list-select'
 
 import FilterDropdown from '../components/FilterDropdown'
 
-// const JobListTabs = Tabs;
 class JobItem extends React.Component {
 	render() {
 		return (
@@ -25,7 +24,7 @@ class JobsList extends React.Component {
 		var rows = [];
 		rows.push(<JobItem isActive={true} />)
 		for (var i=1; i<30; i++) {
-			rows.push(<JobItem key={i}/>)
+			rows.push(<JobItem isActive={false} key={i}/>)
 		}
 		return rows
 	}
@@ -41,23 +40,6 @@ class JobsList extends React.Component {
 		);
 	}
 }
-			      // <JobListTabs>
-				     //    <JobListTabs.Panel title='offentlich'>
-			      //   		<FilterDropdown />
-				     //     	<h2 className="jobs-counter">2 <b>JOBS</b> ÖFFENTLICH</h2>
-				     //     	<JobsList />
-				     //    </JobListTabs.Panel>
-				     //    <JobListTabs.Panel title='vorbereitet'>
-				     //    	<FilterDropdown />
-				     //      	<h2 className="jobs-counter">16 <b>JOBS</b> vorbereitet</h2>
-				     //      	<JobsList />
-				     //    </JobListTabs.Panel>
-				     //    <JobListTabs.Panel title='geschlossen'>
-				     //    	<FilterDropdown />
-				     //      	<h2 className="jobs-counter">18 <b>JOBS</b> geschlossen</h2>
-				     //      	<JobsList />
-				     //    </JobListTabs.Panel>
-			      // </JobListTabs>
 
 export default class Jobs extends React.Component {
 	render() {

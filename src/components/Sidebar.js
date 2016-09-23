@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router'
-				// <Link to="/">JOBS</Link>
-				// <Link to="dashboard">DASHBOARD</Link>
 
 export default class Sidebar extends React.Component {
 	render() {

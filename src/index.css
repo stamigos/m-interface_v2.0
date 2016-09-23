@@ -287,7 +287,6 @@ header {
     font-size: 15px;
     width: 270px;
     margin-bottom: 20px;
-    /* margin-left: 20px; */
     padding: 8px 0;
     color: #9f92b1;
     border: none;
@@ -492,15 +491,8 @@ h2.location {
 /* ------------ TABS JOB DETAIL --------- */
 .job-messages {
     padding-top: 10px;
-/*    position: relative;
-    display: flex;*/
-/*    margin-left: 15px;
-    border-top: 1px solid #f6f4f9;
-    border-bottom: 1px solid #f6f4f9;*/
 }
 .job-messages .ReactTabs.react-tabs {
-/*  max-height: 50px;
-  padding: 0 5px;*/
   padding-bottom: 11px;
   position: fixed;
   display: block;
