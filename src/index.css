@@ -206,8 +206,11 @@ header {
 .navExpanded .sidebar-wrapper span.detail {
     opacity: 1;
 }
-.navExpanded .content-wrapper{
+.navExpanded .content-wrapper {
     left:200px;
+}
+.navExpanded .job-detail-wrapper {
+    left:524px;
 }
 /* ------------ END SIDEBAR ------------- */
 
@@ -379,21 +382,22 @@ h2 b {
     right: 0;
     height: 100%;
 }
-.jobs-container ul {
+.jobs-container .react-list-select{
     list-style: none;
-        padding-bottom: 80px;
+    padding-bottom: 80px;
 }
-a.job-item {
+.jobs-container .react-list-select--item {
     position: relative;
     display: block;
     padding: 18px 25px;
     border-bottom: 1px solid #ebe9ee;
     cursor: pointer;
 }
-a.job-item.active {
-    background-color: #08b39c;
+.jobs-container .react-list-select--item.is-selected {
+    color: #fff;
+    background-color: #08b39c;    
 }
-a.job-item.active h2{
+.jobs-container .react-list-select--item.is-selected h2 {
     color: #fff;
 }
 h2.title {
@@ -420,12 +424,17 @@ h2.location {
     position: fixed;
     background-color: #fff;
     width: 100%;
-    left: 524px;
+    left: 384px;
     top: 80px;
     height: 100%;
+    overflow-y: auto;
+    -webkit-transition: left 0.5s linear;
 }
 .job-detail {
     padding: 50px;
+    position: relative;
+    overflow-y: auto;
+    height: 100%;
 }
 .job-detail h1.title {
     font-family: 'Gotham Rounded', sans-serif;
@@ -491,10 +500,14 @@ h2.location {
 /* ------------ TABS JOB DETAIL --------- */
 .job-messages {
     padding-top: 10px;
+    overflow-y: auto;
+    position: absolute;
+    height: 100%;
+    width: 100%;
 }
 .job-messages .ReactTabs.react-tabs {
-  padding-bottom: 11px;
-  position: fixed;
+  padding-bottom: 90px;
+  position: absolute;
   display: block;
   min-width: 660px;
 }
@@ -540,6 +553,19 @@ h2.location {
   border-bottom: 2px solid #08b39c;
   color: #08b39c;
   background: transparent;
+}
+.applicant-message {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    width: 220px;
+    height: 220px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-right: 25px;
+}
+.applicant-message video {
+    height: 100%;
 }
 /* ------------ END TABS JOB DETAIL --------- */
 

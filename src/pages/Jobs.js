@@ -1,9 +1,10 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-// import Tabs from 'react-simpletabs';
 import List from 'react-list-select'
 
 import FilterDropdown from '../components/FilterDropdown'
+import VacancyVideo from '../components/VacancyVideo'
+
 
 class JobItem extends React.Component {
 	render() {
@@ -18,23 +19,58 @@ class JobItem extends React.Component {
 		);
 	}
 }
-
+const items = [
+		<div>
+	      <h2 className="title">Hello world!</h2>
+	      <h2 className="company">ECOVIS AG</h2>
+	      <h2 className="location"><i className="fa fa-map-marker" aria-hidden="true"></i>Rostock, Germany</h2>
+		</div>,
+		<div>
+          <h2 className="title">Hello world!</h2>
+	      <h2 className="company">ECOVIS AG</h2>
+	      <h2 className="location"><i className="fa fa-map-marker" aria-hidden="true"></i>Rostock, Germany</h2>
+	    </div>
+	]
 class JobsList extends React.Component {
-	getJobs() {
-		var rows = [];
-		rows.push(<JobItem isActive={true} />)
-		for (var i=1; i<30; i++) {
-			rows.push(<JobItem isActive={false} key={i}/>)
-		}
-		return rows
+	constructor(props) {
+		super(props)
+		var headers = new Headers();
+		headers.append("Content-Type", 'application/json');
+		var request = new Request(
+			'http://dev.jobufo.com/api/auth/login/', 
+			{
+				method: "POST", 
+			 	headers: headers, 
+			 	body: JSON.stringify({
+			 		email: 'oldtigersvoice@gmail.com', 
+			 		password: 'test37'
+			 	})
+		    });
+
+		fetch(request)
+			  .then(function(response) {
+			  	console.log('then1:', response)
+			/*    alert(response.headers.get('Content-Type')); // application/json; charset=utf-8
+			    alert(response.status); // 200*/
+
+			    return response.json();
+			   })
+			  .then(function(user) {
+			  		console.log('then2:', user)
+
+			    /*alert(user.name); // iliakan */
+			  });
+			  // .catch( alert );
 	}
 	render() {
 		return (
                     <div className="jobs-container-wrapper">
                         <div className="jobs-container">
-                            <ul>
-								{this.getJobs()}
-                          	</ul>
+                        	<List items={items}
+								  selected={[0]}
+								  disabled={[4]}
+								  multiple={false}
+								  onChange={function (selected) { }} />
                       	</div>
                     </div>
 		);
@@ -151,7 +187,7 @@ export default class Jobs extends React.Component {
 
         					}
 					        <TabPanel>
-					          <h2>Hello from Foo</h2>
+					        		<VacancyVideo />
 					        </TabPanel>
 					        <TabPanel>
 					          <h2>Hello from Bar</h2>
