@@ -543,3 +543,205 @@ h2.location {
 }
 /* ------------ END TABS JOB DETAIL --------- */
 
+/*----------------- COMPANY --------------------*/
+.company-wrapper {
+    display: block;
+    position: relative; 
+    left: 200px;
+    top: 80px;
+    width: calc(100% - 200px);
+    min-height: 100%;
+    height: auto;
+    overflow-y: auto;
+}
+.clear {
+    clear: both;
+    overflow: hidden;
+    height: 1px;
+}
+#width_overflow {
+    width: 100%;
+    overflow: hidden;
+}
+#addNewSubsidiary {
+    font-size: 16px;
+    float: right;
+    margin: 15px 0;
+    cursor: pointer;
+    outline: none;
+}
+.post-job-content-header
+{
+    padding-top: 50px;
+    padding-bottom: 30px;
+
+    border-bottom: 1px solid #f6f4f9;
+}
+.post-job-content-header h1.title
+{
+    color: #6a5d7e;
+}
+.post-job-content-header h2.subtitle
+{
+    font-size: 16px;
+    font-weight: 300;
+
+    margin-top: 15px;
+    margin-bottom: 0;
+
+    color: #9f92b1;
+}
+#subsidiary-wrapper h1.top-title {
+    float: left;
+}
+h1.top-title
+{
+    font-size: 24px;
+
+    margin: 20px 0;
+
+    color: #6a5d7e;
+}
+.company-subsidiary-wrapper
+{
+    width: 860px;
+    margin: 0 auto;
+}
+.align-center {
+    text-align: center;
+}
+.button-cv {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 40px;
+}
+.button-cv-full-red {
+    color: #fff;
+    border: 2px solid #f2415f;
+    background-color: #f2415f;
+}
+li.company-subsidiary-item
+{
+    position: relative;
+
+    display: flex;
+
+    width: 800px;
+    margin-bottom: 30px;
+    padding: 30px;
+
+    border-radius: 20px;
+    background: #e4e2e7;
+}
+.company-subsidiary-item-logo
+{
+    width: 190px;
+}
+.company-subsidiary-item-logo img
+{
+    width: 190px;
+
+    border-radius: 5px;
+}
+.company-subsidiary-item-content
+{
+    margin-left: 30px;
+}
+h1.company-subsidiary-title
+{
+    font-size: 20px;
+    font-weight: 600;
+
+    color: #6a5d7e;
+}
+ul.company-subsidiary-item-list
+{
+    display: block;
+
+    margin-top: 30px;
+}
+li.company-subsidiary-item-list-item
+{
+    float: left;
+
+    margin-right: 50px;
+}
+h2.company-subsidiary-item-list-item
+{
+    font-size: 15px;
+    font-weight: 400;
+
+    color: #6a5d7e;
+}
+h3.company-subsidiary-item-list-item-desc,
+h3.company-subsidiary-item-list-item-desc a
+{
+    font-size: 14px;
+    font-weight: 300;
+
+    margin-top: 3px;
+
+    text-decoration: none;
+
+    color: #6a5d7e;
+}
+ul.company-subsidiary-social-media
+{
+    display: flex;
+}
+li.company-subsidiary-social-media-item
+{
+    float: left;
+
+    margin-right: 15px;
+}
+.company-subsidiary-edit-panel
+{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+
+    display: none;
+}
+.company-edit-panel-edit,
+.company-subsidiary-edit-panel-edit
+{
+    margin-right: 10px;
+}
+.company-subsidiary-edit-panel img
+{
+    cursor: pointer;
+}
+li.company-subsidiary-item:hover > .company-subsidiary-edit-panel
+{
+    display: block;
+}
+div#subsidiary-wrapper
+{
+    margin-top: 70px;
+}
+.form-wrapper
+{
+    width: 600px;
+    margin: 0 auto;
+}
+#profile-subsidiary-form div.half
+{
+    margin-top: 20px;
+}
+div.half.right
+{
+    margin-left: 15px;
+}
+div.half
+{
+    display: inline-block;
+
+    width: 290px;
+}
+/*-----------------END COMPANY-------------------*/

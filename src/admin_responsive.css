@@ -1,0 +1,705 @@
+
+@media only screen and (max-width:1640px)
+{
+    .admin-header
+    {
+        height: 80px;
+    }
+    .admin-header .logo img
+    {
+        height: 40px;
+        margin-top: 20px;
+    }
+    .right-panel
+    {
+        margin-right: 50px;
+    }
+    .user-name h2
+    {
+        font-size: 14px;
+        line-height: 80px;
+    }
+    .user-pic
+    {
+        line-height: 80px;
+
+        height: 80px;
+    }
+    .user-menu-button
+    {
+        height: 80px;
+    }
+    .user-menu-button i
+    {
+        line-height: 80px;
+    }
+    .search
+    {
+        line-height: 80px;
+    }
+
+    .search .fa-search
+    {
+        top: 30px;
+    }
+    .search input[type='search']
+    {
+        font-size: 14px;
+    }
+
+
+
+    /*left panel*/
+    .left-panel-menu
+    {
+        padding-top: 80px;
+    }
+
+    .left-panel-menu .menu-item a
+    {
+        font-size: 14px;
+        line-height: 18px;
+    }
+    .left-panel-menu .fa
+    {
+        font-size: 20px;
+        line-height: 22px;
+    }
+    .mc
+    {
+        font-size: 10px;
+        line-height: 15px;
+    }
+
+
+    /*job post */
+    .job-post-content
+    {
+        margin-top: 0;
+    }
+
+    .post-job-content-header
+    {
+        padding-top: 40px;
+    }
+    .post-job-content-header h1.title
+    {
+        font-size: 28px;
+        line-height: 28px;
+    }
+    .post-job-content-header h2.subtitle
+    {
+        font-size: 14px;
+    }
+    #job-post-form .job-post-label
+    {
+        font-size: 12px;
+    }
+    #job-post-form input[type='text'],
+    #job-post-form input[type='email'],
+    #job-post-form input[type='password'],
+    #job-post-form select
+    {
+        font-size: 16px;
+    }
+    #job-post-form .job-post-label-big
+    {
+        font-size: 16px !important;
+    }
+    #job-post-form textarea
+    {
+        font-size: 14px;
+
+        padding: 16px;
+    }
+    #job-post-form label.label-for-check
+    {
+        font-size: 12px;
+    }
+    #job-post-form h2.day
+    {
+        font-size: 14px;
+    }
+    /*preview job popup*/
+    #preview_job_popup .popup-title,
+    #preview_edit_job_popup .popup-title,
+    #vacancy_popup .popup-title
+    {
+        font-size: 22px;
+        line-height: 22px;
+
+        padding-top: 20px;
+        padding-bottom: 5px;
+    }
+    #preview_job_popup .popup-subtitle,
+    #preview_edit_job_popup .popup-subtitle,
+    #vacancy_popup .popup-subtitle
+    {
+        font-size: 11px;
+        line-height: 12px;
+
+        padding-bottom: 20px;
+    }
+    #preview_job_popup .preview_job-wrapper,
+    #preview_edit_job_popup .preview_job-wrapper,
+    #vacancy_popup .preview_job-wrapper
+    {
+        height: 350px;
+        margin: 0 auto;
+        padding-top: 65px;
+
+        background-position-x: center;
+        background-size: 320px;
+    }
+    .preview-job-content-wrapper
+    {
+        width: 238px;
+        height: 345px;
+    }
+    .slider_preview_job .wr, .wrappers_previews .wr {
+        width: 238px;
+    }
+    img.iphone_header
+    {
+        width: 220px;
+        height: 50px;
+    }
+    div#preview_job-body,
+    div#preview_edit_job-body,
+    div#vacancy_job-body,
+    div#vacancy-body
+    {
+        height: 309px;
+    }
+    .preview-job-img-slider
+    {
+        width: 100%;
+    }
+    ul.preview-job-img-slide-wrapper
+    {
+        height: 140px;
+    }
+    #preview_job_popup ul.preview-job-img-slide-wrapper li,
+    #preview_edit_job_popup ul.preview-job-img-slide-wrapper li,
+    #vacancy_popup ul.preview-job-img-slide-wrapper li
+    {
+        height: 140px;
+    }
+    #preview_job_popup ul.preview-job-img-slide-wrapper li img,
+    #preview_edit_job_popup ul.preview-job-img-slide-wrapper li img,
+    #vacancy_popup ul.preview-job-img-slide-wrapper li img
+    {
+        width: 100%;
+    }
+    #preview_job_popup .nav-slider-half,
+    #preview_edit_job_popup .nav-slider-half,
+    #vacancy_popup .nav-slider-half
+    {
+        width: 100% !important;
+    }
+    .preview-job-body
+    {
+        width: 200px;
+        margin: 0 auto;
+    }
+    .iphone-section
+    {
+        padding: 16px 0;
+    }
+    .preview-job-body .job_preview-title
+    {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .preview-job-body .job_preview-subtitle
+    {
+        font-size: 12px;
+        line-height: 16px;
+    }
+    #options li,
+    #edit_options li,
+    #vacancy_options li
+    {
+        font-size: 10px;
+        line-height: 18px;
+
+        margin: 5px 5px 5px 0;
+        padding: 3px 8px;
+    }
+    img.company-logo
+    {
+        width: 38px;
+        height: 38px;
+    }
+    .iphone-section .iphone-section-title
+    {
+        font-size: 12px;
+    }
+    .iphone-section h2.location
+    {
+        font-size: 12px;
+    }
+    div.company_block-icon
+    {
+        width: 24px;
+        height: 24px;
+        margin-top: 10px;
+    }
+    .company_block-icon i
+    {
+        font-size: 12px;
+        line-height: 20px;
+
+        width: 20px;
+        width: 25px;
+    }
+    .iphone-section .iphone-title
+    {
+        font-size: 8px;
+    }
+    img.job-provider
+    {
+        width: 15px;
+        margin-top: 11px;
+    }
+    h2.job-preview-footer-title
+    {
+        font-size: 12px;
+        line-height: 35px;
+    }
+    #preview_edit_job_popup .preview-job-img-slider,
+    #vacancy_popup .preview-job-img-slider
+    {
+        position: relative;
+    }
+    #preview_edit_job_popup .unslider,
+    #vacancy_popup .unslider
+    {
+        position: initial;
+
+        display: block;
+
+        margin: 0;
+    }
+
+
+
+
+
+
+    #preview_job_popup .buttons,
+    #preview_edit_job_popup .buttons
+    {
+        margin-top: 0;
+        padding: 14px 45px 0;
+    }
+
+
+    img.iphone_header
+    {
+        width: 100%;
+        height: 36px;
+    }
+
+
+
+    /*jobs */
+
+    #job-message-filter
+    {
+        padding-top: 80px;
+    }
+    #message-content
+    {
+        margin-left: 535px;
+        padding-top: 80px;
+    }
+    .message-content-header
+    {
+        margin-top: 40px;
+        margin-right: 20px;
+    }
+    .message-content-header.small {
+        margin-top: 15px;
+        margin-right: 20px;
+    }
+    .message-content-header .title
+    {
+        font-size: 22px;
+        line-height: 26px;
+
+        max-width: calc(100% - 190px);
+    }
+    .message-menu i
+    {
+        line-height: 44px;
+    }
+    .message-content-header h2.company
+    {
+        font-size: 14px;
+        margin-top: 3px;
+    }
+    h2.location {
+        font-size: 14px;
+        margin-top: 3px;
+    }
+    .message-content-header .active-icon,
+    .message-content-header .scheduled-icon,
+    .message-content-header .closed-icon
+    {
+        margin: 5px 0;
+    }
+    .message-content-header h2.status
+    {
+        margin-top: 10px ;
+    }
+    .message-header-buttons
+    {
+        top: 0;
+    }
+    .message-tab
+    {
+        width: 120px;
+    }
+    .message-tab a
+    {
+        padding: 10px 0;
+    }
+    .message-tab h2
+    {
+        font-size: 20px;
+        line-height: 30px;
+
+        position: relative;
+    }
+    .message-tab h3
+    {
+        font-size: 14px;
+    }
+    a.new-aplications
+    {
+        font-size: 12px;
+
+        height: 16px;
+        margin-right: 20px;
+    }
+    .message-applicants-container
+    {
+        margin-right: 20px;
+    }
+    .message-applicant
+    {
+        margin-right: 0px;
+        margin-bottom: 0px;
+    }
+.message-applicants-container .wrap {
+    padding-top: 20px !important;
+}
+
+    #close_job_popup.popup
+    {
+        top: 220px;
+    }
+    #close_job_popup .button-cv
+    {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    #message_popup.popup
+    {
+        top: 100px;
+    }
+    .popup-header .user
+    {
+        width: 80px;
+        height: 80px;
+    }
+    .popup-header .user img
+    {
+        width: 80px;
+        height: 80px;
+    }
+    .popup-subtitle
+    {
+        font-size: 12px;
+    }
+    .popup-title
+    {
+        font-size: 24px;
+
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
+    .form-title
+    {
+        font-size: 14px;
+
+        padding: 20px 0;
+    }
+    #message_popup-form .job-post-label-big
+    {
+        font-size: 14px !important;
+
+        margin-top: 10px;
+    }
+    #message_popup-form textarea
+    {
+        font-size: 14px;
+
+        padding: 14px;
+    }
+    #message_popup-form .buttons
+    {
+        padding: 0;
+    }
+    ul.applicant-preview-menu li.applicant-preview-menu-item
+    {
+        font-size: 14px;
+
+        padding: 4px 0;
+    }
+
+    .bussiness_card
+    {
+        width: 800px;
+    }
+    .bussiness_card .info
+    {
+        width: 400px;
+        height: 400px;
+    }
+    .bussiness_card .info .info-wrapper
+    {
+        margin: 45px;
+        padding: 0;
+    }
+    .bussiness_card .info-title
+    {
+        margin-bottom: 130px;
+    }
+    .bussiness_card .info h1.title
+    {
+        font-size: 30px;
+    }
+    .bussiness_card .info h2.location
+    {
+        font-size: 16px;
+
+        margin-top: 5px;
+    }
+    .bussiness_card .info .info-buttons
+    {
+        margin: 45px 0;
+    }
+    .bussiness_card .button-cv
+    {
+        font-size: 12px;
+
+        width: 140px;
+        padding: 8px 0;
+    }
+    .bussiness_card .video
+    {
+        width: 400px;
+        height: 400px;
+    }
+    .bussiness_card .cv-image
+    {
+        width: 400px;
+        height: 400px;
+    }
+    .bussiness_card .filter-layer
+    {
+        width: 400px;
+        height: 400px;
+    }
+    .bussiness_card .play,
+    .bussiness_card .pause
+    {
+        top: 165px;
+        left: 165px;
+
+        width: 60px;
+        height: 60px;
+    }
+    .bussiness_card .pause.hide_b,
+    .bussiness_card .play.hide_b
+    {
+        top: 165px;
+        left: 165px;
+
+        width: 60px;
+        height: 60px;
+
+        opacity: 0;
+    }
+    .bussiness_card .applicant-menu
+    {
+        width: 740px;
+        padding: 0 30px;
+        padding-top: 10px;
+    }
+    .bussiness_card li.applicant-menu-item
+    {
+        margin-right: 15px;
+    }
+    .bussiness_card li a
+    {
+        font-size: 14px;
+
+        padding: 12px 16px;
+    }
+    .bussiness_card .applicant_tab
+    {
+        min-height: 650px;
+    }
+    .desc-wrapper .desc-col i
+    {
+        font-size: 20px;
+        line-height: 38px;
+
+        color: #fff;
+    }
+    .bussiness_card .desc-wrapper .desc-col
+    {
+        width: 320px;
+        padding-bottom: 30px;
+    }
+    .desc-wrapper .desc-col .icon-red,
+    .desc-wrapper .desc-col .icon-green
+    {
+        width: 35px;
+        height: 35px;
+        margin-right: 10px;
+    }
+    .desc-wrapper .desc-col h1
+    {
+        font-size: 14px;
+        line-height: 40px;
+    }
+    .bussiness_card .description-list .description-line-wrapper.line-first
+    {
+        height: 35px;
+    }
+    .bussiness_card .description-list .description-line-wrapper
+    {
+        margin-left: 14px;
+    }
+    .bussiness_card .point
+    {
+        margin-left: 11px;
+    }
+    .bussiness_card h2.period
+    {
+        font-size: 13px;
+    }
+    .bussiness_card .description h1.title
+    {
+        font-size: 16px;
+    }
+    .bussiness_card .description h2.desc
+    {
+        font-size: 13px;
+    }
+    .bussiness_card .description h2.location
+    {
+        font-size: 13px;
+    }
+    .bussiness_card .description-list .description-line-wrapper
+    {
+        height: 120px;
+    }
+    .bussiness_card li.more_info_wrapper-item
+    {
+        padding: 30px 0;
+    }
+    .bussiness_card .more_info_wrapper-item h2.title
+    {
+        font-size: 13px;
+
+        padding-bottom: 10px;
+    }
+    #bussiness_card-wrapper h2.day
+    {
+        font-size: 13px;
+    }
+    #bussiness_card-wrapper input[type=checkbox].week-days + label:before
+    {
+        font-size: 14px;
+        line-height: 14px;
+
+        padding: 6px 8px;
+    }
+    #bussiness_card-wrapper input[type=checkbox].week-days:checked + label:before
+    {
+        padding: 6px 6px;
+    }
+    #bussiness_card-wrapper li.availability-list-item
+    {
+        width: 28px;
+        margin-right: 20px;
+    }
+    .bussiness_card li.location-list-item
+    {
+        font-size: 13px;
+    }
+    .bussiness_card span.more-info-point
+    {
+        font-size: 13px;
+
+        padding: 3px 10px;
+    }
+    .bussiness_card .message
+    {
+        width: 450px;
+    }
+    .bussiness_card .message img.user_photo
+    {
+        width: 40px;
+        height: 40px;
+        margin-right: 15px;
+    }
+    .bussiness_card .message h1.user_name
+    {
+        font-size: 13px;
+        line-height: 16px;
+    }
+    .bussiness_card h3.info-message
+    {
+        font-size: 10px;
+        line-height: 12px;
+
+        position: absolute;
+        bottom: 100px;
+
+        width: 320px;
+
+        color: #9f92b1;
+    }
+    .bussiness_card .message h2.date
+    {
+        font-size: 12px;
+    }
+
+    .bussiness_card .message .message_body p
+    {
+        font-size: 13px;
+
+        padding: 20px 3px;
+    }
+    .bussiness_card .applicant_tab
+    {
+        width: 100%;
+        min-height: 650px;
+    }
+
+    #reject_applicant_popup,
+    #accept_applicant_popup
+    {
+        top: 220px;
+    }
+    #thanks_reject_applicant_popup
+    {
+        top: 320px;
+    }
+}

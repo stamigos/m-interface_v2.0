@@ -9,6 +9,8 @@ import Layout from './pages/Layout'
 import PostJob from './pages/PostJob'
 
 import './index.css';
+import './admin.css';
+// import './admin_responsive.css';
 
 const root = document.getElementById('root');
 
