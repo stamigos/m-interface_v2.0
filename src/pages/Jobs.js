@@ -199,7 +199,7 @@ export default class Jobs extends React.Component {
 	        		</div>
 	        	</div>
 	        </div>
-	        </div>
+	      </div>
 	    );
   }
 }
