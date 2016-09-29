@@ -37,6 +37,20 @@ body {
     background-color: #f6f4f9;
     height: 100%;
 }
+.button {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 18px 65px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 40px;
+    background-color: #fff;
+}
+.button-pop-red {
+    color: #fff;
+    background-color: #f2415f;
+}
 /* ----------- HEADER -----------------*/
 header {
     position: fixed;

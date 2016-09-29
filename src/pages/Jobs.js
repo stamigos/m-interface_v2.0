@@ -50,17 +50,27 @@ class JobsList extends React.Component {
 		fetch(request)
 			  .then(function(response) {
 			  	console.log('then1:', response)
-			/*    alert(response.headers.get('Content-Type')); // application/json; charset=utf-8
-			    alert(response.status); // 200*/
-
 			    return response.json();
 			   })
 			  .then(function(user) {
-			  		console.log('then2:', user)
+			  		console.log('then2:', user.key)
+		  				var headers = new Headers();
+						headers.append("Authorization", "Token " + user.key);
+						var request = new Request(
+							'http://dev.jobufo.com/api/v1/management/vacancy/?limit=100',
+							{
+								method: "GET",
+								headers: headers
+							})
+						fetch(request)
+			  				.then(function(r) {
+			  					return r.json();
+			  				})
+			  				.then(function(object) {
+			  					console.log('result:', object)
+			  				})
 
-			    /*alert(user.name); // iliakan */
 			  });
-			  // .catch( alert );
 	}
 	render() {
 		return (

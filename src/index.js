@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard'
 import Jobs from './pages/Jobs'
 import Layout from './pages/Layout'
 import PostJob from './pages/PostJob'
+import Login from './pages/Login'
 
 import './index.css';
 import './admin.css';
@@ -14,13 +15,32 @@ import './admin.css';
 
 const root = document.getElementById('root');
 
+function requireAuth(nextState, replace) {
+	var loggedIn = (!!localStorage.token);
+	  if (!loggedIn) {
+	    replace({
+	      pathname: '/login',
+	      state: { nextPathname: nextState.location.pathname }
+	    })
+	  }
+}
+function afterLogin(nextState, replace) {
+	var loggedIn = (!!localStorage.token);
+	  if (loggedIn) {
+	    replace({
+	      pathname: '/',
+	      state: { nextPathname: nextState.location.pathname }
+	    })
+	  }
+}
 ReactDOM.render(
 	<Router history={hashHistory}>
 		<Route path="/" component={Layout}>
-			<IndexRoute component={Jobs}></IndexRoute>
-			<Route path='post-job' component={PostJob}></Route>
-			<Route path='dashboard' component={Dashboard}></Route>
-			<Route path='company' component={Company}></Route>
+			<IndexRoute component={Jobs} onEnter={requireAuth}></IndexRoute>
+			<Route path='post-job' component={PostJob} onEnter={requireAuth}></Route>
+			<Route path='dashboard' component={Dashboard} onEnter={requireAuth}></Route>
+			<Route path='company' component={Company} onEnter={requireAuth}></Route>
+			<Route path='login' component={Login} onEnter={afterLogin}></Route>
 		</Route>
 	</Router>,
   root);

@@ -1,0 +1,282 @@
+@font-face {
+    font-family: gotham_rounded_book;
+    src: url(fonts/gotham-rounded-book.otf);
+}
+.main-login
+{
+    background-color: #312b3a;
+    height: 100%;
+    min-height: 800px;
+}
+.login-registration-wrapper
+{
+    width: 500px;
+    margin: 0 auto;
+}
+.popup-content {
+    background: #fff;
+}
+.popup-title {
+    font-size: 28px;
+    font-weight: 400;
+    display: inline-block;
+}
+.logo
+{
+    float: none;
+    text-align: center;
+}
+.logo img
+{
+    margin: 40px 0;
+}
+#login-registration-popup
+{
+    position: inherit;
+    z-index: 100;
+    top: 0;
+
+    display: block;
+}
+#login-registration-popup .popup-window
+{
+    width: 100%;
+}
+#login-registration-popup .popup-header
+{
+    position: relative;
+    color: #6a5d7e;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: #fff;
+}
+#login-registration-popup  h2.popup-title
+{
+    font-family: gotham_rounded_book;
+    margin-top: 40px;
+    margin-bottom: 0;
+    color: #6a5d7e;
+}
+#login-registration-popup .popup-content{
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.login-registration-popup-form
+{
+    padding: 0 50px 50px 50px;
+}
+div.half{
+    margin-top:30px;
+}
+.login-registration-popup-form label.label-for-check
+{
+    font-family: 'Open Sans',sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+
+    color: #9f92b1;
+}
+
+.login-registration-popup-form input[type='text'],
+.login-registration-popup-form input[type='email'],
+.login-registration-popup-form input[type='password'],
+.login-registration-popup-form input[type='tel'],
+.login-registration-popup-form select
+{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+
+    width: 400px;
+    margin: 0;
+    padding: 5px 0 12px 0;
+
+    color: #433b50;
+    border: none;
+    border-bottom: 1px solid #cdc6d5;
+    background: none;
+}
+.login-registration-popup-form input[type='text']::-webkit-input-placeholder,
+.login-registration-popup-form input[type='email']::-webkit-input-placeholder,
+.login-registration-popup-form input[type='phone']::-webkit-input-placeholder,
+.login-registration-popup-form input[type='password']::-webkit-input-placeholder
+{
+    color: #9f92b1;
+}
+.login-registration-popup-form input[type='text']::-moz-placeholder,
+.login-registration-popup-form input[type='email']::-moz-placeholder,
+.login-registration-popup-form input[type='tel']::-moz-placeholder,
+.login-registration-popup-form input[type='password']::-moz-placeholder
+{
+    color: #9f92b1;
+}
+.login-registration-popup-form input[type='text']:-ms-input-placeholder,
+.login-registration-popup-form input[type='email']:-ms-input-placeholder,
+.login-registration-popup-form input[type='tel']:-ms-input-placeholder,
+.login-registration-popup-form input[type='password']:-ms-input-placeholder
+{
+    color: #9f92b1;
+}
+.login-registration-popup-form select
+{
+    background-image: url('img/arrow-down.png');
+    background-repeat: no-repeat;
+    background-position: right center;
+
+    -webkit-appearance: none;
+       -moz-appearance: none;
+        -ms-appearance: none;
+            appearance: none!important;
+}
+.login-registration-popup-form select::-ms-expand
+{
+    display: none;
+}
+.login-registration-popup-form textarea
+{
+    font-family: 'Open Sans',sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+
+    box-sizing: border-box;
+    width: 400px;
+    margin-top: 10px;
+    padding: 18px;
+
+    resize: none;
+
+    color: #6a5d7e;
+    border: none;
+    border-radius: 5px;
+    background: #f6f4f9;
+}
+.login-registration-popup-form textarea:focus
+{
+    outline: none;
+}
+.login-registration-popup-form input[type='text'].half,
+.login-registration-popup-form select.half,
+.login-registration-popup-form select.half
+{
+    width: 180px;
+}
+.login-registration-popup-form input[type='text'].half.right,
+.login-registration-popup-form select.half.right
+{
+    margin-left: 35px;
+}
+#login-registration-popup input[type='password']
+{
+    margin-top: 30px;
+}
+div.half
+{
+    display: inline-block;
+
+    width: 180px;
+}
+a.forgot
+{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    line-height: 40px;
+
+    width: 400px;
+
+    text-decoration: none;
+
+    color: #9f92b1;
+}
+#login-registration-popup .button-pop
+{
+    font-size: 16px;
+
+    display: block;
+
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding: 12px 50px;
+
+    cursor: pointer;
+
+    border: none;
+}
+.after-form
+{
+    text-align: center;
+}
+.after-form h2
+{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+
+    margin: 30px 0;
+
+    color: #9f92b1;
+}
+a.sing-up
+{
+    text-decoration: none;
+
+    color: #08b39c;
+}
+
+#registration-popup-form input[type='text'],
+#registration-popup-form input[type='email'],
+.login-registration-popup-form input[type='email'],
+.login-registration-popup-form input[type='tel']
+{
+    margin-top: 30px;
+}
+#login-registration-popup .button-pop
+{
+    margin-top: 50px;
+}
+
+
+input.input-error
+{
+    color: #f2415f !important;
+    border-bottom: 1px solid #f2415f !important;
+}
+input[type=checkbox]
+{
+    display: none;
+}
+input[type=checkbox] + label:before
+{
+    font-family: FontAwesome;
+    font-size: 20px;
+    line-height: 16px;
+
+    display: inline-block;
+
+    margin-top: 15px;
+    margin-right: 10px;
+    padding: 0;
+}
+input[type=checkbox] + label:before
+{
+    content: '\f14a';
+
+    color: #d1c7df;
+    border-radius: 3px;
+    background-color: #d1c7df;
+}
+input[type=checkbox]:checked + label:before
+{
+    content: '\f14a';
+
+    color: #08b39c;
+    background-color: #fff;
+}
+
+label.label-for-check
+{
+    font-family: 'Open Sans',sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+
+    color: #9f92b1;
+}

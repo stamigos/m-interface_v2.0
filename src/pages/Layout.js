@@ -12,7 +12,8 @@ export default class Layout extends React.Component {
 	}
 	getState() {
 			return {
-				navExpanded: true
+				navExpanded: true, /* sidebar expanded */
+				loggedIn: !!localStorage.token
 			}
 	}
 	onNavLick() {
@@ -20,11 +21,21 @@ export default class Layout extends React.Component {
 	}
 	render() {
 		return (
-			<div className={this.state.navExpanded ? 'main navExpanded': ''}>
-				<Header />
-				<Sidebar onToggleClick={this.onNavLick.bind(this)} />
-				{this.props.children}
+			<div>
+			{!this.state.loggedIn ? (<div className="main-login">{this.props.children}</div>
+				) : (
+				<div className={this.state.navExpanded ? 'main navExpanded': ''}>
+						<Header />
+						<Sidebar onToggleClick={this.onNavLick.bind(this)} />
+						{this.props.children}
+				</div>
+				)}
 			</div>
+				// <div className={this.state.navExpanded ? 'main navExpanded': ''}>
+				// 	<Header />
+				// 	<Sidebar onToggleClick={this.onNavLick.bind(this)} />
+				// 	{this.props.children}
+				// </div>
 		);
 	}
 }
