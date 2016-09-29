@@ -33,50 +33,29 @@ const items = [
 	]
 class JobsList extends React.Component {
 	constructor(props) {
-		super(props)
-		var headers = new Headers();
-		headers.append("Content-Type", 'application/json');
-		var request = new Request(
-			'http://dev.jobufo.com/api/auth/login/', 
-			{
-				method: "POST", 
-			 	headers: headers, 
-			 	body: JSON.stringify({
-			 		email: 'oldtigersvoice@gmail.com', 
-			 		password: 'test37'
-			 	})
-		    });
-
-		fetch(request)
-			  .then(function(response) {
-			  	console.log('then1:', response)
-			    return response.json();
-			   })
-			  .then(function(user) {
-			  		console.log('then2:', user.key)
-		  				var headers = new Headers();
-						headers.append("Authorization", "Token " + user.key);
-						var request = new Request(
-							'http://dev.jobufo.com/api/v1/management/vacancy/?limit=100',
-							{
-								method: "GET",
-								headers: headers
-							})
-						fetch(request)
-			  				.then(function(r) {
-			  					return r.json();
-			  				})
-			  				.then(function(object) {
-			  					console.log('result:', object)
-			  				})
-
-			  });
+		super(props);
+		this._get_html_jobs = this._get_html_jobs.bind(this);
+	}
+  	// shouldComponentUpdate(nextProps, nextState) {
+   //  	return this.state.jobs != nextState.jobs;
+  	// }
+	_get_html_jobs() {
+		var jobs = []
+		this.props.items.map(function(job) {
+			jobs.push(
+					<div>
+					  <h2 className="title">{job.title}</h2>
+					  <h2 className="company">{job.company.name}</h2>
+					  <h2 className="location"><i className="fa fa-map-marker" aria-hidden="true"></i>{job.address.city.name}</h2>
+					</div>);
+		})
+		return jobs;
 	}
 	render() {
 		return (
                     <div className="jobs-container-wrapper">
                         <div className="jobs-container">
-                        	<List items={items}
+                        	<List items={this._get_html_jobs()}
 								  selected={[0]}
 								  disabled={[4]}
 								  multiple={false}
@@ -88,6 +67,34 @@ class JobsList extends React.Component {
 }
 
 export default class Jobs extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			jobs: []
+		}
+		this.getJobs()
+	}
+	getJobs() {
+		var self = this;
+		var headers = new Headers();
+		headers.append("Authorization", "Token " + localStorage.token);
+		var request = new Request(
+			'http://dev.jobufo.com/api/v1/management/vacancy/?limit=100',
+			{
+				method: "GET",
+				headers: headers
+			})
+		fetch(request)
+				.then(function(r) {
+					return r.json();
+				})
+				.then(function(objects) {
+					console.log(objects)
+					self.setState({
+						jobs: objects
+					})
+				})
+	}
 	render() {
 	    return (
 	    	<div>
@@ -136,7 +143,7 @@ export default class Jobs extends React.Component {
 	  				          <div>
 						          <FilterDropdown />
 						         <h2 className="jobs-counter">2 <b>JOBS</b> ÖFFENTLICH</h2>
-						         <JobsList />
+						         <JobsList items={this.state.jobs}/>
 					         </div>
 				        </TabPanel>
 				        <TabPanel>

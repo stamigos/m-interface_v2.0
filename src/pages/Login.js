@@ -12,7 +12,7 @@ export default class Login extends React.Component {
 		return {
 			email: "",
 			password: "",
-			errors: {}
+			errors: false
 		}
 	}
 	onChange(e) {
@@ -22,6 +22,7 @@ export default class Login extends React.Component {
     	this.setState(state);
 	}
 	onSubmit(e) {
+		var self = this;
 		e.preventDefault();
 		var headers = new Headers();
 		headers.append("Content-Type", 'application/json');
@@ -48,7 +49,9 @@ export default class Login extends React.Component {
 			  		console.log('then2:', obj)
 			  	}
 			  	else {
-			  		console.log("Error!")
+			  		self.setState({
+			  			errors: true
+			  		})
 			  	}
 			  	});
 	}
@@ -65,8 +68,8 @@ export default class Login extends React.Component {
 						</div>
 						<div className="popup-content">
 							<form onSubmit={this.onSubmit.bind(this)} action="/jobs" method="POST" role="form" className="login-registration-popup-form" id="login-popup-form">
-								<input onChange={this.onChange.bind(this)} type="email" className="" id="Email" name="email" placeholder="Email" required="required"/>
-								<input onChange={this.onChange.bind(this)} type="password" className="" id="Password" name="password" placeholder="Passwort" required="required"/>
+								<input onChange={this.onChange.bind(this)} type="email" className={this.state.errors ? ("input-error"):("")} id="Email" name="email" placeholder="Email" required="required"/>
+								<input onChange={this.onChange.bind(this)} type="password" className={this.state.errors ? ("input-error"):("")} id="Password" name="password" placeholder="Passwort" required="required"/>
 								<div className="clear"></div>
 								<a className="forgot" href="forgot_password.html">Passwort vergessen?</a>
 								<input type="submit" id="call_me_submit" className="button button-pop button-pop-red" value="LOGIN"/>

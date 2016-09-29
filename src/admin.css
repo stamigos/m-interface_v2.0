@@ -272,24 +272,7 @@ div.half
 {
     color: #9f92b1;
 }
-.user-name
-{
-    float: left;
 
-    padding-right: 10px;
-
-    background: #312b3a;
-}
-.user-name h2
-{
-    font-family: 'Open Sans',sans-serif;
-    font-size: 15px;
-    line-height: 100px;
-
-    vertical-align: middle;
-
-    color: #9f92b1;
-}
 .user-pic
 {
     line-height: 100px;
@@ -322,26 +305,7 @@ div.half
     height: 100%;
     vertical-align: top;
 }
-.user-menu-button
-{
-    line-height: 100%;
 
-    float: left;
-
-    height: 100px;
-
-    vertical-align: middle;
-
-    background: #312b3a;
-}
-.user-menu-button i
-{
-    line-height: 100px;
-
-    margin: 0 10px;
-
-    color: #9f92b1;
-}
 ul.user-menu
 {
     position: absolute;

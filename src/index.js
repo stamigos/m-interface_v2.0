@@ -8,6 +8,7 @@ import Jobs from './pages/Jobs'
 import Layout from './pages/Layout'
 import PostJob from './pages/PostJob'
 import Login from './pages/Login'
+import Logout from './pages/Logout'
 
 import './index.css';
 import './admin.css';
@@ -41,6 +42,7 @@ ReactDOM.render(
 			<Route path='dashboard' component={Dashboard} onEnter={requireAuth}></Route>
 			<Route path='company' component={Company} onEnter={requireAuth}></Route>
 			<Route path='login' component={Login} onEnter={afterLogin}></Route>
+			<Route path='logout' component={Logout} onEnter={requireAuth}></Route>
 		</Route>
 	</Router>,
   root);
