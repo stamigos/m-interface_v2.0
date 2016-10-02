@@ -5,63 +5,93 @@ import List from 'react-list-select'
 import FilterDropdown from '../components/FilterDropdown'
 import VacancyVideo from '../components/VacancyVideo'
 
+function addDays(publication_date, days) {
+		var newdate = new Date(publication_date);
+		newdate.setDate(publication_date.getDate() + days);
+		return newdate;
+	}
+function vacancyStatus(vacancy){
+		var publication_date = new Date(vacancy.publication_date);
+		var start_date 		 = new Date(vacancy.vacancy_start);
+		var publication_end  = addDays(publication_date, vacancy.publication_duration);
+		var today 			 = new Date();
+		if (publication_end < today || vacancy.is_active == false)
+			return 'closed';
+		else if (publication_date <= today)
+			return 'posted';
+		else if (publication_date > start_date && publication_date > today)
+			return 'scheduled';
+	};
+
+var jobsReceived = [];
 
 class JobItem extends React.Component {
 	render() {
 		return (
-			<li>
-                <a className={this.props.isActive ? "job-item active": "job-item"}>
-	                  <h2 className="title">Hello world!</h2>
-	                  <h2 className="company">ECOVIS AG</h2>
-	                  <h2 className="location"><i className="fa fa-map-marker" aria-hidden="true"></i>Rostock, Germany</h2>
-                </a>
-			</li>
+			<div key={this.props.key}>
+		      <h2 className="title">{this.props.job.title}</h2>
+		      <h2 className="company">{this.props.job.company.name}</h2>
+		      <h2 className="location"><i className="fa fa-map-marker" aria-hidden="true"></i>{this.props.job.address.city.name}</h2>
+			</div>
 		);
 	}
 }
-const items = [
-		<div>
-	      <h2 className="title">Hello world!</h2>
-	      <h2 className="company">ECOVIS AG</h2>
-	      <h2 className="location"><i className="fa fa-map-marker" aria-hidden="true"></i>Rostock, Germany</h2>
-		</div>,
-		<div>
-          <h2 className="title">Hello world!</h2>
-	      <h2 className="company">ECOVIS AG</h2>
-	      <h2 className="location"><i className="fa fa-map-marker" aria-hidden="true"></i>Rostock, Germany</h2>
-	    </div>
-	]
+// const items = [
+// 		<div>
+// 	      <h2 className="title">Hello world!</h2>
+// 	      <h2 className="company">ECOVIS AG</h2>
+// 	      <h2 className="location"><i className="fa fa-map-marker" aria-hidden="true"></i>Rostock, Germany</h2>
+// 		</div>,
+// 		<div>
+//           <h2 className="title">Hello world!</h2>
+// 	      <h2 className="company">ECOVIS AG</h2>
+// 	      <h2 className="location"><i className="fa fa-map-marker" aria-hidden="true"></i>Rostock, Germany</h2>
+// 	    </div>
+// 	]
 class JobsList extends React.Component {
 	constructor(props) {
 		super(props);
-		this._get_html_jobs = this._get_html_jobs.bind(this);
+		this.state = {
+			jobsCount: 0,
+			jobs: []
+		}
+		this.filter_jobs = this.filter_jobs.bind(this);
 	}
-  	// shouldComponentUpdate(nextProps, nextState) {
-   //  	return this.state.jobs != nextState.jobs;
-  	// }
-	_get_html_jobs() {
-		var jobs = []
-		this.props.items.map(function(job) {
-			jobs.push(
-					<div>
-					  <h2 className="title">{job.title}</h2>
-					  <h2 className="company">{job.company.name}</h2>
-					  <h2 className="location"><i className="fa fa-map-marker" aria-hidden="true"></i>{job.address.city.name}</h2>
-					</div>);
-		})
-		return jobs;
+	componentWillReceiveProps(nextProps) {
+	    this.filter_jobs(nextProps)
+	}
+	componentDidMount() {
+		this.filter_jobs()
+	}
+	filter_jobs() {
+		var self = this;
+
+		if (jobsReceived.length > 0) {
+			var list = []
+			jobsReceived.map(function(job, i) {
+				if (vacancyStatus(job) == self.props.status) {
+					list.push(<JobItem job={job} />)
+				}
+			})
+				this.setState({
+					jobs: list,
+					jobsCount: list.length
+				})
+
+			}
 	}
 	render() {
 		return (
+			<div>
+				<h2 className="jobs-counter">{this.state.jobsCount} <b>JOBS</b> {this.props.statusTitle}</h2>
                     <div className="jobs-container-wrapper">
                         <div className="jobs-container">
-                        	<List items={this._get_html_jobs()}
+                        	<List items={this.state.jobs}
 								  selected={[0]}
-								  disabled={[4]}
-								  multiple={false}
-								  onChange={function (selected) { }} />
+								  multiple={false} />
                       	</div>
                     </div>
+            </div>
 		);
 	}
 }
@@ -71,9 +101,14 @@ export default class Jobs extends React.Component {
 		super(props);
 		this.state = {
 			jobs: []
-		}
-		this.getJobs()
+		};
+		this.getJobs = this.getJobs.bind(this);
+		this.getJobs();
 	}
+	componentDidMount(){
+		this.getJobs();
+	}
+
 	getJobs() {
 		var self = this;
 		var headers = new Headers();
@@ -89,75 +124,45 @@ export default class Jobs extends React.Component {
 					return r.json();
 				})
 				.then(function(objects) {
-					console.log(objects)
+				    jobsReceived = objects;
 					self.setState({
-						jobs: objects
+						jobsCount: objects.length,
+						jobs: JSON.stringify(objects)
 					})
-				})
+		})
 	}
 	render() {
 	    return (
 	    	<div>
 	      	<div className="content-wrapper">
 	      		<div className="content">
-					<Tabs onSelect={this.handleSelect} selectedIndex={0}>
-
-				        {/*
-				          <TabList/> is a composit component and is the container for the <Tab/>s.
-				        */}
-
+					<Tabs selectedIndex={0}>
+				        {}
 				        <TabList>
-
-				          {/*
-				            <Tab/> is the actual tab component that users will interact with.
-
-				            Selecting a tab can be done by either clicking with the mouse,
-				            or by using the keyboard tab to give focus then navigating with
-				            the arrow keys (right/down to select tab to the right of selected,
-				            left/up to select tab to the left of selected).
-
-				            The content of the <Tab/> (this.props.children) will be shown as the label.
-				          */
-				      		}
-
+				          {}
 				          <Tab>offentlich</Tab>
 				          <Tab>vorbereitet</Tab>
 				          <Tab>geschlossen</Tab>
 				        </TabList>
 
-				        {/*
-				          <TabPanel/> is the content for the tab.
-
-				          There should be an equal number of <Tab/> and <TabPanel/> components.
-				          <Tab/> and <TabPanel/> components are tied together by the order in
-				          which they appear. The first (index 0) <Tab/> will be associated with
-				          the <TabPanel/> of the same index. Running this example when
-				          `selectedIndex` is 0 the tab with the label "Foo" will be selected
-				          and the content shown will be "Hello from Foo".
-
-				          As with <Tab/> the content of <TabPanel/> will be shown as the content.
-				        */
-				    	}
+				        {}
 
 				        <TabPanel>
 	  				          <div>
 						          <FilterDropdown />
-						         <h2 className="jobs-counter">2 <b>JOBS</b> ÖFFENTLICH</h2>
-						         <JobsList items={this.state.jobs}/>
+						         <JobsList status="posted" statusTitle="ÖFFENTLICH"/>
 					         </div>
 				        </TabPanel>
 				        <TabPanel>
     				          <div>
 						          <FilterDropdown />
-						         <h2 className="jobs-counter">2 <b>JOBS</b> ÖFFENTLICH</h2>
-						         <JobsList />
+						         <JobsList status="scheduled" statusTitle="VORBEREITET"/>
 					         </div>
 				        </TabPanel>
 				        <TabPanel>
     				          <div>
 						          <FilterDropdown />
-						         <h2 className="jobs-counter">2 <b>JOBS</b> ÖFFENTLICH</h2>
-						         <JobsList />
+						         <JobsList status="closed" statusTitle="GESCHLOSSEN" />
 					         </div>
 				        </TabPanel>
 				      </Tabs>
@@ -180,13 +185,9 @@ export default class Jobs extends React.Component {
 	        		<h2 className="status">Öffentlich seit 01.09.2016</h2>
 	        		<div className="job-messages">
 	        			<Tabs onSelect={this.handleSelect} selectedIndex={2}>
-	        				{
-
-	        				}
+	        				{}
 	        				<TabList>
-	        					{
-
-	        					}
+	        					{}
 	        					<Tab>
 	        						<h2 className="new_applicant">00</h2>
 	        						<h3>Bewerbungen</h3>
@@ -200,9 +201,7 @@ export default class Jobs extends React.Component {
 	        						<h3>Abgelehnt</h3>
 	        					</Tab>
         					</TabList>
-        					{
-
-        					}
+        					{}
 					        <TabPanel>
 					        		<VacancyVideo />
 					        </TabPanel>

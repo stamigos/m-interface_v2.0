@@ -31,11 +31,6 @@ export default class Layout extends React.Component {
 				</div>
 				)}
 			</div>
-				// <div className={this.state.navExpanded ? 'main navExpanded': ''}>
-				// 	<Header />
-				// 	<Sidebar onToggleClick={this.onNavLick.bind(this)} />
-				// 	{this.props.children}
-				// </div>
 		);
 	}
 }
