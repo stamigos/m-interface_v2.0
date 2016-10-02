@@ -1,88 +1,5 @@
 import React from 'react';
-
-class CompanyItem extends React.Component {
-	render() {
-		return (
-			<li className="company-subsidiary-item">
-				<div className="company-subsidiary-item-logo">
-					<img src={"http://dev.jobufo.com/media/logos/6a6b9657-9eb.png"} alt="ECOVIS AG" />
-				</div>
-				<div className="company-subsidiary-item-content">
-					<h1 className="company-subsidiary-title">ECOVIS AG</h1>
-					<ul className="company-subsidiary-item-list">
-						<li className="company-subsidiary-item-list-item">
-							<h2 className="company-subsidiary-item-list-item">Website</h2>
-							<h3 className="company-subsidiary-item-list-item-desc"><a href="http://hello.com/index.html">http://hello.com/index.html</a></h3>
-						</li>
-						<li className="company-subsidiary-item-list-item">
-							<h2 className="company-subsidiary-item-list-item">Branche</h2>
-							<h3 className="company-subsidiary-item-list-item-desc">Technology</h3>
-						</li>
-						<li className="company-subsidiary-item-list-item">
-							<ul className="company-subsidiary-social-media">
-								<li className="company-subsidiary-social-media-item">
-									<a href="https://www.facebook.com/" target="_blank">
-										<img src={require("../img/facebook.png")} alt="" />
-									</a>
-								</li>
-								<li className="company-subsidiary-social-media-item">
-									<a href="https://twitter.com/" target="_blank">
-										<img src={require("../img/twetter.png")} alt="" />
-									</a>
-								</li>
-								<li className="company-subsidiary-social-media-item">
-									<a href="https://www.instagram.com/" target="_blank">
-										<img src={require("../img/instagram.png")} alt="" />
-									</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-				<div className="company-subsidiary-edit-panel">
-					<a onClick={this.props.openCompanyEdit} className="company-edit-panel-edit-link">
-						<img className="company-subsidiary-edit-panel-edit" src={require("../img/edit.png")} alt="" />
-					</a>
-					<img className="company-subsidiary-edit-panel-delete" src={require("../img/delete.png")} alt="" />
-				</div>
-			</li>
-		);
-	}
-}
-
-class SubsidiaryItem extends React.Component {
-	render() {
-		return (
-			<li className="company-subsidiary-item">
-				<div className="company-subsidiary-item-logo">
-					<img src="http://dev.jobufo.com/media/71d65eed-8fa.png" alt=" ECOVIS AG"/>
-				</div>
-				<div className="company-subsidiary-item-content">
-					<h1 className="company-subsidiary-title"><span className="green">name1</span> ECOVIS AG</h1>
-					<ul className="company-subsidiary-item-list">
-						<li className="company-subsidiary-item-list-item">
-							<h2 className="company-subsidiary-item-list-item">Adresse</h2>
-							<h3 className="company-subsidiary-item-list-item-desc">Am Campus</h3>
-							<h3 className="company-subsidiary-item-list-item-desc">18182, Rostock, Germany</h3>
-						</li>
-						<li className="company-subsidiary-item-list-item manager">
-							<h2 className="company-subsidiary-item-list-item ">Manager</h2>
-							<h3 className="company-subsidiary-item-list-item-desc">asd sad</h3>
-						</li>
-					</ul>
-				</div>
-				<div className="company-subsidiary-edit-panel">
-					<a onClick={this.props.openSubsidiaryEdit} className="subsidiary-edit-panel-edit-link">
-						<img className="company-subsidiary-edit-panel-edit" src={require("../img/edit.png")} alt=""/>
-					</a>
-					<a href="subsidiary-delete_1" className="subsidiary-edit-panel-delete-link">
-						<img className="company-subsidiary-edit-panel-delete" src={require("../img/delete.png")} alt=""/>
-					</a>
-				</div>
-			</li>
-		);
-	}
-}
+import List from 'react-list-select'
 
 class CompanyEdit extends React.Component {
 	render() {
@@ -252,7 +169,7 @@ class SubsidiaryEdit extends React.Component {
 
 						<div className="clear"></div>
 						<div id="subsidiaryManagers">
-							{this.state.managerForm == true ? <ManagerForm deleteManagerForm={this.deleteManagerForm} /> : null}
+							{this.state.managerForm === true ? <ManagerForm deleteManagerForm={this.deleteManagerForm} /> : null}
 						</div>
 						<div className="clear"></div>
 						<span onClick={this.addManagerForm} id="addManagerButton" className="green">Manager hinzufügen</span>
@@ -272,7 +189,250 @@ class SubsidiaryEdit extends React.Component {
 	}
 }
 
+class ListCompanies extends React.Component {
+	constructor(props) {
+		super(props);
+		this.get_companies = this.get_companies.bind(this);
+		this.formatCompany = this.formatCompany.bind(this);
+	}
+
+	formatCompany(company) {
+		return {
+			pk: company.pk,
+			name: company.name,
+			logo: company.logo,
+			category: company.category.name,
+			website: [{
+				name: company.social_media_list['0'].handle,
+				url: company.social_media_list['0'].url
+			}],
+			facebook: company.social_media_list['1'].url,
+			twitter: company.social_media_list['2'].url,
+			instagram: company.social_media_list['3'].url
+		};
+	}
+
+	get_companies() {
+		var companies = [];
+		var openCompanyEdit = this.props.openCompanyEdit;
+		var formatCompany = this.formatCompany;
+
+		this.props.items.map(function(company) {
+			formatCompany(company);
+			companies.push(
+				<div className="company-subsidiary-item">
+					<div className="company-subsidiary-item-logo">
+						<img src={company.logo} alt="Company" />
+					</div>
+					<div className="company-subsidiary-item-content">
+						<h1 className="company-subsidiary-title">{company.name}</h1>
+						<ul className="company-subsidiary-item-list">
+							<li className="company-subsidiary-item-list-item">
+								<h2 className="company-subsidiary-item-list-item">Website</h2>
+								<h3 className="company-subsidiary-item-list-item-desc"><a href={company.website.url}>{company.website.name}</a></h3>
+							</li>
+							<li className="company-subsidiary-item-list-item">
+								<h2 className="company-subsidiary-item-list-item">Branche</h2>
+								<h3 className="company-subsidiary-item-list-item-desc">{company.category}</h3>
+							</li>
+							<li className="company-subsidiary-item-list-item">
+								<ul className="company-subsidiary-social-media">
+									<li className="company-subsidiary-social-media-item">
+										<a href={company.facebook} target="_blank">
+											<img src={require("../img/facebook.png")} alt="" />
+										</a>
+									</li>
+									<li className="company-subsidiary-social-media-item">
+										<a href={company.twitter} target="_blank">
+											<img src={require("../img/twetter.png")} alt="" />
+										</a>
+									</li>
+									<li className="company-subsidiary-social-media-item">
+										<a href={company.instagram} target="_blank">
+											<img src={require("../img/instagram.png")} alt="" />
+										</a>
+									</li>	
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<div className="company-subsidiary-edit-panel">
+						<a onClick={openCompanyEdit} className="company-edit-panel-edit-link">
+							<img className="company-subsidiary-edit-panel-edit" src={require("../img/edit.png")} alt="" />
+						</a>
+						<img className="company-subsidiary-edit-panel-delete" src={require("../img/delete.png")} alt="" />
+					</div>
+				</div>
+			)});
+		return companies;
+	}
+
+	render() {
+		return (
+			<List items={this.get_companies()}
+				selected={[0]}
+				disabled={[4]}
+				multiple={false}
+				onChange={function (selected) { }} />
+		);
+	}
+}
+
+class ListSubsidiaries extends React.Component {
+	constructor(props) {
+		super(props);
+		this.get_subsidiaries = this.get_subsidiaries.bind(this);
+		this.formatSubsidiary = this.formatSubsidiary.bind(this);
+	}
+
+	formatSubsidiary(subsidiary) {
+		console.log(subsidiary);
+		return {
+			pk: subsidiary.pk,
+			name: subsidiary.name,
+			company_name: '',
+			logo: subsidiary.image_list['0'].image,
+			address: [{
+				street: subsidiary.address.street,
+				housenumber: subsidiary.address.housenumber,
+				postal_code: subsidiary.address.postal_code,
+				city: subsidiary.address.city.name
+			}],
+			manager: ''
+		};
+	}
+
+	get_subsidiaries() {
+		var subsidiaries = [];
+		var openSubsidiaryEdit = this.props.openSubsidiaryEdit;
+		var formatSubsidiary = this.formatSubsidiary;
+
+		this.props.items.map(function(subsidiary) {
+			formatSubsidiary(subsidiary);
+			subsidiaries.push(
+				<div className="company-subsidiary-item">
+					<div className="company-subsidiary-item-logo">
+						<img src={subsidiary.logo} alt="Company"/>
+					</div>
+					<div className="company-subsidiary-item-content">
+						<h1 className="company-subsidiary-title"><span className="green">{subsidiary.name}</span> {subsidiary.company_name}</h1>
+						<ul className="company-subsidiary-item-list">
+							<li className="company-subsidiary-item-list-item">
+								<h2 className="company-subsidiary-item-list-item">Adresse</h2>
+								<h3 className="company-subsidiary-item-list-item-desc">{subsidiary.address.street}, {subsidiary.address.housenumber}</h3>
+								<h3 className="company-subsidiary-item-list-item-desc">{subsidiary.address.postal_code}, {subsidiary.address.city}</h3>
+							</li>
+							<li className="company-subsidiary-item-list-item manager">
+								<h2 className="company-subsidiary-item-list-item ">Manager</h2>
+								<h3 className="company-subsidiary-item-list-item-desc">{}</h3>
+							</li>
+						</ul>
+					</div>
+					<div className="company-subsidiary-edit-panel">
+						<a onClick={openSubsidiaryEdit} className="subsidiary-edit-panel-edit-link">
+							<img className="company-subsidiary-edit-panel-edit" src={require("../img/edit.png")} alt=""/>
+						</a>
+						<a href="subsidiary-delete_1" className="subsidiary-edit-panel-delete-link">
+							<img className="company-subsidiary-edit-panel-delete" src={require("../img/delete.png")} alt=""/>
+						</a>
+					</div>
+				</div>
+			)})
+		return subsidiaries;
+	}
+
+	render() {
+		return (
+			<List items={this.get_subsidiaries()}
+				selected={[0]}
+				disabled={[4]}
+				multiple={false}
+				onChange={function (selected) { }} />
+		);
+	}
+}
+
 class CompanyMain extends React.Component {	
+	constructor(props) {
+		super(props);
+		this.state = {
+			companies: [],
+			subsidiaries: []
+		};
+		this.getCompanies();
+		this.getSubsidiaries();
+	}
+
+	async getCompanies() {
+		var self = this;
+		var headers = new Headers();
+		headers.append("Authorization", "Token " + localStorage.token);
+		var request = await new Request(
+			'http://dev.jobufo.com/api/v1/management/company/',
+			{
+				method: "GET",
+				headers: headers
+			})
+		fetch(request)
+				.then(function(r) {
+					return r.json();
+				})
+				.then(function(objects) {
+					console.log(objects);
+					self.setState({
+						companies: objects
+					})
+				})
+	}
+
+	// async postCompanies() {
+	// 	var self = this;
+	// 	var headers = new Headers();
+	// 	headers.append("Authorization", "Token " + localStorage.token);
+	// 	var body = {
+	// 		name: 'Vasya'
+	// 	};
+	// 	var request = await new Request(
+	// 		'http://dev.jobufo.com/api/v1/management/company/',
+	// 		{
+	// 			method: "POST",
+	// 			headers: headers,
+	// 			body: JSON.stringify(body)
+	// 		})
+	// 	fetch(request)
+	// 			.then(function(r) {
+	// 				return r.json();
+	// 			})
+	// 			.then(function(objects) {
+	// 				console.log(objects)
+	// 				self.setState({
+	// 					companies: objects
+	// 				})
+	// 			})
+	// }
+
+	async getSubsidiaries() {
+		var self = this;
+		var headers = new Headers();
+		headers.append("Authorization", "Token " + localStorage.token);
+		var request = await new Request(
+			'http://dev.jobufo.com/api/v1/management/subsidiary/',
+			{
+				method: "GET",
+				headers: headers
+			})
+		fetch(request)
+				.then(function(r) {
+					return r.json();
+				})
+				.then(function(objects) {
+					console.log(objects)
+					self.setState({
+						subsidiaries: objects
+					})
+				})
+	}
+
 	render() {
 		return (
 			<div>
@@ -282,17 +442,16 @@ class CompanyMain extends React.Component {
 				</div>
 				<div id="company-wrapper" className="company-subsidiary-wrapper">
 					<h1 className="top-title">Unternehmensdaten</h1>
-					<ul id="company-subsidiary-company" className="company-subsidiary">
-						<CompanyItem openCompanyMain={this.props.openCompanyMain} openCompanyEdit={this.props.openCompanyEdit} />
-					</ul>
+					<div id="company-subsidiary-company" className="company-subsidiary">
+						<ListCompanies items={this.state.companies} openCompanyMain={this.props.openCompanyMain} openCompanyEdit={this.props.openCompanyEdit} />
+					</div>
 				</div>
 				<div id="subsidiary-wrapper" className="company-subsidiary-wrapper">
 					<h1 className="top-title">Filialen</h1>
 					<button onClick={this.props.openSubsidiaryEdit} type="button" id="addNewSubsidiary" className="button-cv button-cv-full-red">Neue Filiale hinzufugen</button>
-					<ul id="company-subsidiary-subsidiary" className="company-subsidiary">
-						<SubsidiaryItem openCompanyMain={this.props.openCompanyMain} openSubsidiaryEdit={this.props.openSubsidiaryEdit} />
-						<SubsidiaryItem openCompanyMain={this.props.openCompanyMain} openSubsidiaryEdit={this.props.openSubsidiaryEdit} />
-					</ul>
+					<div id="company-subsidiary-subsidiary" className="company-subsidiary">
+						<ListSubsidiaries items={this.state.subsidiaries} openCompanyMain={this.props.openCompanyMain} openSubsidiaryEdit={this.props.openSubsidiaryEdit} />
+					</div>
 				</div>
 			</div>
 		);
