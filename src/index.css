@@ -615,12 +615,19 @@ h2.location {
     margin-right: 5px;
     background-repeat: no-repeat;
     background-position: 8px 50%;
+<<<<<<< HEAD
     background-color: #2cb39c;
     background-image: url('img/Benefit_white.png');
+=======
+>>>>>>> 6ad3418... flux added
     background-size: 13px;
     border-radius: 200px;
     color: white;
     font-size: 12px;
+}
+.job-detail .stats .benefits {
+    background-color: #2cb39c;
+    background-image: url(img/Benefit_white.png);
 }
 .active-icon, 
 .message-content-header .scheduled-icon, 

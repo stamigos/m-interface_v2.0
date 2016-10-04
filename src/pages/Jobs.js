@@ -1,7 +1,8 @@
 import React from 'react';
+import Backbone from 'backbone';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import List from 'react-list-select'
 
+<<<<<<< HEAD
 import FilterDropdown from '../components/FilterDropdown'
 import VacancyVideo from '../components/VacancyVideo'
 
@@ -65,10 +66,26 @@ class JobsList extends React.Component {
 		);
 	}
 }
+=======
+//Stores
+import JobStore from '../store/JobStore';
+
+//Mixin
+import mixins from 'es6-mixins';
+import BackboneMixin from '../mixin/BackboneMixin';
+
+//Actions
+import AppActions from '../actions/AppActions';
+
+import FilterDropdown from '../components/FilterDropdown'
+import JobsList from '../components/JobsList'
+import JobDetails from '../components/JobDetails'
+>>>>>>> 6ad3418... flux added
 
 export default class Jobs extends React.Component {
 	constructor(props) {
 		super(props);
+<<<<<<< HEAD
 		this.state = {
 			jobs: []
 		}
@@ -94,6 +111,11 @@ export default class Jobs extends React.Component {
 						jobs: objects
 					})
 				})
+=======
+		mixins(BackboneMixin,this);
+		AppActions.getJobs();
+		// AppActions.getSelectedJob(0);
+>>>>>>> 6ad3418... flux added
 	}
 	render() {
 	    return (
@@ -142,28 +164,41 @@ export default class Jobs extends React.Component {
 				        <TabPanel>
 	  				          <div>
 						          <FilterDropdown />
+<<<<<<< HEAD
 						         <h2 className="jobs-counter">2 <b>JOBS</b> ÖFFENTLICH</h2>
 						         <JobsList items={this.state.jobs}/>
+=======
+						         <JobsList model={JobStore} status="posted" statusTitle="ÖFFENTLICH" />
+>>>>>>> 6ad3418... flux added
 					         </div>
 				        </TabPanel>
 				        <TabPanel>
     				          <div>
 						          <FilterDropdown />
+<<<<<<< HEAD
 						         <h2 className="jobs-counter">2 <b>JOBS</b> ÖFFENTLICH</h2>
 						         <JobsList />
+=======
+						         <JobsList model={JobStore} status="scheduled" statusTitle="VORBEREITET" />
+>>>>>>> 6ad3418... flux added
 					         </div>
 				        </TabPanel>
 				        <TabPanel>
     				          <div>
 						          <FilterDropdown />
+<<<<<<< HEAD
 						         <h2 className="jobs-counter">2 <b>JOBS</b> ÖFFENTLICH</h2>
 						         <JobsList />
+=======
+						         <JobsList model={JobStore} status="closed" statusTitle="GESCHLOSSEN" />
+>>>>>>> 6ad3418... flux added
 					         </div>
 				        </TabPanel>
 				      </Tabs>
 
 		        </div>
 	        </div>
+<<<<<<< HEAD
 
 	        <div className="job-detail-wrapper">
 	        	<div className="job-detail">
@@ -216,6 +251,9 @@ export default class Jobs extends React.Component {
 	        		</div>
 	        	</div>
 	        </div>
+=======
+	        <JobDetails model={JobStore} />
+>>>>>>> 6ad3418... flux added
 	      </div>
 	    );
   }
