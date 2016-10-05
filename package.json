@@ -22,6 +22,8 @@
     "react-list-select": "^0.3.0",
     "react-menu": "0.0.10",
     "react-menu-aim": "^1.0.1",
+    "react-modal-component": "^1.0.9",
+    "react-modal-dialog": "^3.0.2",
     "react-router": "^2.8.1",
     "react-sidebar": "^2.2.1",
     "react-simpletabs": "^0.7.0",

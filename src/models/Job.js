@@ -68,7 +68,8 @@ class Job extends Backbone.Model {
                 created_at: '',
                 last_modified: '',
                 benefit_1: false,
-                benefit_2: false
+                benefit_2: false,
+                application_list: []
             }
         }
     }

@@ -16,6 +16,7 @@ import FilterDropdown from '../components/FilterDropdown'
 import JobsList from '../components/JobsList'
 import JobDetails from '../components/JobDetails'
 
+
 export default class Jobs extends React.Component {
 	constructor(props) {
 		super(props);

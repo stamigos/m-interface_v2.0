@@ -8,7 +8,7 @@ import JobStore from '../store/JobStore';
 import mixins from 'es6-mixins';
 import BackboneMixin from '../mixin/BackboneMixin';
 
-import VacancyVideo from '../components/VacancyVideo'
+import VacancyVideoList from '../components/VacancyVideoList'
 
 function formatDate(pubDate) {
 	if (pubDate){
@@ -19,6 +19,23 @@ function formatDate(pubDate) {
 		return ""
 	}
 }
+function applicationStatus(application){
+    if(application.status == "DECLINED")
+      return 'rejected';
+    if(application.status == "CONTACTED")
+      return 'accepted';
+    return 'applied';
+}
+function applicationsCount(applications, status) {
+	var list = []
+	applications.map(function(application) {
+		if (applicationStatus(application) == status) {
+			list.push(application)
+		}
+	});
+	return ((list.length/2) >= 5) ? (String(list.length)) : ('0'+String(list.length))
+}
+
 export default class JobDetails extends React.Component {
 	constructor(props) {
 		super(props)
@@ -31,7 +48,7 @@ export default class JobDetails extends React.Component {
 	render() {
 		var model = this.props.model;
 		var job = model.get("selectedJob");
-		console.log("job:", job)
+		console.log("applicationList:", job.application_list)
 		// if (model.get("selectedJobPassed")) {
 		// 	job = model.get("posted")[0];
 		// }
@@ -50,32 +67,32 @@ export default class JobDetails extends React.Component {
 	        		<i className="fa fa-check-circle-o active-icon" aria-hidden="true"></i>
 	        		<h2 className="status">Öffentlich seit {formatDate(job.publication_date)}</h2>
 	        		<div className="job-messages">
-	        			<Tabs onSelect={this.handleSelect} selectedIndex={2}>
+	        			<Tabs onSelect={this.handleSelect} selectedIndex={0}>
 	        				{}
 	        				<TabList>
 	        					{}
 	        					<Tab>
-	        						<h2 className="new_applicant">00</h2>
+	        						<h2 className="new_applicant">{applicationsCount(job.application_list, "applied")}</h2>
 	        						<h3>Bewerbungen</h3>
         						</Tab>
 	        					<Tab>
-	        						<h2>00</h2>
+	        						<h2>{applicationsCount(job.application_list, "accepted")}</h2>
 	        						<h3>Eingeladen</h3>
 	        					</Tab>
 	        					<Tab>
-	        						<h2>00</h2>
+	        						<h2>{applicationsCount(job.application_list, "rejected")}</h2>
 	        						<h3>Abgelehnt</h3>
 	        					</Tab>
         					</TabList>
         					{}
 					        <TabPanel>
-					        		<VacancyVideo />
+					        		<VacancyVideoList applicationList={job.application_list} applicationStatus="applied" />
 					        </TabPanel>
 					        <TabPanel>
-					          <h2>Hello from Bar</h2>
+					        		<VacancyVideoList applicationList={job.application_list} applicationStatus="accepted" />
 					        </TabPanel>
 					        <TabPanel>
-					          <h2>Hello from Baz</h2>
+					        		<VacancyVideoList applicationList={job.application_list} applicationStatus="rejected" />
 					        </TabPanel>
 	        			</Tabs>
 	        		</div>

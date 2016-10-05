@@ -57,7 +57,7 @@ header {
 	width: 100%;
 	height: 80px;
 	background-color: #312b3a;
-    z-index: 9999;
+    z-index: 3;
 }
 .right-panel-avatar {
     float: right;
@@ -115,6 +115,7 @@ header {
     line-height: 80px;
     margin: 0 10px;
     color: #9f92b1;
+    cursor: pointer;
 }
 /* ----------- RIGHT PANEL DROPDOWN -------- */
 .user-menu-button li {
@@ -605,6 +606,13 @@ h2.location {
 .job-messages .ReactTabs__Tab:not(.ReactTabs__Tab--selected):hover {
     color: #08b39c;
 }
+.react-tabs [role=tab]:focus {
+    outline: none;
+    box-shadow: none;
+}
+.react-tabs [role=tab]:focus:after {
+    background: none;
+}
 .job-messages .react-tabs [role=tab][aria-selected=true] {
   border-bottom: 2px solid #08b39c;
   color: #08b39c;
@@ -613,16 +621,208 @@ h2.location {
 .applicant-message {
     position: relative;
     display: inline-block;
-    overflow: hidden;
+    overflow: visible;
     width: 220px;
-    height: 220px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    height: 285px;
+    border-radius: 10px;
     margin-right: 25px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+.applicant-message h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    padding-left: 15px;
+}
+.applicant-message h2.name {
+    font-size: 15px;
+    padding-top: 10px;
+    color: #6a5d7e;
+}
+.applicant-message h2.date {
+    font-size: 14px;
+    color: #9f92b1;
+    float: left;
+}
+.applicant-message:hover {
+    z-index: 1;
+    -webkit-transition: all 120ms ease-out 0s;
+    -moz-transition: all 120ms ease-out 0s;
+    transition: all 120ms ease-out 0s;
+    transition-timing-function: ease-out;
+    -webkit-transform: scale(1.07);
+    -moz-transform: scale(1.07);
+    -ms-transform: scale(1.07);
+    transform: scale(1.07);
+    box-shadow: 0 0 5px 0 rgba(0,0,0,.2);
 }
 .applicant-message video {
-    height: 100%;
+    height: 220px;
+    width: 220px;
+    background: grey;
+    transition: 1s linear;
+    -webkit-transition: 1s linear;
+    -moz-transition: 1s linear;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
+.video--paused video {
+    opacity: 0.5;
+}
+.video--playing video {
+    opacity: 1;
+}
+.applicant-message .applicant-info {
+    height: 65px;
+    background: #f6f4f9;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.applicant-message .video {
+    height: 220px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+/*.video-overlay__loader .video-spinner, .video-overlay__play .video-icon {
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    margin-left: -22px;
+    margin-top: -35px;
+    font-size: 30px;
+    border-radius: 15px;
+    padding: 20px;
+    background: url(img/play-button.png) no-repeat;
+    box-sizing: border-box;
+    background-size: 50px;
+    z-index: 1;
+}*/
+.video-button.play{
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    margin-left: -22px;
+    margin-top: -35px;
+    font-size: 30px;
+    border-radius: 15px;
+    padding: 20px;
+    background: url(img/play-button.png) no-repeat;
+    box-sizing: border-box;
+    background-size: 50px;
+    z-index: 1;
+}
+.applicant-message:hover .video-button.stop{
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    margin-left: -22px;
+    margin-top: -35px;
+    font-size: 30px;
+    border-radius: 15px;
+    padding: 20px;
+    background: url(img/pause-button.png) no-repeat;
+    box-sizing: border-box;
+    background-size: 50px;
+    z-index: 1;
+}
+/*.video-overlay__loader .video-spinner, .video-overlay__paused .video-icon {
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    margin-left: -22px;
+    margin-top: -35px;
+    font-size: 30px;
+    border-radius: 15px;
+    padding: 20px;
+    background: url(img/play-button.png) no-repeat;
+    box-sizing: border-box;
+    background-size: 50px;
+    z-index: 1;
+}*/
+.video--focused {
+    outline: none;
+    border: none;
+}
+.video--paused {
+    background: #000;
+}
+.video-icon:before {
+    font-family: "video-fontello";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    /* opacity: .8; */
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    margin-left: .2em;
+    /* font-size: 120%; */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    outline: none;
+
+    /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+.applicant-dropdown {
+    position: absolute;
+    right: 9px;
+    bottom: -7px;
+}
+.applicant-dropdown i{
+    color: #9f92b1;
+}
+.applicant-dropdown .user-menu-button {
+    background: none;
+}
+.applicant-dropdown .user-menu-button a {
+    font-size: 14px;
+}
+.applicant-dropdown .dd-items-right {
+    position: absolute;
+    right: -34px;
+    border: 1px solid #b8b8b8;
+    border-radius: 10px;
+    padding: 12px 25px;
+    background: #fff;
+    width: 140px;
+}
+.applicant-message:hover .applicant-dropdown .dd-items-right:hover  {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+}
+.modal-profile-info {
+    width: 400px;
+    height: 400px;
+    float: left;
+}
+/*button.video-play.video__control {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    border: 0;
+    border-radius: 15px;
+    background: url(img/play-button.png)
+}*/
 /* ------------ END TABS JOB DETAIL --------- */
 
 /*----------------- COMPANY --------------------*/
