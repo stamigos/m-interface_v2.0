@@ -1,6 +1,7 @@
 import React from 'react';
 import Backbone from 'backbone';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import List from 'react-list-select'
 
 //Stores
 import JobStore from '../store/JobStore';

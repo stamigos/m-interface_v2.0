@@ -11,8 +11,7 @@ import Login from './pages/Login'
 import Logout from './pages/Logout'
 
 import './index.css';
-import './admin.css';
-// import './admin_responsive.css';
+// import './admin.css';
 
 const root = document.getElementById('root');
 
