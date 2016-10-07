@@ -243,6 +243,7 @@ header {
     margin-top: 20px;
     padding: 12px 25px;
     width: 210px;
+    background-color: #fff;
 }
 .dd-items-right:before {
     content:"";
@@ -910,21 +911,223 @@ h2.location {
     -ms-transform: scale(1);
     transform: scale(1);
 }
-.modal-profile-info {
+/* ------------ END TABS JOB DETAIL --------- */
+/* ------------ MODAL APPLICANT ------------- */
+.modal-applicant-info,
+.modal-applicant-video {
     width: 400px;
     height: 400px;
     float: left;
+    background-color: #40384c;
 }
-/*button.video-play.video__control {
+.modal-applicant-video,
+.modal-applicant-video .video,
+.modal-applicant-video video {
+    border-top-right-radius: 20px;
+}
+.modal-applicant-video video,
+.modal-applicant-video .video {
+    width: 400px;
+    height: 400px;
+}
+.modal-applicant-video .video-button {
+    top: 200px;
+    left: 75%;
+}
+.dialog--jss-0-0 {
+    padding: 0 !important;
+    border-radius: 20px !important;
+    overflow: hidden !important; 
+    background: #40384c !important;
+}
+.modal-applicant-video:hover .video-button.stop{
+    cursor: pointer;
     position: absolute;
-    top: 100px;
-    left: 100px;
-    border: 0;
+    top: 200px;
+    left: 75%;
+    width: 50px;
+    height: 50px;
+    margin-left: -22px;
+    margin-top: -35px;
+    font-size: 30px;
     border-radius: 15px;
-    background: url(img/play-button.png)
-}*/
-/* ------------ END TABS JOB DETAIL --------- */
-
+    padding: 20px;
+    background: url(img/pause-button.png) no-repeat;
+    box-sizing: border-box;
+    background-size: 50px;
+    z-index: 1;
+}
+.modal-applicant-info-wrapper {
+    margin: 45px;
+    padding: 0;
+}
+.modal-applicant-info a {
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-block;
+    width: 140px;
+    padding: 10px 0;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 40px;
+}
+.modal-applicant-info .accept {
+    font-size: 12px;
+    width: 140px;
+    padding: 8px 0;
+    color: #fff;
+    border: 2px solid #f2415f;
+    background-color: #f2415f;
+}
+.modal-applicant-info .accept:hover {
+    color: #f2415f;
+    background-color: #fff;
+    border: 2px solid #fff;
+}
+.modal-applicant-info .reject {
+    margin-left: 20px;
+    color: #f2415f;
+    border: 2px solid #f2415f;
+}
+.modal-applicant-info .reject:hover {
+    color: #fff;
+    border: 2px solid #fff;
+}
+.modal-applicant-info h1.title {
+    color: #fff;
+    font-size: 30px;
+    font-family: 'Gotham Rounded', sans-serif;
+}
+.modal-applicant-info h2.location {
+    font-size: 16px;
+    margin-top: 5px;
+    color: #9f92b1;
+}
+.modal-applicant-info .info-buttons {
+    margin-top: 190px;
+}
+.modal-tabs-wrapper {
+    background-color: #fff;
+    padding: 78px 30px;
+    padding-top: 10px;
+    margin-top: 400px;
+    min-height: 650px;
+}
+.modal-tabs-wrapper .react-tabs [role=tab] {
+    border: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 12px 16px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #9f92b1;
+}
+.modal-tabs-wrapper .react-tabs [role=tab][aria-selected=true] {
+    color: #08b39c;
+    border-bottom: 3px solid #08b39c;
+    font-size: 14px;
+    padding: 12px 16px;
+    font-weight: 400;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.modal-tabs-wrapper .react-tabs [role=tablist] {
+    border-bottom: 1px solid #ebe9ee;
+}
+.modal-applicant-profile {
+    padding: 35px 20px;
+    min-height: 150px;
+}
+.modal-applicant-profile .col {
+    float: left;
+    width: 320px;
+    padding-bottom: 30px;
+    color: #08b39c;
+}
+.modal-applicant-profile .col i {
+    font-size: 20px;
+    line-height: 38px;
+    color: #fff;
+}
+.modal-applicant-profile .col h1 {
+    font-size: 14px;
+    line-height: 40px;
+    font-family: 'Gotham Rounded';
+    text-transform: uppercase;
+}
+.modal-applicant-profile .icon-green {
+    float: left;
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+    text-align: center;
+    border-radius: 40px;
+    background-color: #08b39c;
+}
+.modal-applicant-profile .icon-red {
+    float: left;
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+    text-align: center;
+    border-radius: 40px;
+    background-color: #f2415f;
+}
+.modal-applicant-profile .col:first-child {
+    color: #08b39c;
+}
+.modal-applicant-profile .col:last-child {
+    color: #f2415f;
+}
+.modal-applicant-profile .description-list-wrapper {
+    list-style-type: disc;
+}
+.modal-applicant-profile h2.period {
+    font-size: 13px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    margin: 5px 0;
+    color: #6a5d7e;
+}
+.modal-applicant-profile .line-wrapper.line-first {
+    height: 35px;
+}
+.modal-applicant-profile .line-wrapper {
+    margin-left: 14px;
+    position: relative;
+    margin-bottom: 10px;
+    padding-left: 26px;
+}
+.modal-applicant-profile .line {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    margin-right: 20px;
+    border: 3px solid #e4e2e7;
+    border-radius: 5px;
+}
+.modal-applicant-profile .point {
+    float: left;
+    width: 12px;
+    height: 12px;
+    margin-top: 4px;
+    margin-right: 18px;
+    margin-left: 11px;
+    border-radius: 10px;
+}
+.modal-applicant-profile .point.point-green {
+    background-color: #08b39c;
+}
+.modal-applicant-profile .point.point-red {
+    background-color: #f2415f;
+}
+/* ------------ END MODAL APPLICANT --------- */
 /*----------------- COMPANY --------------------*/
 .company-wrapper {
     position: relative; 

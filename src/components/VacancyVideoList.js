@@ -29,6 +29,7 @@ class VacancyVideo extends React.Component {
       };
       this.toggle = this.toggle.bind(this);
       this.close = this.close.bind(this);
+      this.onApplicationClick = this.onApplicationClick.bind(this);
     }
     close() {
         this.setState({ 
@@ -36,7 +37,10 @@ class VacancyVideo extends React.Component {
         });
       }
     toggle() {
-        this.setState({ isMenuOpen: !this.state.isMenuOpen });
+        this.setState({ 
+          isMenuOpen: !this.state.isMenuOpen,
+          isShowingModal: false
+        });
     }
     onApplicationClick() {
         this.setState({isShowingModal: true})
@@ -49,9 +53,7 @@ class VacancyVideo extends React.Component {
         toggle: <i onClick={this.toggle} className="fa fa-chevron-down in-applicant" aria-hidden="true"></i>,
         align: 'right',
         animAlign: 'center',
-        animate: true,
-        closeOnOutsideClick: false,
-        closeOnInsideClick: false
+        animate: true
       }
     return (
       <div>
@@ -72,11 +74,12 @@ class VacancyVideo extends React.Component {
                       <DropdownMenu {...menuOptions}>
                         <li><Link to="" href="#">Accept</Link></li>
                         <li><Link to="" href="#">Decline</Link></li>
-                        <li><ModalProfile isShowingModal={this.state.isShowingModal} /></li>
+                        <li><a onClick={this.onApplicationClick}>View full profile</a></li>
                       </DropdownMenu>
                     </div>
                   </div>
           </div>
+          <ModalProfile isShowingModal={this.state.isShowingModal} application={application}/>
         </div>
         </div>
     );
@@ -92,8 +95,6 @@ export default class VacancyVideoList extends React.Component {
     this.filterVideos = this.filterVideos.bind(this);
   }
   componentWillReceiveProps(nextProps, nextState) {
-      console.log("componentWillReceiveProps")
-      console.log('nextProps:',nextProps)
       this.setState({
           applications: this.filterVideos(nextProps)
       })
@@ -106,8 +107,6 @@ export default class VacancyVideoList extends React.Component {
   filterVideos(props) {
     var applications = []
     props.applicationList.map(function(application, i) {
-      console.log("status:", application.status)
-      console.log("props status:", props.applicationStatus)
         if (applicationStatus(application) == props.applicationStatus) {
             applications.push(<VacancyVideo key={i} application={application} />)
         }
@@ -116,7 +115,6 @@ export default class VacancyVideoList extends React.Component {
   }
   render() {
     var applications = this.state.applications;
-    console.log("applications:", this.state)
     return (
       <div>
           {applications}
@@ -124,6 +122,3 @@ export default class VacancyVideoList extends React.Component {
     )
   }
 };
-/*                <List items={}
-                    multiple={false}
-                    onChange={}/>;*/

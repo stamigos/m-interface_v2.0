@@ -18,10 +18,11 @@ export default class Login extends React.Component {
 	onChange(e) {
 		console.log("changed!")
 	    var state = {};
-    	state[e.target.name] =  $.trim(e.target.value);
+    	state[e.target.name] =  e.target.value;
     	this.setState(state);
 	}
 	onSubmit(e) {
+		console.log(this.state)
 		var self = this;
 		e.preventDefault();
 		var headers = new Headers();

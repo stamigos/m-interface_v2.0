@@ -216,6 +216,7 @@ class ListCompanies extends React.Component {
 		var companies = [];
 		var openCompanyEdit = this.props.openCompanyEdit;
 		var formatCompany = this.formatCompany;
+		console.log('props:', this.props.items)
 
 		this.props.items.map(function(company) {
 			formatCompany(company);

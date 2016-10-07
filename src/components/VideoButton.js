@@ -10,7 +10,6 @@ export default class VideoButton extends React.Component {
 		}
 	}
 	render() {
-		console.log(this.props)
 		return (
 			<span className={this.props.paused ? ("video-button play") : ("video-button stop")} onClick={this.onClick.bind(this)}></span>
 		);
