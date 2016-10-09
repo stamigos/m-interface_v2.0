@@ -4,13 +4,71 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { default as Video, Controls, Play, Mute, Seek, Fullscreen, Time, Overlay } from 'react-html5video';
 import VideoButton from '../components/VideoButton'
 
+function getMonth(date) {
+	var str = '';
+		switch(date){
+			case '01':
+				str = 'Jan ';
+				break;
+			case '02':
+				str = 'Feb ';
+				break;
+			case '03':
+				str = 'Mar ';
+				break;
+			case '04':
+				str = 'Apr ';
+				break;
+			case '05':
+				str = 'May ';
+				break;
+			case '06':
+				str = 'Jun ';
+				break;
+			case '07':
+				str = 'Jul ';
+				break;
+			case '08':
+				str = 'Aug ';
+				break;
+			case '09':
+				str = 'Sep ';
+				break;
+			case '10':
+				str = 'Oct ';
+				break;
+			case '11':
+				str = 'Nov ';
+				break;
+			case '12':
+				str = 'Dec ';
+				break;
+		}
+		return str;
+}
+function applicationPeriod(start_date, end_date){
+		var str = '';
+		var start_date_sp = start_date.split('-');
+		var end_date_sp = start_date.split('-');
+		str += getMonth(start_date_sp[1]);
+		str += start_date_sp[0] + ' - ';
+		if(end_date == null){
+			str += 'Heute ';
+		}
+		else{
+			str += getMonth(end_date_sp[1])
+			str += end_date_sp[0];
+		}
+		return str;
+}
+
 class DescriptionItem extends React.Component {
 	render() {
 		return (
       			<div className="list-item">
       				<div className="title-wrapper">
       					<div className={this.props.type=="job_list" ? ("point point-green"):("point point-red")}></div>
-      					<h2 className="period">{this.props.application.begin_date} – {this.props.application.end_date}</h2>
+      					<h2 className="period">{applicationPeriod(this.props.application.begin_date, this.props.application.end_date)}</h2>
       				</div>
       				<div className="line-wrapper line-first">
       					<div className="line"></div>
@@ -22,13 +80,12 @@ class DescriptionItem extends React.Component {
 
 export default class ModalProfile extends React.Component {
 	constructor(props) {
-		super(props)
+		super(props);
 		this.state = {
 		   isShowingModal: false,
 		   application: null, 
 		   fullApplication: null
 		}
-		// this.handleClick = this.handleClick.bind(this);
 		this.handleClose = this.handleClose.bind(this);
 		this.getFullApplication = this.getFullApplication.bind(this);
 		this.getDescriptionListHtml = this.getDescriptionListHtml.bind(this);
@@ -41,9 +98,6 @@ export default class ModalProfile extends React.Component {
 		})
 		this.getFullApplication(nextProps.application.api_url);
 	}
-	// handleClick() {
-	// 	this.setState({isShowingModal: true})
-	// }
 	handleClose() {
 		this.setState({isShowingModal: false})
 	}
@@ -89,10 +143,6 @@ export default class ModalProfile extends React.Component {
 		
 	}
 	render() {
-		// console.log("app:", this.state.application)
-		// if (this.state.application){
-		// 	this.getFullApplication(this.state.application.api_url)
-		// }
 		return (
 			<div>
 		      {
@@ -170,9 +220,78 @@ export default class ModalProfile extends React.Component {
 						        </div>
 					        </TabPanel>
 					        <TabPanel>
-	    				          <div>
-
-						         </div>
+					        	<div className="modal-applicant-profile-more">
+					        		<div className="more_info_wrapper">
+					        			<ul className="more_info_list">
+					        				<li className="more_info_wrapper-item">
+					        					<h2 className="title">Verfügbarkeit</h2>
+				        						<ul className="availability-list">
+				        							<li className="availability-list-item">
+			        									<h2 className="day">MO</h2>
+			        									<input type="checkbox" name="WeekDays" className="week-days" id="DayMonday" value="Monday" disabled />
+			        									<label className="week-days" htmlFor="DayMonday"></label>
+    												</li>
+													<li className="availability-list-item">
+														<h2 className="day">DIE</h2>
+														<input type="checkbox" name="WeekDays" className="week-days" id="DayTuesday" value="Tuesday" disabled />
+														<label className="week-days" htmlFor="DayTuesday"></label>
+													</li>
+													<li className="availability-list-item">
+														<h2 className="day">MI</h2>
+														<input type="checkbox" name="WeekDays" className="week-days" id="DayWednesday" value="Wednesday" disabled />
+														<label className="week-days" htmlFor="DayWednesday"></label>
+													</li>
+													<li className="availability-list-item">
+														<h2 className="day">DO</h2>
+														<input type="checkbox" name="WeekDays" className="week-days" id="DayThursday" value="Thursday" disabled />
+														<label className="week-days" htmlFor="DayThursday"></label>
+													</li>
+													<li className="availability-list-item">
+														<h2 className="day">FR</h2>
+														<input type="checkbox" name="WeekDays" className="week-days" id="DayFriday" value="Friday" disabled />
+														<label className="week-days" htmlFor="DayFriday"></label>
+													</li>
+													<li className="availability-list-item">
+														<h2 className="day">SA</h2>
+														<input type="checkbox" name="WeekDays" className="week-days" id="DaySaturday" value="Saturday" disabled />
+														<label className="week-days" htmlFor="DaySaturday"></label>
+													</li>
+													<li className="availability-list-item">
+														<h2 className="day">SO</h2>
+														<input type="checkbox" name="WeekDays" className="week-days" id="DaySunday" value="Sunday" disabled />
+														<label className="week-days" htmlFor="DaySunday"></label>
+													</li>
+												</ul>
+												<div className="clear"></div>
+											</li>
+											<li className="more_info_wrapper-item">
+												<h2 className="title">Mögliche Einsatzorte</h2>
+												<ul className="location-list">
+													<li className="location-list-item">
+														<i className="fa fa-map-marker" aria-hidden="true"></i> Berlin, Germany
+													</li>
+													<li className="location-list-item">
+														<i className="fa fa-map-marker" aria-hidden="true"></i> Lepzig, Germany
+													</li>
+													<li className="location-list-item">
+														<i className="fa fa-map-marker" aria-hidden="true"></i> London, England
+													</li>
+												</ul>
+											</li>
+											<li className="more_info_wrapper-item">
+												<h2 className="title">Branchen</h2>
+												<span className="more-info-point">Retail</span>
+												<span className="more-info-point">Hosmitality</span>
+												<span className="more-info-point">Retail</span>
+											</li>
+											<li className="more_info_wrapper-item">
+												<h2 className="title">Interessiert an:</h2>
+												<span className="more-info-point">Part-time</span>
+												<span className="more-info-point">Temporary</span>
+											</li>
+										</ul>
+									</div>
+								</div>
 					        </TabPanel>
 					        <TabPanel>
 	    				          <div>

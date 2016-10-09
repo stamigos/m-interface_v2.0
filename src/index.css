@@ -26,6 +26,9 @@ body {
     padding: 0;
     background-color: #fff;
 }
+input[type='text'].half, select.half {
+    width: 290px !important;
+}
 .align-center {
     text-align: center;
 }
@@ -122,6 +125,19 @@ textarea {
     border: none;
     border-radius: 5px;
     background: #f6f4f9;
+}
+input[type='text'], 
+input[type='email'], 
+input[type='password'], 
+select {
+    font-size: 18px;
+    width: 600px;
+    margin: 0;
+    padding: 5px 0 12px 0;
+    color: #433b50;
+    border: none;
+    border-bottom: 1px solid #cdc6d5;
+    background: none;
 }
 .overlay
 {
@@ -939,6 +955,7 @@ h2.location {
     border-radius: 20px !important;
     overflow: hidden !important; 
     background: #40384c !important;
+    box-shadow: 0 0 100px rgba(0,0,0,1) !important;
 }
 .modal-applicant-video:hover .video-button.stop{
     cursor: pointer;
@@ -1127,7 +1144,165 @@ h2.location {
 .modal-applicant-profile .point.point-red {
     background-color: #f2415f;
 }
+.modal-applicant-profile-more .more_info_wrapper {
+    padding: 0 15px;
+}
+.modal-applicant-profile-more li.more_info_wrapper-item {
+    padding: 30px 0;
+    border-bottom: 1px solid #f0ecf4;
+}
+.modal-applicant-profile-more .more_info_wrapper-item h2.title {
+    font-family: 'Open Sans',sans-serif;
+    font-size: 13px;
+    padding-bottom: 10px;
+    color: #6a5d7e;
+    font-weight: 700;
+}
+.modal-applicant-profile-more li.location-list-item {
+    font-size: 13px;
+    font-family: 'Open Sans',sans-serif;
+    font-weight: 300;
+    padding: 2px 0;
+    color: #6a5d7e;
+}
+.modal-applicant-profile-more span.more-info-point {
+    font-size: 13px;
+    padding: 3px 10px;
+    font-family: 'Open Sans',sans-serif;
+    font-weight: 300;
+    margin-right: 10px;
+    color: #fff;
+    border-radius: 20px;
+    background: #796a8f;
+}
+.modal-applicant-profile-more li.more_info_wrapper-item:last-child {
+    border-bottom: none;
+}
+.modal-applicant-profile-more li.availability-list-item {
+    float: left;
+    margin-right: 20px;
+}
+.modal-applicant-profile-more h2.day {
+    font-family: 'Open Sans',sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    padding-bottom: 10px;
+    text-align: center;
+    color: #d1c7df;
+}
 /* ------------ END MODAL APPLICANT --------- */
+/* ------------ MY ACCOUNT ------------------ */
+.container-account .post-job-content-header {
+    padding-top: 110px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #f6f4f9;
+}
+.container-account .post-job-content-header.align-center {
+    text-align: center;
+}
+.container-account .post-job-content-header h1.title {
+    font-size: 28px;
+    line-height: 28px;
+    font-family: 'Gotham Rounded', sans-serif;
+    font-weight: 400;
+}
+.container-account .form-wrapper {
+    width: 600px;
+    margin: 0 auto;
+}
+.container-account div#profileAvatar-wrapper {
+    position: relative;
+    width: 100px;
+    margin: 0 auto;
+}
+.container-account #profileAvatar img {
+    width: 100px;
+    height: 100px;
+}
+.container-account label.imageUpload div:first-child {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 50%;
+    background: #f2415f;
+}
+.container-account label.imageUpload i.fa.fa-camera {
+    font-size: 20px;
+    line-height: 40px;
+    width: 40px;
+    text-align: center;
+    color: #fff;
+}
+.container-account input.imageUpload {
+    display: none;
+}
+.container-account div.half {
+    display: inline-block;
+    width: 290px;
+}
+.container-account div.half.right {
+    margin-left: 15px;
+}
+.container-account .label {
+    font-size: 14px;
+    display: inherit;
+    width: 100%;
+    margin-top: 20px;
+    color: #9f92b1;
+}
+.container-account ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #9f92b1;
+}
+.container-account ::-moz-placeholder { /* Firefox 19+ */
+    color: #9f92b1;
+}
+.container-account :-ms-input-placeholder { /* IE 10+ */
+    color: #9f92b1;
+}
+.container-account :-moz-placeholder { /* Firefox 18- */
+    color: #9f92b1;
+}
+.container-account .buttons {
+    margin-top: 45px;
+    padding: 45px 0;
+    border-top: 1px solid #f6f4f9;
+}
+.container-account form .button-cv-transperent {
+    float: right;
+    margin-left: 20px;
+    color: #f2415f;
+    border: 2px solid #f2415f;
+}
+.container-account form .button-cv {
+    width: 170px;
+    padding-right: 0;
+    padding-left: 0;
+    text-align: center;
+}
+.container-account form#profile-settings-form {
+    padding-top: 25px;
+}
+.container-account .inner-content {
+    /* Initially we don't want any height, and we want the contents to be hidden */
+    max-height: 0;
+    overflow: hidden;
+
+    /* Set our transitions up. */
+    -webkit-transition: max-height 0.8s;
+    -moz-transition: max-height 0.8s;
+    transition: max-height 0.8s;
+}
+.container-account .inner-content.expanded {
+    /* On hover, set the max-height to something large. In this case there's an obvious limit. */
+    max-height: 200px;
+}
+.container-account a#profileChangePasswordButton {
+    margin-top: 20px;
+}
+/* ------------ END MY ACCOUNT -------------- */
 /*----------------- COMPANY --------------------*/
 .company-wrapper {
     position: relative; 

@@ -40,11 +40,11 @@ export default class Header extends React.Component {
           						<h2>Thomas Paucker</h2>
           					</div>
           					<div className="user-avatar">
-          				 		<UserAvatar size="40" name="Thomas Paucker" />
-      				 		</div>
+          				 		<UserAvatar size="40" name="Thomas Paucker" src="http://dev.jobufo.com/media/avatars/a29002ff-1e8.png" />
+      				 		  </div>
       				 		<div className="user-menu-button">
 							      <DropdownMenu {...menuOptions}>
-							        <li><Link to="" href="#">Mein Konto</Link></li>
+							        <li><Link to="account" href="#">Mein Konto</Link></li>
 							        <li><Link to="logout" href="#">Ausloggen</Link></li>
 							      </DropdownMenu>
       				 		</div>
