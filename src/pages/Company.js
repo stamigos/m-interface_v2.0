@@ -1,6 +1,17 @@
 import React from 'react';
 import List from 'react-list-select'
 
+//Stores
+import JobStore from '../store/JobStore';
+
+//Mixin
+import mixins from 'es6-mixins';
+import BackboneMixin from '../mixin/BackboneMixin';
+
+//Actions
+import AppActions from '../actions/AppActions';
+
+
 class CompanyEdit extends React.Component {
 	render() {
 		return (
@@ -189,26 +200,38 @@ class SubsidiaryEdit extends React.Component {
 	}
 }
 
+function getUrl(social_media, social_media_title) {
+	var result = null;
+	social_media.map(function(item) {
+		if (item.type == social_media_title) {
+			result = item
+		}
+	})
+	return result;
+}
+
+
 class ListCompanies extends React.Component {
 	constructor(props) {
 		super(props);
+		mixins(BackboneMixin,this);
 		this.get_companies = this.get_companies.bind(this);
 		this.formatCompany = this.formatCompany.bind(this);
+		console.log("in ListCompanies")
 	}
-
 	formatCompany(company) {
 		return {
 			pk: company.pk,
 			name: company.name,
 			logo: company.logo,
-			category: company.category.name,
+			category: company.category ? (company.category.name):(""),
 			website: [{
-				name: company.social_media_list['0'].handle,
-				url: company.social_media_list['0'].url
+				name: getUrl(company.social_media_list, "URL") ? (getUrl(company.social_media_list, "URL").handle):(""),
+				url: getUrl(company.social_media_list, "URL") ? (getUrl(company.social_media_list, "URL").url):("")
 			}],
-			facebook: company.social_media_list['1'].url,
-			twitter: company.social_media_list['2'].url,
-			instagram: company.social_media_list['3'].url
+			facebook: getUrl(company.social_media_list, "FACEBOOK") ? (getUrl(company.social_media_list, "FACEBOOK").url):(""),
+			twitter: getUrl(company.social_media_list, "TWITTER") ? (getUrl(company.social_media_list, "TWITTER").url):(""),
+			instagram: getUrl(company.social_media_list, "INSTAGRAM") ? (getUrl(company.social_media_list, "INSTAGRAM").url):("")
 		};
 	}
 
@@ -216,12 +239,15 @@ class ListCompanies extends React.Component {
 		var companies = [];
 		var openCompanyEdit = this.props.openCompanyEdit;
 		var formatCompany = this.formatCompany;
-		console.log('props:', this.props.items)
+		var model = this.props.model;
+		console.log('props model:', this.props.model)
 
-		this.props.items.map(function(company) {
-			formatCompany(company);
+		model.get("companies").map(function(company) {
+			console.log('company:', company)
+			company = formatCompany(company);
+			console.log('company after format:', company)
 			companies.push(
-				<div className="company-subsidiary-item">
+				<div>
 					<div className="company-subsidiary-item-logo">
 						<img src={company.logo} alt="Company" />
 					</div>
@@ -265,16 +291,96 @@ class ListCompanies extends React.Component {
 					</div>
 				</div>
 			)});
-		return companies;
+		return [companies[0]];
 	}
 
 	render() {
+		var model = this.props.model;
+		var companies = []
+		if (!model.get("companiesLoading")) {
+			companies = this.get_companies();
+		}
 		return (
-			<List items={this.get_companies()}
-				selected={[0]}
-				disabled={[4]}
-				multiple={false}
+			<List items={companies}
 				onChange={function (selected) { }} />
+		);
+	}
+}
+
+					// <div className="company-subsidiary-item-content">
+					// 	<h1 className="company-subsidiary-title"><span className="green">{subsidiary.name}</span> {subsidiary.company_name}</h1>
+					// 	<ul className="company-subsidiary-item-list">
+					// 		<li className="company-subsidiary-item-list-item">
+					// 			<h2 className="company-subsidiary-item-list-item">Adresse</h2>
+					// 			<h3 className="company-subsidiary-item-list-item-desc">{subsidiary.address.street}, {subsidiary.address.housenumber}</h3>
+					// 			<h3 className="company-subsidiary-item-list-item-desc">{subsidiary.address.postal_code}, {subsidiary.address.city}</h3>
+					// 		</li>
+					// 		<li className="company-subsidiary-item-list-item manager">
+					// 			<h2 className="company-subsidiary-item-list-item ">Manager</h2>
+					// 			<h3 className="company-subsidiary-item-list-item-desc"></h3>
+					// 		</li>
+					// 	</ul>
+					// </div>
+				// 	<div className="company-subsidiary-edit-panel">
+				// 		<a onClick={openSubsidiaryEdit} className="subsidiary-edit-panel-edit-link">
+				// 			<img className="company-subsidiary-edit-panel-edit" src={require("../img/edit.png")} alt=""/>
+				// 		</a>
+				// 		<a href="subsidiary-delete_1" className="subsidiary-edit-panel-delete-link">
+				// 			<img className="company-subsidiary-edit-panel-delete" src={require("../img/delete.png")} alt=""/>
+				// 		</a>
+				// 	</div>
+
+					// 				<div className="company-subsidiary-item-content">
+					// 	<h1 className="company-subsidiary-title"><span className="green">{subsidiary.name}</span> {company_name}</h1>
+					// 	<ul className="company-subsidiary-item-list">
+					// 		<li className="company-subsidiary-item-list-item">
+					// 			<h2 className="company-subsidiary-item-list-item">Adresse</h2>
+					// 			<h3 className="company-subsidiary-item-list-item-desc">{street}, {housenumber}</h3>
+					// 			<h3 className="company-subsidiary-item-list-item-desc">{postal_code}, {city}</h3>
+					// 		</li>
+					// 		<li className="company-subsidiary-item-list-item manager">
+					// 			<h2 className="company-subsidiary-item-list-item ">Manager</h2>
+					// 			<h3 className="company-subsidiary-item-list-item-desc"></h3>
+					// 		</li>
+					// 	</ul>
+					// </div>
+class SubsidiaryItem extends React.Component {
+	render() {
+		var subsidiary = this.props.subsidiary;
+		var openSubsidiaryEdit = this.props.openSubsidiaryEdit;
+		console.log("SubsidiaryItem:", subsidiary)
+		var street = subsidiary.address.street;
+		var housenumber = subsidiary.address.housenumber;
+		var street_house = street + ', ' + housenumber
+		var postal_code = subsidiary.address.postal_code;		
+		var city = subsidiary.address.city;
+		var postal_city = postal_code + ", " + city
+		var company_name = subsidiary.company.name;
+		return (
+			<div className="company-subsidiary-item">
+					<div className="company-subsidiary-item-logo">
+						<img src={subsidiary.image_list['0'].image} alt="Company"/>
+					</div>
+					<div className="company-subsidiary-item-content">
+						<h1 className="company-subsidiary-title">
+							<span className="green">{subsidiary.name}</span> 
+							{company_name}
+						</h1>
+						<ul className="company-subsidiary-item-list">
+							<li>					
+								<h2 className="company-subsidiary-item-list-item">Adresse</h2>
+								<h3 className="company-subsidiary-item-list-item-desc">{street_house}</h3>
+								<h3 className="company-subsidiary-item-list-item-desc">{postal_city}</h3>
+							</li>
+							<li className="company-subsidiary-item-list-item manager">
+								<h2 className="company-subsidiary-item-list-item ">Manager</h2>
+								<h3 className="company-subsidiary-item-list-item-desc"></h3>
+							</li>
+						</ul>
+					</div>
+
+
+			</div>
 		);
 	}
 }
@@ -282,12 +388,29 @@ class ListCompanies extends React.Component {
 class ListSubsidiaries extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			subsidiaries: []
+		}
+		mixins(BackboneMixin,this);
 		this.get_subsidiaries = this.get_subsidiaries.bind(this);
 		this.formatSubsidiary = this.formatSubsidiary.bind(this);
 	}
+	componentWillMount() {
+		var model = this.props.model;
+		console.log("JobStore subsidiaries", model.get("subsidiaries"))
+		if (!model.get("subsidiariesLoading")) {
+			this.get_subsidiaries();
+		}
+	}
+	componentWillReceiveProps(nextProps) {
+		var model = nextProps.model;
+		console.log("JobStore subsidiaries", model.get("subsidiaries"))
+		if (!model.get("subsidiariesLoading")) {
+			this.get_subsidiaries();
+		}
+	}
 
 	formatSubsidiary(subsidiary) {
-		console.log(subsidiary);
 		return {
 			pk: subsidiary.pk,
 			name: subsidiary.name,
@@ -307,48 +430,27 @@ class ListSubsidiaries extends React.Component {
 		var subsidiaries = [];
 		var openSubsidiaryEdit = this.props.openSubsidiaryEdit;
 		var formatSubsidiary = this.formatSubsidiary;
+		console.log('props subsidiaries:', this.props.model)
+		var model = this.props.model;
 
-		this.props.items.map(function(subsidiary) {
-			formatSubsidiary(subsidiary);
-			subsidiaries.push(
-				<div className="company-subsidiary-item">
-					<div className="company-subsidiary-item-logo">
-						<img src={subsidiary.logo} alt="Company"/>
-					</div>
-					<div className="company-subsidiary-item-content">
-						<h1 className="company-subsidiary-title"><span className="green">{subsidiary.name}</span> {subsidiary.company_name}</h1>
-						<ul className="company-subsidiary-item-list">
-							<li className="company-subsidiary-item-list-item">
-								<h2 className="company-subsidiary-item-list-item">Adresse</h2>
-								<h3 className="company-subsidiary-item-list-item-desc">{subsidiary.address.street}, {subsidiary.address.housenumber}</h3>
-								<h3 className="company-subsidiary-item-list-item-desc">{subsidiary.address.postal_code}, {subsidiary.address.city}</h3>
-							</li>
-							<li className="company-subsidiary-item-list-item manager">
-								<h2 className="company-subsidiary-item-list-item ">Manager</h2>
-								<h3 className="company-subsidiary-item-list-item-desc">{}</h3>
-							</li>
-						</ul>
-					</div>
-					<div className="company-subsidiary-edit-panel">
-						<a onClick={openSubsidiaryEdit} className="subsidiary-edit-panel-edit-link">
-							<img className="company-subsidiary-edit-panel-edit" src={require("../img/edit.png")} alt=""/>
-						</a>
-						<a href="subsidiary-delete_1" className="subsidiary-edit-panel-delete-link">
-							<img className="company-subsidiary-edit-panel-delete" src={require("../img/delete.png")} alt=""/>
-						</a>
-					</div>
-				</div>
-			)})
-		return subsidiaries;
+		var subsidiaryList = model.get("subsidiaries").map(function(subsidiary) {
+			return (<SubsidiaryItem subsidiary={subsidiary} openSubsidiaryEdit={openSubsidiaryEdit} />)
+		})
+		this.setState({
+			subsidiaries: subsidiaryList
+		})
 	}
 
 	render() {
+		// var model = this.props.model;
+		// console.log("JobStore subsidiaries", model.get("subsidiaries"))
+		// var subsidiaries = [<div></div>]
+		// if (!model.get("subsidiariesLoading")) {
+		// 	subsidiaries = this.get_subsidiaries();
+		// }
+		// console.log("subsidiaries after", subsidiaries)
 		return (
-			<List items={this.get_subsidiaries()}
-				selected={[0]}
-				disabled={[4]}
-				multiple={false}
-				onChange={function (selected) { }} />
+			<List items={this.state.subsidiaries} />
 		);
 	}
 }
@@ -356,35 +458,37 @@ class ListSubsidiaries extends React.Component {
 class CompanyMain extends React.Component {	
 	constructor(props) {
 		super(props);
-		this.state = {
-			companies: [],
-			subsidiaries: []
-		};
-		this.getCompanies();
-		this.getSubsidiaries();
+		mixins(BackboneMixin,this);
+		AppActions.getCompanies();
+		AppActions.getSubsidiaries();
+		// this.state = {
+		// 	companies: []
+		// };
+		// this.getCompanies = this.getCompanies.bind(this)();
+		// this.getSubsidiaries = this.getSubsidiaries.bind(this)();
 	}
 
-	async getCompanies() {
-		var self = this;
-		var headers = new Headers();
-		headers.append("Authorization", "Token " + localStorage.token);
-		var request = await new Request(
-			'http://dev.jobufo.com/api/v1/management/company/',
-			{
-				method: "GET",
-				headers: headers
-			})
-		fetch(request)
-				.then(function(r) {
-					return r.json();
-				})
-				.then(function(objects) {
-					console.log(objects);
-					self.setState({
-						companies: objects
-					})
-				})
-	}
+	// async getCompanies() {
+	// 	var self = this;
+	// 	var headers = new Headers();
+	// 	headers.append("Authorization", "Token " + localStorage.token);
+	// 	var request = await new Request(
+	// 		'http://dev.jobufo.com/api/v1/management/company/',
+	// 		{
+	// 			method: "GET",
+	// 			headers: headers
+	// 		})
+	// 	fetch(request)
+	// 			.then(function(r) {
+	// 				return r.json();
+	// 			})
+	// 			.then(function(objects) {
+	// 				console.log('companies:',objects);
+	// 				self.setState({
+	// 					companies: objects
+	// 				})
+	// 			})
+	// }
 
 	// async postCompanies() {
 	// 	var self = this;
@@ -412,27 +516,27 @@ class CompanyMain extends React.Component {
 	// 			})
 	// }
 
-	async getSubsidiaries() {
-		var self = this;
-		var headers = new Headers();
-		headers.append("Authorization", "Token " + localStorage.token);
-		var request = await new Request(
-			'http://dev.jobufo.com/api/v1/management/subsidiary/',
-			{
-				method: "GET",
-				headers: headers
-			})
-		fetch(request)
-				.then(function(r) {
-					return r.json();
-				})
-				.then(function(objects) {
-					console.log(objects)
-					self.setState({
-						subsidiaries: objects
-					})
-				})
-	}
+	// async getSubsidiaries() {
+	// 	var self = this;
+	// 	var headers = new Headers();
+	// 	headers.append("Authorization", "Token " + localStorage.token);
+	// 	var request = await new Request(
+	// 		'http://dev.jobufo.com/api/v1/management/subsidiary/',
+	// 		{
+	// 			method: "GET",
+	// 			headers: headers
+	// 		})
+	// 	fetch(request)
+	// 			.then(function(r) {
+	// 				return r.json();
+	// 			})
+	// 			.then(function(objects) {
+	// 				console.log('subsidiaries:',objects)
+	// 				self.setState({
+	// 					subsidiaries: objects
+	// 				})
+	// 			})
+	// }
 
 	render() {
 		return (
@@ -444,14 +548,14 @@ class CompanyMain extends React.Component {
 				<div id="company-wrapper" className="company-subsidiary-wrapper">
 					<h1 className="top-title">Unternehmensdaten</h1>
 					<div id="company-subsidiary-company" className="company-subsidiary">
-						<ListCompanies items={this.state.companies} openCompanyMain={this.props.openCompanyMain} openCompanyEdit={this.props.openCompanyEdit} />
+						<ListCompanies model={JobStore} openCompanyMain={this.props.openCompanyMain} openCompanyEdit={this.props.openCompanyEdit} />
 					</div>
 				</div>
 				<div id="subsidiary-wrapper" className="company-subsidiary-wrapper">
 					<h1 className="top-title">Filialen</h1>
 					<button onClick={this.props.openSubsidiaryEdit} type="button" id="addNewSubsidiary" className="button-cv button-cv-full-red">Neue Filiale hinzufugen</button>
 					<div id="company-subsidiary-subsidiary" className="company-subsidiary">
-						<ListSubsidiaries items={this.state.subsidiaries} openCompanyMain={this.props.openCompanyMain} openSubsidiaryEdit={this.props.openSubsidiaryEdit} />
+						<ListSubsidiaries model={JobStore} openCompanyMain={this.props.openCompanyMain} openSubsidiaryEdit={this.props.openSubsidiaryEdit} />
 					</div>
 				</div>
 			</div>

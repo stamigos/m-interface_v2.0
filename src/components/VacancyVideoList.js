@@ -56,7 +56,6 @@ class VacancyVideo extends React.Component {
         animate: true
       }
     return (
-      <div>
         <div className="applicant-message">
           <Video controls onClick={this.onApplicationClick.bind(this)}>
               <Controls>
@@ -80,7 +79,6 @@ class VacancyVideo extends React.Component {
                   </div>
           </div>
           <ModalProfile isShowingModal={this.state.isShowingModal} application={application}/>
-        </div>
         </div>
     );
   }

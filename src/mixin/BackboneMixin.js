@@ -1,3 +1,6 @@
+//Stores
+import JobStore from '../store/JobStore';
+
 var BackboneMixin = {
 
     componentDidMount () {
@@ -7,13 +10,17 @@ var BackboneMixin = {
                 this.forceUpdate();
             });
         }
+        else {
+            JobStore.on('change', () => {
+                this.forceUpdate();
+            });
+        }
 
         if (this.props.collection) {
             this.props.collection.on('add remove reset sort', () => {
                 this.forceUpdate();
             });
         }
-
     },
 
     componentWillUnMount () {
@@ -21,11 +28,13 @@ var BackboneMixin = {
         if(this.props.model){
             this.props.model.off(null, null, this);
         }
+        else {
+            JobStore.off(null, null, this);
+        }
 
         if(this.props.collection){
             this.props.collection.off(null, null, this);
         }
-
     }
 }
 

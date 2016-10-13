@@ -169,6 +169,18 @@ select {
 
     width: 290px;
 }
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #9f92b1;
+}
+::-moz-placeholder { /* Firefox 19+ */
+    color: #9f92b1;
+}
+:-ms-input-placeholder { /* IE 10+ */
+    color: #9f92b1;
+}
+:-moz-placeholder { /* Firefox 18- */
+    color: #9f92b1;
+}
 /* ----------- HEADER -----------------*/
 header {
     position: fixed;
@@ -599,13 +611,14 @@ h2.location {
     top: 80px;
     height: 100%;
     overflow-y: auto;
+    overflow-x: auto;
     -webkit-transition: left 0.5s linear;
 }
 .job-detail {
     padding: 50px;
     position: relative;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: auto;
     height: 100%;
 }
 .job-detail h1.title {
@@ -1253,18 +1266,6 @@ h2.location {
     margin-top: 20px;
     color: #9f92b1;
 }
-.container-account ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-    color: #9f92b1;
-}
-.container-account ::-moz-placeholder { /* Firefox 19+ */
-    color: #9f92b1;
-}
-.container-account :-ms-input-placeholder { /* IE 10+ */
-    color: #9f92b1;
-}
-.container-account :-moz-placeholder { /* Firefox 18- */
-    color: #9f92b1;
-}
 .container-account .buttons {
     margin-top: 45px;
     padding: 45px 0;
@@ -1276,11 +1277,17 @@ h2.location {
     color: #f2415f;
     border: 2px solid #f2415f;
 }
+.container-account form .button-cv-transperent:hover {
+    color: #fff;
+    border: 2px solid #f2415f;
+    background-color: #f2415f;
+}
 .container-account form .button-cv {
     width: 170px;
     padding-right: 0;
     padding-left: 0;
     text-align: center;
+    cursor: pointer;
 }
 .container-account form#profile-settings-form {
     padding-top: 25px;
@@ -1375,7 +1382,30 @@ h1.top-title
     border: 2px solid #f2415f;
     background-color: #f2415f;
 }
-li.company-subsidiary-item
+.button-cv-full-red:hover {
+    color: #f2415f;
+    border: 2px solid #f2415f;
+    background-color: #fff;
+}
+input.button-cv.button-cv-full-red.green {
+    background-color: #08b39c;
+    border-color: #08b39c;
+    color: #fff;
+    -webkit-transition: background-color 500ms ease-out .5s, border-color 500ms ease-out .5s, color 500ms ease-out .5s;
+    -moz-transition: background-color 500ms ease-out .5s, border-color 500ms ease-out .5s, color 500ms ease-out .5s;
+    -o-transition: background-color 500ms ease-out .5s, border-color 500ms ease-out .5s, color 500ms ease-out .5s;
+    transition: background-color 500ms ease-out .5s, border-color 500ms ease-out .5s, color 500ms ease-out .5s;
+}
+a.button-cv.button-cv-full-red.green {
+    background-color: #08b39c;
+    border-color: #08b39c;
+    color: #fff;
+    -webkit-transition: background-color 500ms ease-out .5s, border-color 500ms ease-out .5s, color 500ms ease-out .5s;
+    -moz-transition: background-color 500ms ease-out .5s, border-color 500ms ease-out .5s, color 500ms ease-out .5s;
+    -o-transition: background-color 500ms ease-out .5s, border-color 500ms ease-out .5s, color 500ms ease-out .5s;
+    transition: background-color 500ms ease-out .5s, border-color 500ms ease-out .5s, color 500ms ease-out .5s;
+}
+.company-subsidiary li.react-list-select--item
 {
     position: relative;
 
@@ -1712,6 +1742,7 @@ form#job-post-form
     float: left;
 
     width: 290px;
+    max-height: 169px;
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 0;
@@ -1724,6 +1755,12 @@ form#job-post-form
     border-radius: 5px;
     background: #f6f4f9;
     background: #f6f4f9;
+    overflow: hidden;
+}
+.upload-button img {
+    width: inherit;
+    border-radius: 5px;
+    height: inherit;
 }
 .upload-button:nth-child(2n) {
     margin-left: 12px !important;
@@ -1731,6 +1768,7 @@ form#job-post-form
 .upload-button#postjobVideo-label, #postJobUploadedFilesVideo {
     width: 100%;
     height: 327px;
+    max-height: 327px;
     font-size: 46px;
     line-height: 300px;
 }
@@ -1744,20 +1782,37 @@ form#job-post-form
 }
 
 div#postJobUploadedFilesVideo {
-    position: relative;
-
-    display: none;
+    position: absolute;
     float: left;
-    /*overflow: hidden;*/
-
     margin-top: 10px;
     margin-bottom: 10px;
+    margin-left: 12px;
     padding: 0;
+
+    width: 600px;
+    height: 327px;
+    max-height: 327px;
+    overflow: hidden;
 
     border-radius: 10px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 190px;
+    z-index: 0;
+}
+#videoFile {
+    width: 100%;
+}
+#videoFile .video {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+#videoFile video {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+
 }
 .subsidiaryVideo-preview-buttons
 {
@@ -1825,7 +1880,7 @@ div#postJobUploadedFilesVideo {
 #postJobUploadedFilesVideo .duration .selector {
     position: absolute;
     left: calc(50% - 75px);
-    bottom: -10px;
+    bottom: 0px;
     width: 150px;
     color: white;
     background: #f2415f;
@@ -1851,7 +1906,7 @@ div#postJobUploadedFilesVideo {
     right: 0px;
     bottom: -15px;
     top: 0px;
-    z-index: 2000;
+    z-index: 1;
     cursor: pointer;
 }
 
@@ -2065,5 +2120,19 @@ input[type='text'].half, select.half {
     border-radius: 8px;
     height: 100%;
     max-height: 340px;
+}
+#Schedule {
+    /* Initially we don't want any height, and we want the contents to be hidden */
+    max-height: 0;
+    overflow: hidden;
+
+    /* Set our transitions up. */
+    -webkit-transition: max-height 0.8s;
+    -moz-transition: max-height 0.8s;
+    transition: max-height 0.8s;
+}
+#Schedule.expanded {
+    /* On hover, set the max-height to something large. In this case there's an obvious limit. */
+    max-height: 200px;
 }
 /*---------------------JOB POST END----------------------*/

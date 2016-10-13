@@ -42,22 +42,16 @@ export default class Jobs extends React.Component {
 				        {}
 
 				        <TabPanel>
-	  				          <div>
-						          <FilterDropdown />
+						         <FilterDropdown />
 						         <JobsList model={JobStore} status="posted" statusTitle="ÖFFENTLICH" />
-					         </div>
 				        </TabPanel>
 				        <TabPanel>
-    				          <div>
-						          <FilterDropdown />
+						         <FilterDropdown />
 						         <JobsList model={JobStore} status="scheduled" statusTitle="VORBEREITET" />
-					         </div>
 				        </TabPanel>
 				        <TabPanel>
-    				          <div>
-						          <FilterDropdown />
+						         <FilterDropdown />
 						         <JobsList model={JobStore} status="closed" statusTitle="GESCHLOSSEN" />
-					         </div>
 				        </TabPanel>
 				      </Tabs>
 

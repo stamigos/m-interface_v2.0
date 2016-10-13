@@ -3,13 +3,25 @@ import UserAvatar from 'react-user-avatar';
 import DropdownMenu from 'react-dd-menu';
 import { Link } from 'react-router'
 
+//Stores
+import JobStore from '../store/JobStore';
+
+//Mixin
+import mixins from 'es6-mixins';
+import BackboneMixin from '../mixin/BackboneMixin';
+
+function getFullName(user) {
+  console.log('user', user)
+  return user.first_name + " " + user.last_name
+}
 
 export default class Header extends React.Component {
-	constructor(){
-		super()
+	constructor(props){
+		super(props)
 		this.state = {
-			isMenuOpen: false
+			isMenuOpen: false,
 		};
+    mixins(BackboneMixin,this);
 		this.toggle = this.toggle.bind(this);
 		this.close = this.close.bind(this);
 	}
@@ -30,17 +42,24 @@ export default class Header extends React.Component {
       animAlign: 'center',
       animate: true
     }
+    var userName = " ";
+    var image = "";
+    var model = this.props.model;
+    if (!model.get("currentUserLoading")) {
+        userName = getFullName(model.get('currentUser'))
+        image = model.get('currentUser').ufouser.avatar;
+    }
 		return (
-			<header>
+    			<header>
       			<div className="container">
         			<div className="navbar-header">
           				<img className="job-ufo-logo" />
           				<div className="right-panel-avatar">
           					<div className="user-name">
-          						<h2>Thomas Paucker</h2>
+          						<h2>{userName}</h2>
           					</div>
           					<div className="user-avatar">
-          				 		<UserAvatar size="40" name="Thomas Paucker" src="http://dev.jobufo.com/media/avatars/a29002ff-1e8.png" />
+          				 		<UserAvatar size="40" name={userName} src={image} />
       				 		  </div>
       				 		<div className="user-menu-button">
 							      <DropdownMenu {...menuOptions}>

@@ -40,12 +40,18 @@ class Job extends Backbone.Model {
     defaults() {
         return {
             loading: true,
+            currentUserLoading: true,
+            subsidiaries: [],
+            subsidiariesLoading: true,
+            companies:[],
+            companiesLoading: true,
             jobs: [],
             posted: [],
             scheduled: [],
             closed: [],
             filteredJobs: [],
             selectedJobPassed: true,
+            currentUser: null,
             selectedJob: {
                 company: {name: ''},
                 title: '',
@@ -108,10 +114,20 @@ class Job extends Backbone.Model {
                 this.set("loading", false)
                 this.set("selectedJob", posted[0])
                 break;
-            // case 'get-filtered-jobs':
-            //     this.set("filteredJobs", payload.value)
             case 'get-selected-job':
                 this.set("selectedJob", payload.value)
+                break;
+            case 'get-current-user':
+                this.set("currentUser", payload.value)
+                this.set("currentUserLoading", false)
+                break;
+            case 'get-subsidiaries':
+                this.set("subsidiaries", payload.value)
+                this.set("subsidiariesLoading", false)
+                break;
+            case 'get-companies':
+                this.set("companies", payload.value)
+                this.set("companiesLoading", false)
                 break;
         }
     }

@@ -51,5 +51,23 @@
 	font-family: "Open Sans";
 }
 .popup-content {
-	width: 600px;
+	margin: 30px;
+    overflow: hidden;
+    height: 338px;
+}
+.popup-content-image {
+    margin: 30px;
+    overflow: hidden;
+    height: inherit !important;
+}
+#postjobImage_2_block {
+    margin-left: 12px !important;
+}
+.popup-content .video__el {
+    width: 620px;
+}
+.popup-content video {
+    cursor:move;
+    width: 620px;
+    position: relative;
 }

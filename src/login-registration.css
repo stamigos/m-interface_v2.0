@@ -13,7 +13,7 @@
     width: 500px;
     margin: 0 auto;
 }
-.popup-content {
+.popup-content-login {
     background: #fff;
 }
 .popup-title {
@@ -42,7 +42,7 @@
 {
     width: 100%;
 }
-#login-registration-popup .popup-header
+#login-registration-popup .popup-header-login
 {
     position: relative;
     color: #6a5d7e;
@@ -57,7 +57,7 @@
     margin-bottom: 0;
     color: #6a5d7e;
 }
-#login-registration-popup .popup-content{
+#login-registration-popup .popup-content-login{
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 }

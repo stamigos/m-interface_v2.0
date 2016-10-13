@@ -40,14 +40,12 @@ export default class Login extends React.Component {
 
 		fetch(request)
 			  .then(function(response) {
-			  	console.log('then1:', response)
 			    return response.json();
 			   })
 			  .then(function(obj) {
 			  	if (obj.key != undefined){
 			  		localStorage.token = obj.key
 			  		window.location.reload()
-			  		console.log('then2:', obj)
 			  	}
 			  	else {
 			  		self.setState({
@@ -64,10 +62,10 @@ export default class Login extends React.Component {
 				</div>
 				<section id="login-registration-popup" className="popup">
 					<div className="popup-window">
-						<div className="popup-header align-center ">
+						<div className="popup-header-login align-center ">
 							<h2 className="popup-title">Einloggen</h2>
 						</div>
-						<div className="popup-content">
+						<div className="popup-content-login">
 							<form onSubmit={this.onSubmit.bind(this)} action="/jobs" method="POST" role="form" className="login-registration-popup-form" id="login-popup-form">
 								<input onChange={this.onChange.bind(this)} type="email" className={this.state.errors ? ("input-error"):("")} id="Email" name="email" placeholder="Email" required="required"/>
 								<input onChange={this.onChange.bind(this)} type="password" className={this.state.errors ? ("input-error"):("")} id="Password" name="password" placeholder="Passwort" required="required"/>

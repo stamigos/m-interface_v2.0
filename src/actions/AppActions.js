@@ -23,24 +23,77 @@ var actions = {
 	                });
 		})
 	},
-	// getFilteredJobs(jobs) {
- //        AppDispatcher.dispatch({
- //            actionType: 'get-filtered-jobs',
- //            value: jobs
- //        });
-	// },
 	getSelectedJob(job) {
         AppDispatcher.dispatch({
             actionType: 'get-selected-job',
             value: job
         });
+	},
+	getCurrentUser() {
+		var headers = new Headers();
+		headers.append("Authorization", "Token " + localStorage.token);
+		var request = new Request(
+			'http://dev.jobufo.com/api/auth/user/',
+			{
+				method: "GET",
+				headers: headers
+			})
+		fetch(request)
+				.then(function(r) {
+					return r.json();
+				})
+				.then(function(object) {
+			        AppDispatcher.dispatch({
+					    actionType: 'get-current-user',
+					    value: object
+					});
+				})
+	},
+	getSubsidiaries() {
+		var self = this;
+		var headers = new Headers();
+		headers.append("Authorization", "Token " + localStorage.token);
+		var request = new Request(
+			'http://dev.jobufo.com/api/v1/management/subsidiary/',
+			{
+				method: "GET",
+				headers: headers
+			})
+		fetch(request)
+				.then(function(r) {
+					return r.json();
+				})
+				.then(function(objects) {
+					console.log('subsidiaries:',objects)
+			        AppDispatcher.dispatch({
+					    actionType: 'get-subsidiaries',
+					    value: objects
+					});
+				})
+
+	},
+	getCompanies() {
+		var self = this;
+		var headers = new Headers();
+		headers.append("Authorization", "Token " + localStorage.token);
+		var request = new Request(
+			'http://dev.jobufo.com/api/v1/management/company/',
+			{
+				method: "GET",
+				headers: headers
+			})
+		fetch(request)
+				.then(function(r) {
+					return r.json();
+				})
+				.then(function(objects) {
+					console.log('companies:',objects);
+			        AppDispatcher.dispatch({
+					    actionType: 'get-companies',
+					    value: objects
+					});
+				})
 	}
-	// getFirstSelectedJob(job) {
-	// 	AppDispatcher.dispatch({
- //            actionType: 'get-first-selected-job',
- //            value: job
-	// 	})
-	// }
 }
 
 export default actions;
