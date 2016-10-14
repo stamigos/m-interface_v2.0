@@ -1420,16 +1420,18 @@ a.button-cv.button-cv-full-red.green {
 }
 .company-subsidiary-item-logo
 {
+    float: left;
     width: 190px;
 }
 .company-subsidiary-item-logo img
 {
+    float: left;
     width: 190px;
-
     border-radius: 5px;
 }
 .company-subsidiary-item-content
 {
+    display: inline-block;
     margin-left: 30px;
 }
 h1.company-subsidiary-title
@@ -1513,6 +1515,15 @@ div#subsidiary-wrapper
 #profile-subsidiary-form div.half
 {
     margin-top: 20px;
+}
+span.green {
+    font-family: 'Gotham Rounded', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #08b39c;
+}
+.company-subsidiary .react-list-select--item:hover .company-subsidiary-edit-panel {
+    display: block;
 }
 /*-----------------END COMPANY-------------------*/
 
