@@ -28,6 +28,7 @@ export default class RightModalImageCrop extends React.Component {
 		super()
 		this.state = {
 			imgSrc: "",
+			imageSelected: false,
 		    crop: {
 		    	x: 0,
 		   	 	y: 0,
@@ -48,6 +49,7 @@ export default class RightModalImageCrop extends React.Component {
       			    pixelCrop.y,
       			    function(dataUrl) {
       			    	self.setState({
+      			    		imageSelected: true,
       			    		result: dataUrl
       			    	}) 
       			    })
@@ -61,6 +63,7 @@ export default class RightModalImageCrop extends React.Component {
 					pixelCrop.y, 
 					function(dataUrl) { 
 						self.setState({
+							imageSelected: true,
 							result: dataUrl
 						}) 
 					})
@@ -88,6 +91,8 @@ export default class RightModalImageCrop extends React.Component {
 	}
 	render() {
 		var timestamp = Math.round(new Date().getTime()/1000);
+		var timestamp_popup = Math.round(new Date().getTime()/1010);
+
 
 		var htmlContent = <ReactCrop {...this.state} src={this.state.imgSrc} crop={this.state.crop} keepSelection={true} onComplete={this.onComplete.bind(this)} onImageLoaded={this.onImageLoaded.bind(this)}/>
 		var popupOptions = {
@@ -98,6 +103,7 @@ export default class RightModalImageCrop extends React.Component {
 			button: {left: "HOCHLADEN", right: "ABBRECHEN"},
 			htmlContent: htmlContent,
 			onLeftClick: function() {
+				this.props.getRightImage(this.state.result);
 				this.setState({
 					isShowingModal: false
 				})

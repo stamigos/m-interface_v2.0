@@ -28,16 +28,35 @@ export default class ModalVideoCrop extends React.Component {
 			videoSrc: '',
 			activeDrags: 0,
 			isLoading: true,
-			cropped: false
+			cropped: false,
+			top_min: 0,
+			crop_params: {
+				slice_start: 0,
+				x_min: 0, 
+				x_max: 600,
+				y_min: 0,
+				y_max: 338
+			}
 		}
 	}
 	cropVideo() {
+		var params = {};
+		var videoRealWidth = $(".popup-content video")[0].videoWidth;
+		var videoRealHeight = $(".popup-content video")[0].videoHeight;
+		params.slice_start = this.state.crop_params.slice_start;
+		params.x_min = 0;
+		params.x_max = videoRealWidth;
+		params.y_min = 0;
+		params.y_max = Math.floor((videoRealWidth * 338)/600);
+		params.video = this.state.videoSrc;
+
+		this.props.getVideoCropParams(params)
 		this.setState({
 			cropped: true,
 			isShowingModal: false,
-			isLoading: true
+			isLoading: true,
+			crop_params: params
 		})
-		console.log("cropVideo")
 	}
 	onCancel() {
 		this.setState({
@@ -76,13 +95,31 @@ export default class ModalVideoCrop extends React.Component {
         this.setState({
        		activeDrags: --this.state.activeDrags,
        		videoWidth: $(".popup-content video").width(),
-       		videoHeight: $(".popup-content video").height()
+       		videoHeight: $(".popup-content video").height(),
+       		videoRealWidth: $(".popup-content video")[0].videoWidth,
+       		videoRealHeight: $(".popup-content video")[0].videoHeight,
+       		top_min: -ui.y
        	});
     }
     onClear(cropped) {
     	this.setState({
     		cropped: cropped
     	})
+    }
+    getCropParams(params) {
+    	if (Math.floor(this.state.videoRealWidth) != 600) {
+			var params = {}
+			var top = Math.floor((this.state.videoRealWidth * 338)/600);
+			params.slice_start = this.state.crop_params.slice_start;
+			params.x_min = 0;
+			params.x_max = Math.floor(this.state.videoRealWidth);
+			params.y_min = Math.floor(this.state.top_min);
+			params.y_max = top + Math.floor(this.state.top_min);
+			params.video = this.state.videoSrc;
+			this.setState(params);
+		}
+    	this.props.getVideoCropParams(params)
+    	console.log("getCropParams:", params)
     }
     //{{left: -100, right: 100}}
 	render() {
@@ -120,7 +157,7 @@ export default class ModalVideoCrop extends React.Component {
 				<input key={timestamp} onChange={this.selectVideo.bind(this)} ref="file" className="fileinput" accept="video/*" name="postjobVideo" id="postjobVideo" type="file" />
 				<Popup {...popupOptions} />
 				{this.state.cropped ? (
-					<VideoPreview videoSrc={this.state.videoSrc} onClear={this.onClear.bind(this)} />
+					<VideoPreview videoSrc={this.state.videoSrc} onClear={this.onClear.bind(this)} getCropParams={this.getCropParams.bind(this)} xy_params={this.state.crop_params} />
 				):(
 					<div></div>
 				)}

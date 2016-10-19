@@ -50,6 +50,12 @@
 	font-size: 28px;
 	font-family: "Open Sans";
 }
+.popup-header h2 {
+    font-size: 11px;
+    line-height: 12px;
+    padding-bottom: 20px;
+    font-weight: 300;
+}
 .popup-content {
 	margin: 30px;
     overflow: hidden;

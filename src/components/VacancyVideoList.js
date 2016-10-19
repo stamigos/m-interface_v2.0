@@ -56,14 +56,14 @@ class VacancyVideo extends React.Component {
         animate: true
       }
     return (
-        <div className="applicant-message">
-          <Video controls onClick={this.onApplicationClick.bind(this)}>
+        <div className="applicant-message" onClick={this.onApplicationClick}>
+          <Video controls>
               <Controls>
                   <VideoButton type="play"/>
                   <VideoButton type="stop"/>
               </Controls>
+              <div className="darker"></div>
               <source src={application.video} type="video/mp4" />
-              <Overlay />
           </Video>
           <div className="applicant-info">
                   <h2 className="name">{application.owner.first_name} {application.owner.last_name}</h2>
@@ -104,9 +104,11 @@ export default class VacancyVideoList extends React.Component {
   }
   filterVideos(props) {
     var applications = []
+    var timestamp = Math.round(new Date().getTime()/1000);
+
     props.applicationList.map(function(application, i) {
         if (applicationStatus(application) == props.applicationStatus) {
-            applications.push(<VacancyVideo key={i} application={application} />)
+            applications.push(<VacancyVideo key={timestamp+i} application={application} />)
         }
     })
     return applications;

@@ -41,23 +41,26 @@ export default class VideoPreview extends React.Component {
 			startedFrom: 0
 		}
 	}
-	componentDidMount() {
-		console.log("componentDidMount")
-		console.log("duration refs:", this.refs.video.state.duration)
-		console.log("duration selector:", $("#videoFile video")[0].duration)
+	componentWillMount() {
+		this.props.getCropParams({
+			slice_start: 0,
+			x_min: this.props.xy_params.x_min,
+			x_max: this.props.xy_params.x_max,
+			y_min: this.props.xy_params.y_min,
+			y_max: this.props.xy_params.y_max,
+			video: this.props.videoSrc
+		})
 	}
 	onPlay() {
 		var self = this;
 		var waitTime = 150;
 		setTimeout(function () {      
-		  // Resume play if the element if is paused.
 		  if (self.refs.video.state.paused) {
 		  		self.refs.video.play();
 		  } else {
-			    self.refs.video.pause()
+		  		self.refs.video.pause();
 		  }
 		}, waitTime);
-		console.log(this.refs.video)
 	}
 	onDragStart(e, ui) {
 		console.log("ui before", ui)
@@ -73,9 +76,18 @@ export default class VideoPreview extends React.Component {
 		this.refs.video.seek(seek_current)
         this.setState({
         	activeDrags: --this.state.activeDrags,
-        	startedFrom: seek_current
+        	startedFrom: seek_current,
     	})
-    	this.refs.video.play()
+		var self = this;
+		var waitTime = 150;
+		setTimeout(function () {      
+		  if (self.refs.video.state.paused) {
+		  		self.refs.video.play();
+		  } 
+		}, waitTime);
+		this.props.getCropParams({
+			slice_start: Math.floor(seek_current),
+		})
 	}
 	onTimeUpdate() {
 		var difference = this.refs.video.state.currentTime - this.state.startedFrom;
@@ -96,7 +108,10 @@ export default class VideoPreview extends React.Component {
 		this.setState({
 			duration: this.refs.video.state.duration,
 			current_duration: this.refs.video.state.currentTime,
-			startedFrom: this.refs.video.state.currentTime
+			startedFrom: this.refs.video.state.currentTime,
+		})
+		this.props.getCropParams({
+			slice_start: Math.floor(this.refs.video.state.currentTime),
 		})
 	}
 	onClear() {

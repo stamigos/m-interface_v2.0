@@ -6,29 +6,24 @@ export default class NormalTopJob extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isActiveNormal: true,
-			isActiveTop: false,
-			isOpenPopup: false
+			isOpenPopup: false,
+			isTopJob: false
 		}
-		this.selectActiveNormal = this.selectActiveNormal.bind(this);
-		this.selectActiveTop = this.selectActiveTop.bind(this);
+		this.switchJobToNormal = this.switchJobToNormal.bind(this);
+		this.switchJobToTop = this.switchJobToTop.bind(this);
 		this.togglePopup = this.togglePopup.bind(this);
 	}
-	selectActiveNormal() {
-		if (!this.isActiveNormal) {
-			this.setState({
-				isActiveNormal: true,
-				isActiveTop: false
-			});
-		}
+	switchJobToNormal() {
+		this.setState({
+			isTopJob: false
+		});
+		this.props.switchJobType(false)
 	}
-	selectActiveTop() {
-		if (!this.isActiveTop) {
-			this.setState({
-				isActiveNormal: false,
-				isActiveTop: true
-			});
-		}
+	switchJobToTop() {
+		this.setState({
+			isTopJob: true
+		});
+		this.props.switchJobType(true)
 	}
 	togglePopup() {
 		this.setState({
@@ -45,11 +40,11 @@ export default class NormalTopJob extends React.Component {
 					<input type="radio" className="" name="Type" value="false" />
 					<input type="radio" className="" name="Type" value="true" />
 					
-				<div className={this.state.isActiveNormal ? 'box selected' : 'box'} onClick={this.selectActiveNormal}>
+				<div className={!this.state.isTopJob ? 'box selected' : 'box'} onClick={this.switchJobToNormal}>
 					<b>Normaler Job</b>
 					unlimited
 				</div>
-				<div id="topjob"className={this.state.isActiveTop ? 'box selected' : 'box'} onClick={this.selectActiveTop}>
+				<div id="topjob"className={this.state.isTopJob ? 'box selected' : 'box'} onClick={this.switchJobToTop}>
 					<b>Top Job</b>
 					<amount><span>3</span> / 10 available</amount>
 
