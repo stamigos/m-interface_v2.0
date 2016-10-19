@@ -34,7 +34,7 @@ function vacancyStatus(vacancy){
 class JobListItem extends React.Component {
 	render() {
 		return (
-			<div key={this.props.key}>
+			<div>
 		      <h2 className="title">{this.props.job.title}</h2>
 		      <h2 className="company">{this.props.job.company.name}</h2>
 		      <h2 className="location"><i className="fa fa-map-marker" aria-hidden="true"></i>{this.props.job.address.city.name}</h2>
@@ -65,7 +65,7 @@ export default class JobsList extends React.Component {
 		var htmlList = []
 			model.get("jobs").map(function(job, i) {
 				if (vacancyStatus(job) == self.props.status) {
-					htmlList.push(<JobListItem job={job} />)
+					htmlList.push(<JobListItem key={i} job={job} />)
 					if (self.props.status == "posted"){
 						posted.push(job)
 					}

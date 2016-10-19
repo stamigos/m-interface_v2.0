@@ -1,5 +1,6 @@
 import React from 'react'
 import List from 'react-list-select'
+import ReactSpinner from 'react-spinjs'
 
 //Stores
 import JobStore from '../store/JobStore'
@@ -69,7 +70,6 @@ class ListSubsidiaries extends React.Component {
 		var subsidiaries = [];
 		var openSubsidiaryEdit = this.props.openSubsidiaryEdit;
 		var formatSubsidiary = this.formatSubsidiary;
-		console.log('props subsidiaries:', this.props.model)
 		var model = this.props.model;
 
 		var subsidiaryList = model.get("subsidiaries").map(function(subsidiary) {
@@ -130,27 +130,36 @@ class CompanyMain extends React.Component {
 	// }
 
 	render() {
-		return (
-			<div>
-				<div className="post-job-content-header align-center">
-					<h1 className="title">Unternehmen & Filialen</h1>
-					<h2 className="subtitle">Ändern Sie Ihre Unternehmens- und Filialinformationen hier.</h2>
+		if (JobStore.get('companiesLoading')||JobStore.get('subsidiariesLoading')) {
+			return (
+				<div className="loading-wrapper">
+					<ReactSpinner />
 				</div>
-				<div id="company-wrapper" className="company-subsidiary-wrapper">
-					<h1 className="top-title">Unternehmensdaten</h1>
-					<div id="company-subsidiary-company" className="company-subsidiary">
-						<ListCompanies model={JobStore} openCompanyMain={this.props.openCompanyMain} openCompanyEdit={this.props.openCompanyEdit} />
+			)
+		}
+		else {
+			return (
+				<div>
+					<div className="post-job-content-header align-center">
+						<h1 className="title">Unternehmen & Filialen</h1>
+						<h2 className="subtitle">Ändern Sie Ihre Unternehmens- und Filialinformationen hier.</h2>
+					</div>
+					<div id="company-wrapper" className="company-subsidiary-wrapper">
+						<h1 className="top-title">Unternehmensdaten</h1>
+						<div id="company-subsidiary-company" className="company-subsidiary">
+							<ListCompanies model={JobStore} openCompanyMain={this.props.openCompanyMain} openCompanyEdit={this.props.openCompanyEdit} />
+						</div>
+					</div>
+					<div id="subsidiary-wrapper" className="company-subsidiary-wrapper">
+						<h1 className="top-title">Filialen</h1>
+						<button onClick={this.props.openSubsidiaryEdit} type="button" id="addNewSubsidiary" className="button-cv button-cv-full-red">Neue Filiale hinzufugen</button>
+						<div id="company-subsidiary-subsidiary" className="company-subsidiary">
+							<ListSubsidiaries model={JobStore} openCompanyMain={this.props.openCompanyMain} openSubsidiaryEdit={this.props.openSubsidiaryEdit} />
+						</div>
 					</div>
 				</div>
-				<div id="subsidiary-wrapper" className="company-subsidiary-wrapper">
-					<h1 className="top-title">Filialen</h1>
-					<button onClick={this.props.openSubsidiaryEdit} type="button" id="addNewSubsidiary" className="button-cv button-cv-full-red">Neue Filiale hinzufugen</button>
-					<div id="company-subsidiary-subsidiary" className="company-subsidiary">
-						<ListSubsidiaries model={JobStore} openCompanyMain={this.props.openCompanyMain} openSubsidiaryEdit={this.props.openSubsidiaryEdit} />
-					</div>
-				</div>
-			</div>
-		);
+			);
+		}
 	}
 }
 

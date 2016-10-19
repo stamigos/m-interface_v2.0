@@ -3,7 +3,7 @@
     display: inline-block;
     color: #fff;
     font-family: Helvetica;
-    background-color: #000;
+    background-color: grey;
     -webkit-font-smoothing: antialiased;
     -webkit-user-select: none;
        -moz-user-select: none;
@@ -269,7 +269,7 @@
 }
 .video-controls {
     height: 34px;
-    background-color: rgba(0,0,0,0.8);
+    height: 100%;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;

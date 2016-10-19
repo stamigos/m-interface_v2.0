@@ -1,0 +1,145 @@
+.popup-container .job-preview {
+	background-image: url("img/iphone-img.png");
+    background-repeat: no-repeat;
+    height: 350px;
+    padding-top: 65px;
+    background-position-x: center;
+    background-size: 320px;
+}
+.popup-container .iphone-screen {
+	width: 237px;
+    margin-left: 191px;
+    margin-top: 2px;
+    height: 100%;
+    overflow-y: auto;
+}
+.popup-container .iphone-screen .header {
+	background-image: url("img/iphone-header.png");
+	width: 238px;
+	height: 36px;
+	background-size: 238px;
+	position: fixed;
+    top: 217px;
+    z-index: 1;
+}
+.popup-container .iphone-screen .body {
+	width: 200px;
+    margin: 0 auto;
+}
+.popup-container .iphone-screen .title-section {
+    padding: 16px 0;
+    border-bottom: 1px solid #d1c7df;
+}
+.popup-container .iphone-screen .title-section .job_preview-title {
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #f2415f;
+}
+.popup-container .iphone-screen .title-section .job_preview-subtitle {
+    font-size: 12px;
+    line-height: 16px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #796a8f;
+}
+.popup-container .iphone-screen .options-section {
+	padding: 16px 0;
+	border-bottom: 1px solid #d1c7df;
+}
+.popup-container .iphone-screen .options-section ul {
+	display: inline-block;
+    margin-top: 0 !important;
+}
+.popup-container .iphone-screen .options-section ul li {
+	font-size: 10px;
+    line-height: 18px;
+    margin: 5px 5px 5px 0;
+    padding: 3px 8px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    display: block;
+    float: left;
+    color: #fff;
+    border-radius: 20px;
+}
+.popup-container .iphone-screen .options-section li.workingHours {
+    background-color: #f9c843;
+}
+.popup-container .iphone-screen .options-section li.sallary {
+    background-color: #4bbf6b;
+}
+.popup-container .iphone-screen .options-section li.typeOfJob {
+    background-color: #e46763;
+}
+.popup-container .iphone-screen .description-section {
+    padding: 16px 0;
+    border-bottom: 1px solid #d1c7df;
+}
+.popup-container .iphone-screen .description-section .job_preview-subtitle {
+    font-size: 12px;
+    line-height: 16px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #796a8f;
+}
+.popup-container .iphone-screen .company-section {
+	padding: 16px 0;
+	border-bottom: 1px solid #d1c7df;
+}
+.popup-container .iphone-screen .company-section .job-preview-company-block {
+    margin: 15px 0 -15px;
+}
+.popup-container .iphone-screen .company-section .iphone-section-title {
+    font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #796a8f;
+}
+.popup-container .iphone-screen .company-section img.company-logo {
+    width: 38px;
+    height: 38px;
+    float: left;
+    margin-right: 15px;
+    border-radius: 50%;
+}
+.popup-container .iphone-screen .company-section .clear {
+    display: inline-block;
+    clear: both;
+    overflow: hidden;
+    width: 100%;
+    height: 1px;
+}
+.popup-container .iphone-screen .company-section h2.location {
+    font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+    margin-top: 0;
+    color: #9f92b1;
+}
+.popup-container .iphone-screen .image-slider {
+    margin-top: 36px;
+}
+.popup-container .iphone-screen .bottom-section {
+	border: none;
+    padding: 16px 0;
+    text-align: center;
+}
+.popup-container .iphone-screen .bottom-section .iphone-title {
+    font-size: 8px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #796a8f;
+}
+.popup-container .iphone-screen .bottom-section img.job-provider {
+    width: 15px;
+    margin-top: 11px;
+}
+.popup-container .iphone-screen .video .video--paused {
+	width: 237px !important;
+	height: 140px !important;
+}
+.popup-container .iphone-screen .video__el {
+	width: 237px !important;
+	height: 140px !important;
+}

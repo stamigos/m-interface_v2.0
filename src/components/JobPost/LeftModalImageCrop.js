@@ -43,7 +43,7 @@ export default class LeftModalImageCrop extends React.Component {
       	this.setState({ crop });
       	resizeImage(this.state.imgSrc, 
       				pixelCrop.width, 
-      				pixelCrop.width, 
+      				pixelCrop.height, 
       				pixelCrop.x,
       			    pixelCrop.y,
       			    function(dataUrl) {
@@ -57,7 +57,7 @@ export default class LeftModalImageCrop extends React.Component {
 		var self = this;
 		resizeImage(this.state.imgSrc, 
 					pixelCrop.width, 
-					pixelCrop.width, 
+					pixelCrop.heights, 
 					pixelCrop.x, 
 					pixelCrop.y, 
 					function(dataUrl) { 
@@ -101,6 +101,7 @@ export default class LeftModalImageCrop extends React.Component {
 			button: {left: "HOCHLADEN", right: "ABBRECHEN"},
 			htmlContent: htmlContent,
 			onLeftClick: function() {
+				this.props.getLeftImage(this.state.result);
 				this.setState({
 					isShowingModal: false
 				})
@@ -122,7 +123,7 @@ export default class LeftModalImageCrop extends React.Component {
 					}
 					<input ref="file1" key={timestamp} accept="image/*" name="postjobImage_1" id="postjobImage_1" className="postjobImage" type="file" onChange={this.selectImage.bind(this)} />
 				</label>
-				<Popup key={timestamp_popup} {...popupOptions}/>
+				<Popup {...popupOptions}/>
 			</div>
 		);
 	}

@@ -165,8 +165,8 @@ export default class ModalProfile extends React.Component {
 			                  <VideoButton type="play"/>
 			                  <VideoButton type="stop"/>
 			              </Controls>
+			              <div className="darker"></div>
 			              <source src={this.state.application.video} type="video/mp4" />
-			              <Overlay />
 			          </Video>
 		            </div>
 		            <div className="modal-tabs-wrapper">

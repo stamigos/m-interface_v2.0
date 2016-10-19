@@ -12,12 +12,16 @@ export default class Benefits extends React.Component {
 		this.changeBenefit2 = this.changeBenefit2.bind(this);
 	}
 	changeBenefit1(event) {
-		var number = event.target.value.length;
-		this.setState({benefit1: number});
+		this.setState({
+			benefit1: event.target.value
+		});
+		this.props.changeBenefit1(event.target.value);
 	}
 	changeBenefit2(event) {
-		var number = event.target.value.length;
-		this.setState({benefit2: number});
+		this.setState({
+			benefit2: event.target.value
+		});
+		this.props.changeBenefit2(event.target.value);
 	}
 
 	render() {

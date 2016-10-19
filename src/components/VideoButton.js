@@ -1,7 +1,9 @@
 import React from 'react';
 
 export default class VideoButton extends React.Component {
-	onClick() {
+	onClick(e) {
+		e.stopPropagation();
+		
 		if (this.props.paused){
 			this.props.play()
 		}

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactSpinner from 'react-spinjs'
 import Backbone from 'backbone';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import List from 'react-list-select'
@@ -28,36 +29,37 @@ export default class Jobs extends React.Component {
 	render() {
 	    return (
 	    	<div>
-	      	<div className="content-wrapper">
-	      		<div className="content">
-					<Tabs selectedIndex={0}>
-				        {}
-				        <TabList>
-				          {}
-				          <Tab>offentlich</Tab>
-				          <Tab>vorbereitet</Tab>
-				          <Tab>geschlossen</Tab>
-				        </TabList>
+	     	<div className="content-wrapper">
+		     	{JobStore.get("loading") ? <ReactSpinner/> :
+		      		(<div className="content">
+						<Tabs selectedIndex={0}>
+					        {}
+					        <TabList>
+					          {}
+					          <Tab>offentlich</Tab>
+					          <Tab>vorbereitet</Tab>
+					          <Tab>geschlossen</Tab>
+					        </TabList>
 
-				        {}
+					        {}
 
-				        <TabPanel>
-						         <FilterDropdown />
-						         <JobsList model={JobStore} status="posted" statusTitle="ÖFFENTLICH" />
-				        </TabPanel>
-				        <TabPanel>
-						         <FilterDropdown />
-						         <JobsList model={JobStore} status="scheduled" statusTitle="VORBEREITET" />
-				        </TabPanel>
-				        <TabPanel>
-						         <FilterDropdown />
-						         <JobsList model={JobStore} status="closed" statusTitle="GESCHLOSSEN" />
-				        </TabPanel>
-				      </Tabs>
+					        <TabPanel>
+							         <FilterDropdown />
+							         <JobsList model={JobStore} status="posted" statusTitle="ÖFFENTLICH" />
+					        </TabPanel>
+					        <TabPanel>
+							         <FilterDropdown />
+							         <JobsList model={JobStore} status="scheduled" statusTitle="VORBEREITET" />
+					        </TabPanel>
+					        <TabPanel>
+							         <FilterDropdown />
+							         <JobsList model={JobStore} status="closed" statusTitle="GESCHLOSSEN" />
+					        </TabPanel>
+					      </Tabs>
 
-		        </div>
+			        </div>)}
 	        </div>
-	        <JobDetails model={JobStore} />
+       	    <JobDetails model={JobStore} />
 	      </div>
 	    );
   }
