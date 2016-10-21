@@ -46,7 +46,6 @@ class JobListItem extends React.Component {
 var posted = []
 var scheduled = []
 var closed = []
-var selectedIndex = 0;
 
 export default class JobsList extends React.Component {
 	constructor(props) {
@@ -54,7 +53,8 @@ export default class JobsList extends React.Component {
 		this.state = {
 			jobsCount: 0,
 			jobs: [],
-			rawJobs: []
+			rawJobs: [],
+			selectedIndex: 0
 		}
 		mixins(BackboneMixin,this);
 
@@ -80,7 +80,6 @@ export default class JobsList extends React.Component {
 		return htmlList
 	}
 	onJobSelect(selected){
-		selectedIndex = selected
 		if (this.props.status == "posted") {
 			AppActions.getSelectedJob(posted[selected]);
 		}
@@ -90,21 +89,25 @@ export default class JobsList extends React.Component {
 		if (this.props.status == "closed") {
 			AppActions.getSelectedJob(closed[selected]);
 		}
+		this.setState({
+			selectedIndex: selected
+		})
 	}
 	render() {
 		var model = this.props.model;
-		var jobs = this.filterJobs(model);
 		if (model.get("loading")){
 			return <div></div>
 		}
 		else {
+			var jobs = this.filterJobs(model);
+			console.log("selected:", this.state.selectedIndex)
 			return (
 				<div>
 					<h2 className="jobs-counter">{jobs.length} <b>JOBS</b> {this.props.statusTitle}</h2>
 	                    <div className="jobs-container-wrapper">
 	                        <div className="jobs-container">
 	                        	<List items={jobs}
-	                        		  selected={[selectedIndex]}
+	                        		  selected={[this.state.selectedIndex]}
 									  multiple={false}
 									  onChange={this.onJobSelect.bind(this)}/>;
 	                      	</div>

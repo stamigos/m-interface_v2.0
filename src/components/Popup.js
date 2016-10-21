@@ -54,7 +54,7 @@ export default class Popup extends React.Component {
 			<div>
 		      	{this.state.isShowingModal &&
 		        <ModalContainer onClose={this.handleClose.bind(this)}>
-		          	<ModalDialog>
+		          	<ModalDialog onClose={this.handleClose.bind(this)}>
 		          		<div className="popup-container">
 			          		<div className="popup-header">
 			          			<h1>{this.state.title}</h1>

@@ -1,14 +1,15 @@
-import React from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import React from 'react'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import ReactSpinner from 'react-spinjs'
 
 //Stores
-import JobStore from '../store/JobStore';
+import JobStore from '../store/JobStore'
 
 //Mixin
-import mixins from 'es6-mixins';
-import BackboneMixin from '../mixin/BackboneMixin';
+import mixins from 'es6-mixins'
+import BackboneMixin from '../mixin/BackboneMixin'
 
+import CloseJobModal from '../components/CloseJobModal'
 import VacancyVideoList from '../components/VacancyVideoList'
 
 function formatDate(pubDate) {
@@ -39,20 +40,29 @@ function applicationsCount(applications, status) {
 
 export default class JobDetails extends React.Component {
 	constructor(props) {
-		super(props)
+		super(props);
+		this.state = {
+			isShowingModal: false
+		}
 		mixins(BackboneMixin,this);
 	}
 	// componentWillReceiveProps(nextProps, nextState) {
 	// 	console.log("componentWillReceiveProps")
 	// }
-
+	onCloseJob() {
+		this.setState({
+			isShowingModal: true
+		})
+	}
+	cancel() {
+		this.setState({
+			isShowingModal: false
+		})
+	}
 	render() {
 		var model = this.props.model;
 		var job = model.get("selectedJob");
-		console.log("applicationList:", job.application_list)
-		// if (model.get("selectedJobPassed")) {
-		// 	job = model.get("posted")[0];
-		// }
+
 		return (
 	        <div className="job-detail-wrapper">
 	        	{JobStore.get("loading") ? <ReactSpinner/> :
@@ -64,6 +74,21 @@ export default class JobDetails extends React.Component {
 			        		<div className={job.benefit_1 ? ("benefits"):("")}>{job.benefit_1}</div>
 			        		<div className={job.benefit_2 ? ("benefits"):("")}>{job.benefit_2}</div>
 		        		</div>
+		        		<div className="message-header-buttons">
+		        			<a className="mobile_preview" href="#">
+		        				<i className="fa fa-mobile" aria-hidden="true"></i>
+	        				</a>
+	        				<a href="#">
+	        					<i className="fa fa-share-alt" aria-hidden="true"></i>
+        					</a>
+        					<a className="edit_vacancy">
+        						<i className="fa fa-pencil" aria-hidden="true"></i>
+    						</a>
+							<a className="close_job">
+								<i onClick={this.onCloseJob.bind(this)} className="fa fa-times" aria-hidden="true"></i>
+								<CloseJobModal show={this.state.isShowingModal} updateList={this.props.updateList} selectedJob={this.props.model.get("selectedJob")} cancel={this.cancel.bind(this)} />
+							</a>
+	        			</div>
 		        		<h2 className="company">{job.company.name}</h2>
 		        		<h2 className="location"><i className="fa fa-map-marker" aria-hidden="true"></i> {job.address.city.name}</h2>
 		        		<i className="fa fa-check-circle-o active-icon" aria-hidden="true"></i>

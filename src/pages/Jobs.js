@@ -22,9 +22,17 @@ import JobDetails from '../components/JobDetails'
 export default class Jobs extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			update: false
+		}
 		mixins(BackboneMixin,this);
 		AppActions.getJobs();
 		// AppActions.getSelectedJob(0);
+	}
+	updateList(update) {
+		if (update) {
+			AppActions.getJobs();
+		}
 	}
 	render() {
 	    return (
@@ -59,7 +67,7 @@ export default class Jobs extends React.Component {
 
 			        </div>)}
 	        </div>
-       	    <JobDetails model={JobStore} />
+       	    <JobDetails model={JobStore} updateList={this.updateList.bind(this)}/>
 	      </div>
 	    );
   }

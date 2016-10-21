@@ -54,13 +54,10 @@ export default class ListCompanies extends React.Component {
 		var formatCompany = this.formatCompany;
 		var model = this.props.model;
 		console.log('props model:', this.props.model)
-
-		model.get("companies").map(function(company) {
-			console.log('company:', company)
+		var company = model.get("subsidiaries")[0].company;
 			company = formatCompany(company);
 			console.log('company after format:', company)
-			companies.push(
-				<div>
+		var result = (<div>
 					<div className="company-subsidiary-item-logo">
 						<img src={company.logo} alt="Company" />
 					</div>
@@ -97,20 +94,19 @@ export default class ListCompanies extends React.Component {
 						</ul>
 					</div>
 					<div className="company-subsidiary-edit-panel">
-						<a onClick={openCompanyEdit} className="company-edit-panel-edit-link">
+						<a onClick={openCompanyEdit.bind(this, company)} className="company-edit-panel-edit-link">
 							<img className="company-subsidiary-edit-panel-edit" src={require("../../img/edit.png")} alt="" />
 						</a>
 						<img className="company-subsidiary-edit-panel-delete" src={require("../../img/delete.png")} alt="" />
 					</div>
-				</div>
-			)});
-		return [companies[0]];
+				</div>)
+		return [result];
 	}
 
 	render() {
 		var model = this.props.model;
 		var companies = []
-		if (!model.get("companiesLoading")) {
+		if (!model.get("subsidiariesLoading")) {
 			companies = this.get_companies();
 		}
 		return (

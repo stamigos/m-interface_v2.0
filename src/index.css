@@ -684,6 +684,83 @@ h2.location {
     transition-timing-function: ease-out;
     color: #9f92b1;
 }
+.message-header-buttons {
+    top: 30px;
+}
+.message-header-buttons {
+    position: absolute;
+    right: 10px;
+    display: flex;
+    -webkit-transition: all 120ms ease-out 0s;
+    -moz-transition: all 120ms ease-out 0s;
+    transition: all 120ms ease-out 0s;
+    transition-timing-function: ease-out;
+}
+.message-header-buttons i.fa.fa-mobile {
+    font-size: 22px;
+    padding: 5px 11px;
+}
+.message-header-buttons i {
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 16px;
+    padding: 8px 9px;
+    color: #fff;
+    border-radius: 50%;
+    background-color: #d1c7df;
+}
+.form-title {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #9f92b1;
+    font-size: 14px;
+    padding: 20px 0;
+}
+.uploaded_file {
+    list-style: none;
+    position: relative;
+    float: left;
+    overflow: hidden;
+    width: 100%;
+    height: 165px;
+    border-radius: 5px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.uploaded_file--overlay {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: opacity .5s ease-in-out;
+    -moz-transition: opacity .5s ease-in-out;
+    transition: opacity .5s ease-in-out;
+    opacity: 0;
+    opacity: 0;
+    border-radius: 10px;
+    background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5));
+}
+.upload_file--buttons {
+    font-size: 18px;
+    line-height: 35px;
+    position: absolute;
+    top: 65px;
+    left: 95px;
+    color: #fff;
+    border-radius: 20px;
+    background: #f2415f;
+    list-style: none;
+}
+.upload_file--buttons a {
+    color: #fff;
+}
+.upload_file--button {
+    cursor: pointer;
+}
+.uploaded_file:hover > .uploaded_file--overlay {
+    opacity: 1;
+}
 /* ------------ END JOB CONTAINER ------- */
 /* ------------ TABS JOB DETAIL --------- */
 .job-messages {
@@ -1444,7 +1521,7 @@ a.button-cv.button-cv-full-red.green {
 .company-subsidiary-item-content
 {
     display: inline-block;
-    margin-left: 30px;
+    margin-left: 3px;
 }
 h1.company-subsidiary-title
 {
@@ -1536,6 +1613,214 @@ span.green {
 }
 .company-subsidiary .react-list-select--item:hover .company-subsidiary-edit-panel {
     display: block;
+}
+.profile-company-form div#profile-logo-preview {
+    position: relative;
+    display: block;
+    float: left;
+    width: 190px;
+    height: 109px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 190px;
+}
+.profile-company-form .overlay {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: opacity .5s ease-in-out;
+    -moz-transition: opacity .5s ease-in-out;
+    transition: opacity .5s ease-in-out;
+    opacity: 0;
+    border-radius: 10px;
+    background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5));
+}
+.profile-company-form .overlay:hover {
+    opacity: 1;
+}
+.profile-logo-preview-buttons {
+    font-size: 18px;
+    line-height: 35px;
+    position: absolute;
+    top: 36px;
+    left: 55px;
+    color: #fff;
+    border-radius: 20px;
+    background: #f2415f;
+}
+.profile-logo-preview-button {
+    float: left;
+    padding: 0 15px;
+    cursor: pointer;
+}
+.profile-logo-preview-button:hover {
+    cursor: pointer;
+    color: #000;
+}
+.profile-logo-preview-button.editor label {
+    cursor: pointer;
+}
+.profile-logo-preview-button:first-child {
+    padding-right: 10px;
+}
+.profile-logo-preview-button:last-child {
+    padding-left: 10px;
+}
+label#profile-upload-button {
+    font-size: 25px;
+    line-height: 105px;
+    float: left;
+    width: 186px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0;
+    cursor: pointer;
+    text-align: center;
+    color: #f2415f;
+    border: 2px dashed #ddd6e8;
+    border-radius: 5px;
+    background: #f6f4f9;
+    background: #f6f4f9;
+}
+input#profileCompanyLogo {
+    display: none;
+}
+.profileSocialMedia-item i.fa {
+    font-size: 18px;
+    line-height: 77px;
+    padding: 0 5px;
+    cursor: pointer;
+    color: #9f92b1;
+}
+#profile-company-form .profileSocialMedia-item input[type='text'] {
+    cursor: pointer;
+    line-height: 77px;
+    margin: 0 25px;
+    padding: 0;
+    border: none;
+}
+#profile-company-form .profileSocialMedia-item input[type='text']:focus {
+    cursor: text;
+}
+.profileSocialMedia-item {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid #dad5e0;
+}
+.profileSocialMedia-item .icon-wrapper img {
+    height: 36px;
+    margin: 20px 0 16px;
+}
+.float-left {
+    float: left;
+}
+.buttons {
+    margin-top: 45px;
+    padding: 45px 0;
+    border-top: 1px solid #f6f4f9;
+}
+form .button-cv {
+    cursor: pointer;
+    width: 170px;
+    padding-right: 0;
+    padding-left: 0;
+    text-align: center;
+}
+form .button-cv-transperent {
+    float: right;
+    margin-left: 20px;
+    background: #fff;
+    color: #f2415f;
+    border: 2px solid #f2415f;
+}
+form .button-cv-transperent:hover {
+    color: #fff;
+    background: #f2415f;
+}
+div#subsidiaryVideo-preview {
+    position: relative;
+    display: block;
+    float: left;
+    width: 190px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 190px;
+}
+input#subsidiaryVideo {
+    display: none;
+}
+label#subsidiaryVideo-label {
+    font-size: 25px;
+    line-height: 105px;
+    display: block;
+    float: left;
+    width: 186px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0;
+    cursor: pointer;
+    text-align: center;
+    color: #f2415f;
+    border: 2px dashed #ddd6e8;
+    border-radius: 5px;
+    background: #f6f4f9;
+    background: #f6f4f9;
+}
+#subsidiaryFile {
+    display: none;
+}
+#inviteManagerButton.green, 
+#addManagerButton.green {
+    background-color: #08b39c;
+}
+#inviteManagerButton.green {
+    display: none;
+}
+#inviteManagerButton, #addManagerButton {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 46px;
+    display: inline-block;
+    margin-top: 20px;
+    padding: 0 40px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 40px;
+}
+.manager-item {
+    position: relative;
+}
+a.manager-delete {
+    position: absolute;
+    right: 0;
+    bottom: 13px;
+    color: #000;
+}
+.manager-item .half {
+    margin-top: 20px;
+    width: 290px;
+}
+#profile-subsidiary-form div.half {
+    width: 290px;
+}
+#profile-subsidiary-form input.half.right {
+    margin: 0;
+}
+#profile-subsidiary-form input.bootstrap-typeahead-input-main {
+    width: 290px;
 }
 /*-----------------END COMPANY-------------------*/
 

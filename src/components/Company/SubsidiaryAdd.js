@@ -3,19 +3,18 @@ import SubsidiaryManagers from '../../components/Company/SubsidiaryManagers'
 import TypeAheadCity from '../../components/Company/TypeAheadCity'
 
 
-export default class SubsidiaryEdit extends React.Component {
+export default class SubsidiaryAdd extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			managerForm: false,
 			submitManagerForm: false,
-			images_list: this.props.subsidiary.image_list,
 			//form data
-			subsidiary_name: this.props.subsidiary.name,
-			street: this.props.subsidiary.address.street,
-			housenumber: this.props.subsidiary.address.housenumber,
-			postal_code: this.props.subsidiary.address.postal_code,
-			city_name: this.props.subsidiary.address.city.name
+			subsidiary_name: '',
+			street: '',
+			housenumber: '',
+			postal_code: '',
+			city_name: ''
 		};
 	}
 	getCity(city) {
@@ -65,16 +64,16 @@ export default class SubsidiaryEdit extends React.Component {
 		address.postal_code = this.state.postal_code;
 		address.city = city;
 		body.name = this.state.subsidiary_name;
-		body.company = this.props.subsidiary.company.api_url;
+		body.company = this.props.company.api_url;
 		body.address = address;
 
 		var headers = new Headers();
 		headers.append("Content-Type", "application/json")
 		headers.append("Authorization", "Token " + localStorage.token);
 		var request = new Request(
-			'http://dev.jobufo.com/api/v1/recruiting/subsidiary/'+this.props.subsidiary.pk+'/',
+			'http://dev.jobufo.com/api/v1/recruiting/subsidiary/',
 			{
-				method: "PUT",
+				method: "POST",
 				headers: headers,
 				body: JSON.stringify(body)
 			})
@@ -87,33 +86,8 @@ export default class SubsidiaryEdit extends React.Component {
 					// window.location.reload();
 				})
 	}
-	onImageSelect() {
-		var self = this;
-		var file = this.refs.file.files[0];
-	    var reader = new FileReader();
-		var url = reader.readAsDataURL(file);
-		var images_list = {image: this.state.images_list};
-
-			reader.onloadend = function (e) {
-				images_list.push(reader.result)
-				self.setState({
-					images_list: images_list
-				})
-		    }.bind(this);
-	}
 	render() {
-		console.log("subsidiary prop:", this.props.subsidiary)
-		var uploadedImages = this.state.images_list.map(function(image, i) {
-			return (
-				<li className="uploaded_file" style={{backgroundImage: 'url('+image.image+')'}}>
-					<div className="uploaded_file--overlay">
-						<div className="upload_file--buttons">
-							<a href="" className="move_left"><i className="fa fa-arrow-left" aria-hidden="true"></i></a>
-							<a href="" className="upload_file--button deleter"><i className="fa fa-trash" aria-hidden="true"></i></a>
-							<a href="" className="move_right"><i className="fa fa-arrow-right" aria-hidden="true"></i></a></div>
-						</div>
-				</li>)
-		})
+		console.log("subsidiary prop:", this.props.company)
 		return (
 			<div>
 				<div className="post-job-content-header align-center">
@@ -128,7 +102,7 @@ export default class SubsidiaryEdit extends React.Component {
 						</div>
 						<div className="half right">
 							<label className="label" htmlFor="subsidiaryCompany">Unternehmensname</label>
-							<input defaultValue={this.props.subsidiary.company.name} type="text" name="subsidiaryCompany" id="subsidiaryCompany" className="half right" placeholder="Company name" disabled />
+							<input defaultValue={this.props.company.name} type="text" name="subsidiaryCompany" id="subsidiaryCompany" className="half right" placeholder="Company name" disabled />
 						</div>
 						<div className="half">
 							<label className="label" htmlFor="subsidiaryStreet">Straße name</label>
@@ -167,14 +141,11 @@ export default class SubsidiaryEdit extends React.Component {
 
 						<label className="label-big">Filialbilder</label>
 						<label className="upload-button" htmlFor="subsidiaryFile"><i className="fa fa-plus" aria-hidden="true"></i></label>
-						<input ref="file" onChange={this.onImageSelect.bind(this)} className="subsidiaryFile" accept="image/*" name="subsidiaryFile" id="subsidiaryFile" type="file" />
-						
-							<ul id="subsidiary_uploaded_files">
-								{uploadedImages}
-							</ul>
+						<input className="subsidiaryFile" accept="image/*" name="subsidiaryFile" id="subsidiaryFile" type="file" />
+						<ul id="subsidiary_uploaded_files"></ul>
 						<div className="clear"></div>
 
-						<SubsidiaryManagers subsidiary={this.props.subsidiary} />
+						// <SubsidiaryManagers subsidiary={this.props.subsidiary} />
 
 					</div>
 					<div className="buttons">

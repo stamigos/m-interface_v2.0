@@ -10,7 +10,7 @@ import AvailabilityList from '../components/JobPost/AvailabilityList'
 import ModalVideoCrop from '../components/JobPost/ModalVideoCrop'
 import LeftModalImageCrop from '../components/JobPost/LeftModalImageCrop'
 import RightModalImageCrop from '../components/JobPost/RightModalImageCrop'
-import TypeAheadCity from '../components/JobPost/TypeAheadCity'
+import TypeAheadSubsidiary from '../components/JobPost/TypeAheadSubsidiary'
 import JobPreviewPopup from '../components/JobPost/JobPreviewPopup'
 
 import { getMonth, formatCheckFromDate } from '../utils';
@@ -267,7 +267,7 @@ class PostJobContent extends React.Component {
 
 						<label className="label" htmlFor="Location">Subsidiary</label>
 						<div className="Location citySearchSelect" id="Location">
-							<TypeAheadCity getSubsidiary={this.getSubsidiary.bind(this)}/>
+							<TypeAheadSubsidiary getSubsidiary={this.getSubsidiary.bind(this)}/>
 						</div>
 						<div className="clear"></div>
 

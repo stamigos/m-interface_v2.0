@@ -100,7 +100,6 @@ export default class Account extends React.Component {
 		})
 	}
 	onSubmit(e) {
-		console.log("e:", e.target)
 		e.preventDefault();
 		var self = this;
 		var current_user = JobStore.get("currentUser");
