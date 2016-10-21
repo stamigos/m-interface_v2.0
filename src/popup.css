@@ -61,6 +61,11 @@
     overflow: hidden;
     height: 338px;
 }
+.popup-container .popup-content.crop-video {
+    margin: 30px;
+    overflow: hidden;
+    height: 338px;
+}
 .popup-content-image {
     margin: 30px;
     overflow: hidden;
