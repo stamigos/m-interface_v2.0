@@ -43,6 +43,10 @@ var actions = {
 					return r.json();
 				})
 				.then(function(object) {
+					if (object.hasOwnProperty("detail")) {
+						delete localStorage.token;
+						window.location.reload();
+					}
 			        AppDispatcher.dispatch({
 					    actionType: 'get-current-user',
 					    value: object
