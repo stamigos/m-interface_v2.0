@@ -15,6 +15,11 @@ export default class TypeAheadCity extends React.Component {
 		this.get_cities = this.get_cities.bind(this)();
 		this.get_city = this.get_city.bind(this);
 	}
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.reset) {
+			this.refs.typeaheadCity.getInstance().clear()
+		}
+	}
 	componentWillMount() {
 		this.get_city();
 	}
@@ -58,16 +63,13 @@ export default class TypeAheadCity extends React.Component {
 	}
 	_handleInputChange(value) {
 		var city = this.get_city(value);
-
-		this.setState({
-			filterOption: value
-		})
+		this.props.setReset(false)
 		this.props.getCity(city)
 	}
 	render() {
 		return (
 			<div>
-				<Typeahead selected={[this.props.city_name]} placeholder="Stadt" onChange={this._handleChange.bind(this)} filterOption={this.state.filterOption} onInputChange={this._handleInputChange.bind(this)} options={this.state.options}/>
+				<Typeahead ref="typeaheadCity" selected={[this.props.city_name]} placeholder="Stadt" onChange={this._handleChange.bind(this)} onInputChange={this._handleInputChange.bind(this)} options={this.state.options}/>
 			</div>
 		);
 	}

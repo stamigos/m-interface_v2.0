@@ -7,11 +7,37 @@ export default class NormalTopJob extends React.Component {
 		super(props);
 		this.state = {
 			isOpenPopup: false,
-			isTopJob: false
+			isTopJob: false,
+			top_current: null,
+			top_max: null,
 		}
 		this.switchJobToNormal = this.switchJobToNormal.bind(this);
 		this.switchJobToTop = this.switchJobToTop.bind(this);
 		this.togglePopup = this.togglePopup.bind(this);
+		this.getTopJobCurrentMax.bind(this)();
+	}
+	getTopJobCurrentMax() {
+		var self = this;
+		var headers = new Headers()
+		headers.append("Authorization", "Token " + localStorage.token);
+		var request = new Request(
+			'http://dev.jobufo.com/api/v1/management/vacancy/',
+			{
+				method: 'GET',
+				headers: headers
+			})
+		fetch(request)
+			.then(function(r) {
+				return r.json()
+			})
+			.then(function(objects) {
+				console.log("objects:", objects)
+				self.setState({
+					top_current: objects[0].company.top_jobs.current,
+					top_max: objects[0].company.top_jobs.max
+				})
+			})
+
 	}
 	switchJobToNormal() {
 		this.setState({
@@ -46,7 +72,7 @@ export default class NormalTopJob extends React.Component {
 				</div>
 				<div id="topjob"className={this.state.isTopJob ? 'box selected' : 'box'} onClick={this.switchJobToTop}>
 					<b>Top Job</b>
-					<amount><span>3</span> / 10 available</amount>
+					<amount><span>{this.state.top_current}</span> / {this.state.top_max} available</amount>
 
 					<img src={require('../../img/jobtype_top.png')} />
 					<i className="fa fa-question-circle" aria-hidden="true" onClick={this.togglePopup}></i>

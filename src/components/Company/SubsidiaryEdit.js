@@ -92,10 +92,10 @@ export default class SubsidiaryEdit extends React.Component {
 		var file = this.refs.file.files[0];
 	    var reader = new FileReader();
 		var url = reader.readAsDataURL(file);
-		var images_list = {image: this.state.images_list};
+		var images_list = this.state.images_list;
 
 			reader.onloadend = function (e) {
-				images_list.push(reader.result)
+				images_list.push({image: reader.result})
 				self.setState({
 					images_list: images_list
 				})
@@ -108,9 +108,9 @@ export default class SubsidiaryEdit extends React.Component {
 				<li className="uploaded_file" style={{backgroundImage: 'url('+image.image+')'}}>
 					<div className="uploaded_file--overlay">
 						<div className="upload_file--buttons">
-							<a href="" className="move_left"><i className="fa fa-arrow-left" aria-hidden="true"></i></a>
-							<a href="" className="upload_file--button deleter"><i className="fa fa-trash" aria-hidden="true"></i></a>
-							<a href="" className="move_right"><i className="fa fa-arrow-right" aria-hidden="true"></i></a></div>
+							<a href="#" className="move_left"><i className="fa fa-arrow-left" aria-hidden="true"></i></a>
+							<a href="#" className="upload_file--button deleter"><i className="fa fa-trash" aria-hidden="true"></i></a>
+							<a href="#" className="move_right"><i className="fa fa-arrow-right" aria-hidden="true"></i></a></div>
 						</div>
 				</li>)
 		})

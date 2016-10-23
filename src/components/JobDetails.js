@@ -10,6 +10,7 @@ import mixins from 'es6-mixins'
 import BackboneMixin from '../mixin/BackboneMixin'
 
 import CloseJobModal from '../components/CloseJobModal'
+import JobDetailPreview from '../components/JobDetailPreview'
 import VacancyVideoList from '../components/VacancyVideoList'
 
 function formatDate(pubDate) {
@@ -54,19 +55,32 @@ export default class JobDetails extends React.Component {
 			isShowingModal: true
 		})
 	}
+	onPreviewOpen() {
+		this.setState({
+			isShowingPreview: true
+		})
+	}
 	cancel() {
 		this.setState({
 			isShowingModal: false
 		})
 	}
+	cancelPreview() {
+		this.setState({
+			isShowingPreview: false
+		})
+	}
+	onEditOpen() {
+		this.props.openVacancyEdit();
+	}
 	render() {
 		var model = this.props.model;
 		var job = model.get("selectedJob");
-
+		console.log("selected job:", job)
 		return (
 	        <div className="job-detail-wrapper">
 	        	{JobStore.get("loading") ? <ReactSpinner/> :
-		        	(<div className="job-detail">
+		        	(job ? (<div className="job-detail">
 		        		<h1 className="title">{job.title}</h1>
 			        	<div className="stats">
 			        		<div className={job.payment ? ("salary"):("")}>{job.payment}</div>
@@ -76,13 +90,14 @@ export default class JobDetails extends React.Component {
 		        		</div>
 		        		<div className="message-header-buttons">
 		        			<a className="mobile_preview" href="#">
-		        				<i className="fa fa-mobile" aria-hidden="true"></i>
+		        				<i onClick={this.onPreviewOpen.bind(this)} className="fa fa-mobile" aria-hidden="true"></i>
+		        				<JobDetailPreview show={this.state.isShowingPreview} job={job} cancel={this.cancelPreview.bind(this)} close={this.cancelPreview.bind(this)}/>
 	        				</a>
 	        				<a href="#">
 	        					<i className="fa fa-share-alt" aria-hidden="true"></i>
         					</a>
         					<a className="edit_vacancy">
-        						<i className="fa fa-pencil" aria-hidden="true"></i>
+        						<i onClick={this.onEditOpen.bind(this)} className="fa fa-pencil" aria-hidden="true"></i>
     						</a>
 							<a className="close_job">
 								<i onClick={this.onCloseJob.bind(this)} className="fa fa-times" aria-hidden="true"></i>
@@ -123,7 +138,7 @@ export default class JobDetails extends React.Component {
 						        </TabPanel>
 		        			</Tabs>
 		        		</div>
-		        	</div>)}
+		        	</div>):(null))}
 	        </div>
 		)
 	}

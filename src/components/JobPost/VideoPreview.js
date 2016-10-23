@@ -85,7 +85,7 @@ export default class VideoPreview extends React.Component {
 		  		self.refs.video.play();
 		  } 
 		}, waitTime);
-		this.props.getCropParams({
+    	this.props.getCropParams({
 			slice_start: Math.floor(seek_current),
 		})
 	}

@@ -1,6 +1,7 @@
-import React from 'react';
+import React from 'react'
+import { IndexLink } from 'react-router'
 
-import '../login-registration.css';
+import '../login-registration.css'
 
 export default class Login extends React.Component {
 	constructor() {
@@ -78,7 +79,7 @@ export default class Login extends React.Component {
 					</div>
 				</section>
 				<div className="after-form">
-					<h2 >Don’t have an account yet? <a className="sing-up" href="sign-up.html">Sign Up</a></h2>
+					<h2 >Don’t have an account yet? <IndexLink className="sing-up" to='register'>Sign Up</IndexLink></h2>
 				</div>
 			</div>
 		);

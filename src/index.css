@@ -29,6 +29,15 @@ body {
 input[type='text'].half, select.half {
     width: 290px !important;
 }
+select {
+    background-image: url('img/arrow-down.png') !important;
+    background-repeat: no-repeat !important;
+    background-position: right center !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    -ms-appearance: none !important;
+    appearance: none!important;
+}
 .align-center {
     text-align: center;
 }
@@ -42,17 +51,19 @@ input[type='text'].half, select.half {
 }
 .content-wrapper {
     position: fixed;
-    overflow-y: auto; 
-    left: 60px;
+    overflow: hidden;
+/*    overflow-y: auto; 
+*/    left: 60px;
     top: 80px;
     width: 324px;
 /*    margin-left: 50px;
-*/  height: 100%;
-    background-color: #f6f4f9;
+*/  height: calc(100% - 80px);
+/*    min-height: 550px;
+*/    background-color: #f6f4f9;
     -webkit-transition: left 0.5s linear;
 }
 .content {
-    position:absolute;
+    position:relative;
     display: inline-block;
     width:324px;
     margin-right:auto;
@@ -398,18 +409,19 @@ header {
 /* ------------ END SIDEBAR ------------- */
 
 /* ------------ TABS JOBS LIST-------------------- */
-.content .ReactTabs.react-tabs {
-  max-height: 50px;
-  padding-bottom: 11px;
+.content-wrapper .ReactTabs.react-tabs {
+    height: calc(100% + 80px);
+/*  max-height: 50px;
+  padding-bottom: 11px;*/
 }
-.content .ReactTabs__TabList {
+.content-wrapper .ReactTabs__TabList {
   list-style: none;
   padding: 0;
   margin: 0;
   border:0;
   display: inline-block;
 }
-.content .ReactTabs__Tab {
+.content-wrapper .ReactTabs__Tab {
   display: flex;
   float: left;
   text-align: center;
@@ -424,10 +436,10 @@ header {
   cursor: pointer;
   border: 0;
 }
-.content .ReactTabs__Tab:not(.ReactTabs__Tab--selected):hover {
+.content-wrapper .ReactTabs__Tab:not(.ReactTabs__Tab--selected):hover {
   color: #3498db;
 }
-.content .react-tabs [role=tab][aria-selected=true] {
+.content-wrapper .react-tabs [role=tab][aria-selected=true] {
   border-bottom: 3px solid #08b39c;
   color: #08b39c;
   background: transparent;
@@ -438,7 +450,36 @@ header {
     padding: 0 26px;
     background-color: #e4e2e7;
 }
+.filter-dropdown::selection,
+.filter-dropdown::-moz-selection,
+.filter-dropdown::-webkit-user-select {
+    background: transparent;
+}
+.filter-dropdown {
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */      
+}
+.filter .bootstrap-typeahead-input input{
+    opacity: 1;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    width: 270px;
+    margin-bottom: 20px;
+    padding: 8px 0;
+    color: #9f92b1;
+    border: none;
+    border-bottom: 1px solid #cdc6d5;
+    background-color: #e4e2e7;
+    background-repeat: no-repeat;
+    background-position: right center;
+    -webkit-appearance: none;
+    -webkit-transition: opacity 1.0s ease-out;
+    transition: opacity 1.0s ease-out;
+}
 .reset-filter {
+    cursor: pointer;
     font-family: 'Open Sans', sans-serif;
     font-size: 15px;
     line-height: 20px;
@@ -497,16 +538,28 @@ header {
 
 .divCollapsed .filter.collapsed {
     height: 0;
+    overflow: hidden;
+}
+.divCollapsed .filter.collapsed div,
+.divCollapsed .filter.collapsed select {
+    opacity: 0;
+}
+.filter div,
+.filter select {
+    opacity: 1;
+    -webkit-transition: opacity 1.0s ease-out;
+    transition: opacity 1.0s ease-out;
+    -moz-transition: opacity 1.0s ease-out;
 }
 .filter {
     display: block;
     padding: 0 26px;
     height: 217px;
     background-color: #e4e2e7;
-    overflow: hidden;
-    -webkit-transition: all .3s linear;
-    -moz-transition: all .3s linear;
-    transition: all .3s linear;
+    overflow: visible;
+    -webkit-transition: all .2s linear;
+    -moz-transition: all .2s linear;
+    transition: all .2s linear;
 }
 .rotate {
     -webkit-transition: all .5s linear;
@@ -551,23 +604,28 @@ h2 b {
 /* ------------ END FILTER FROPDOWN ----- */
 /* ------------ JOBS CONTAINER ---------- */
 .jobs-container-wrapper {
-    position: absolute;
+    position: relative;
     width: 324px;
-    overflow-y: auto;
     height: 100%;
 }
 .jobs-container {
-    padding: 0;
+    overflow-x: hidden;
+    overflow: scroll;
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
+    height: calc(100% - 180px);
+    max-width: 100%;
+    outline: none;
+    direction: ltr;
+}
+.top-job-star {
+    position: absolute;
+    right: 25px;
+    top: 40%;
+    height: 20px;
 }
 .jobs-container .react-list-select{
     list-style: none;
-    padding-bottom: 80px;
+    min-width: 324px;
 }
 .jobs-container .react-list-select--item {
     position: relative;
@@ -611,8 +669,7 @@ h2.location {
     top: 80px;
     height: 100%;
     overflow-y: auto;
-/*    overflow-x: auto;
-*/    -webkit-transition: left 0.5s linear;
+   -webkit-transition: left 0.5s linear;
 }
 .job-detail {
     padding: 30px;
@@ -628,6 +685,7 @@ h2.location {
     line-height: 26px;
     font-weight: 400;
     color: #08b39c;
+    width: 500px;
 }
 .job-detail .stats{
     padding: 10px 0px;
@@ -869,11 +927,15 @@ h2.location {
     background: #f6f4f9;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
+    position: absolute;
+    width: 220px;
+    top: 220px;
 }
 .applicant-message video {
     height: 220px;
     width: 220px;
-    background: grey;
+    background: transparent;
+    background-color: transparent;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
 }
@@ -885,15 +947,16 @@ h2.location {
     top: 0;
     border-radius: inherit;
     height: 100%;
-    transition: 1s linear;
-    -webkit-transition: 1s linear;
-    -moz-transition: 1s linear;
-}
+    transition: background ease-out 1s;
+    -webkit-transition: background ease-out 1s;
+    -moz-transition: background ease-out 1s;
+/*    -webkit-backface-visibility: hidden;
+*/}
 .applicant-message .video--playing .darker {
-    opacity: 1;
-    transition: 1s linear;
-    -webkit-transition: 1s linear;
-    -moz-transition: 1s linear;
+    opacity: 0;
+/*    transition: ease-in-out 1s;
+    -webkit-transition: ease-in-out 1s;
+    -moz-transition: ease-in-out 1s;*/
 }
 .applicant-message .video-controls .video__controls {
     background: transparent;
@@ -902,6 +965,7 @@ h2.location {
 
 .applicant-message .video {
     height: 220px;
+    background-color: transparent; 
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
 }
@@ -944,7 +1008,7 @@ h2.location {
     border: none;
 }
 .video--paused {
-    background: grey;
+    background: transparent;
 }
 .video-icon:before {
     font-family: "video-fontello";
@@ -990,6 +1054,7 @@ h2.location {
     padding: 12px 25px;
     background: #fff;
     width: 140px;
+    z-index: 30;
 }
 .applicant-message:hover .applicant-dropdown .dd-items-right:hover  {
     -webkit-transform: scale(1);
@@ -1065,15 +1130,12 @@ h2.location {
     top: 0;
     border-radius: inherit;
     height: 100%;
-    transition: 1s linear;
-    -webkit-transition: 1s linear;
-    -moz-transition: 1s linear;
+    transition: background ease-out 1s;
+    -webkit-transition: background ease-out 1s;
+    -moz-transition: background ease-out 1s;
 }
 .modal-applicant-video .video--playing .darker {
-    opacity: 1;
-    transition: 1s linear;
-    -webkit-transition: 1s linear;
-    -moz-transition: 1s linear;
+    opacity: 0;
 }
 .modal-applicant-info-wrapper {
     margin: 45px;
@@ -2399,7 +2461,7 @@ input[type='text'].half, select.half {
 {
     margin-top: 60px;
     padding: 50px 0;
-
+    margin-bottom: 60px;
     border-top: 1px solid #f6f4f9;
 }
 #job-post-form .button-cv-transperent,
@@ -2442,6 +2504,75 @@ input[type='text'].half, select.half {
 #Schedule.expanded {
     /* On hover, set the max-height to something large. In this case there's an obvious limit. */
     max-height: 200px;
+}
+div#EditPostJobUploadedFilesVideo {
+    position: relative;
+    display: block;
+    float: left;
+    width: 190px;
+    height: 109px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 190px;
+}
+div#EditPostJobUploadedFilesVideo .overlay {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: opacity .5s ease-in-out;
+    -moz-transition: opacity .5s ease-in-out;
+    transition: opacity .5s ease-in-out;
+    opacity: 0;
+    border-radius: 10px;
+    background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5));
+}
+div#EditPostJobUploadedFilesVideo .overlay:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+.EditPostJob-preview-button.deleter a {
+    color: #fff;
+}
+.EditPostJob-preview-button.deleter a:hover {
+    color: #000;
+}
+.EditPostJob-preview-buttons {
+    font-size: 18px;
+    line-height: 35px;
+    position: absolute;
+    top: 36px;
+    left: 55px;
+    color: #fff;
+    border-radius: 20px;
+    background: #f2415f;
+}
+.EditPostJob-preview-button {
+    float: left;
+    padding: 0 15px;
+    cursor: pointer;
+}
+.EditPostJob-preview-button.editor label {
+    cursor: pointer;
+}
+.EditPostJob-preview-button.editor label:hover {
+    color: #000;
+}
+.EditPostJob-preview-button:first-child {
+    padding-right: 10px;
+}
+.EditPostJob-preview-button:last-child {
+    padding-left: 10px;
+}
+input#EditPostjobVideo {
+    display: none;
+}
+#EditPostjobImage {
+    display: none;
 }
 /*---------------------JOB POST END----------------------*/
 .loading-wrapper {

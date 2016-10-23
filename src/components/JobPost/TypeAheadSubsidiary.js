@@ -4,19 +4,24 @@ import Typeahead from 'react-bootstrap-typeahead';
 import '../../Typeahead.css'
 
 
-export default class TypeAheadCity extends React.Component {
+export default class TypeAheadSubsidiary extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			options: [],
 			subsidiaries: [],
-			filterOption: ''
+			selected: ''
 		}
 		this.get_subsidiaries = this.get_subsidiaries.bind(this);
 		this.get_subsidiary = this.get_subsidiary.bind(this);
 	}
 	componentWillMount() {
 		this.get_subsidiaries();
+	}
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.reset) {
+			this.refs.typeaheadSubsidiary.getInstance().clear()
+		}
 	}
 	get_subsidiaries() {
 		var self = this;
@@ -34,12 +39,20 @@ export default class TypeAheadCity extends React.Component {
 				})
 				.then(function(objects) {
 					console.log("result:", objects)
+					var selected = '';
 					var options = objects.map(function(obj) {
+						console.log("obj.pk:", obj.pk)
+						console.log("selectedId:", self.props.selectedId)
+						if (obj.pk == self.props.selectedId) {
+							selected = obj.name
+						}
 						return obj.name
 					})
+					console.log("result selected:", selected)
 					self.setState({
 						options: options,
-						subsidiaries: objects
+						subsidiaries: objects,
+						selected: selected
 					})
 		})
 	}
@@ -49,6 +62,7 @@ export default class TypeAheadCity extends React.Component {
 	get_subsidiary(value) {
 		var subsidiaries = this.state.subsidiaries;
 		var result = [];
+		var selected = [];
 		subsidiaries.map(function(subsidiary) {
 			if (subsidiary.name == value) {
 				result.push(subsidiary)
@@ -58,16 +72,15 @@ export default class TypeAheadCity extends React.Component {
 	}
 	_handleInputChange(value) {
 		var subsidiary = this.get_subsidiary(value);
-
-		this.setState({
-			filterOption: value
-		})
+		if (this.props.setReset) {
+			this.props.setReset(false)
+		}
 		this.props.getSubsidiary(subsidiary)
 	}
 	render() {
 		return (
 			<div>
-				<Typeahead placeholder="Subsidiary" onChange={this._handleChange.bind(this)} filterOption={this.state.filterOption} onInputChange={this._handleInputChange.bind(this)} options={this.state.options}/>
+				<Typeahead ref="typeaheadSubsidiary" selected={[this.state.selected]} placeholder="Subsidiary" onChange={this._handleChange.bind(this)} onInputChange={this._handleInputChange.bind(this)} options={this.state.options}/>
 			</div>
 		);
 	}

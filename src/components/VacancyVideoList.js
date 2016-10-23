@@ -56,13 +56,13 @@ class VacancyVideo extends React.Component {
         animate: true
       }
     return (
-        <div className="applicant-message" onClick={this.onApplicationClick}>
+        <div className="applicant-message">
           <Video controls>
               <Controls>
                   <VideoButton type="play"/>
                   <VideoButton type="stop"/>
               </Controls>
-              <div className="darker"></div>
+              <div className="darker" onClick={this.onApplicationClick}></div>
               <source src={application.video} type="video/mp4" />
           </Video>
           <div className="applicant-info">

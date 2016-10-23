@@ -108,18 +108,25 @@ export default class ModalVideoCrop extends React.Component {
     }
     getCropParams(params) {
     	if (Math.floor(this.state.videoRealWidth) != 600) {
-			var params = {}
+			var crop_params = {}
 			var top = Math.floor((this.state.videoRealWidth * 338)/600);
-			params.slice_start = this.state.crop_params.slice_start;
-			params.x_min = 0;
-			params.x_max = Math.floor(this.state.videoRealWidth);
-			params.y_min = Math.floor(this.state.top_min);
-			params.y_max = top + Math.floor(this.state.top_min);
-			params.video = this.state.videoSrc;
-			this.setState(params);
+			crop_params.slice_start = params.slice_start;
+			crop_params.x_min = 0;
+			crop_params.x_max = Math.floor(this.state.videoRealWidth);
+			crop_params.y_min = Math.floor(this.state.top_min);
+			crop_params.y_max = top + Math.floor(this.state.top_min);
+			crop_params.video = this.state.videoSrc;
+			this.setState(crop_params);
+		} else {
+			var crop_params = {}
+			crop_params.slice_start = params.slice_start;
+			crop_params.x_min = this.state.crop_params.x_min;
+			crop_params.x_max = this.state.crop_params.x_max;
+			crop_params.y_min = this.state.crop_params.y_min;
+			crop_params.y_max = this.state.crop_params.y_max;
 		}
-    	this.props.getVideoCropParams(params)
-    	console.log("getCropParams:", params)
+		console.log("crop_params:", crop_params)
+		this.props.getVideoCropParams(crop_params)
     }
     //{{left: -100, right: 100}}
 	render() {

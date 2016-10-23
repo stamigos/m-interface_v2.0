@@ -30,7 +30,7 @@ export default class Popup extends React.Component {
 			content: nextProps.htmlContent,
 			contentClassName: nextProps.hasOwnProperty("contentClassName") ? (nextProps.contentClassName):(this.state.contentClassName),
 			button: {
-				visible: true,
+				visible: nextProps.button.hasOwnProperty('visible') ? (nextProps.button.visible):(true),
 				left: nextProps.button.left,
 				right: nextProps.button.right,
 			},
@@ -42,6 +42,9 @@ export default class Popup extends React.Component {
 		this.setState({
 			isShowingModal: false
 		})
+		if (this.props.close) {
+			this.props.close();
+		}
 	}
 	onLeftClick() {
 		this.state.onLeftClick();
@@ -63,11 +66,11 @@ export default class Popup extends React.Component {
 				          		<div className={this.state.contentClassName}>
 				          			{this.state.content}
 				          		</div>
-			          		{this.state.button.visible &&
-				          		<div className="bottom">
+			          		{this.state.button.visible ?
+				          		(<div className="bottom">
 									<div className="crop" onClick={this.onLeftClick.bind(this)}>{this.state.button.left}</div>
 									<div className="cancel" onClick={this.onRightClick.bind(this)}>{this.state.button.right}</div>
-								</div>
+								</div>) : (null)
 							}
 		          		</div>
 	          		</ModalDialog>

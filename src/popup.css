@@ -82,3 +82,7 @@
     width: 620px;
     position: relative;
 }
+.popup-content.job-list {
+    margin-bottom: 0;
+    padding-bottom: 80px;
+}

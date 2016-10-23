@@ -14,7 +14,8 @@ export default class SubsidiaryAdd extends React.Component {
 			street: '',
 			housenumber: '',
 			postal_code: '',
-			city_name: ''
+			city_name: '',
+			images_list: []
 		};
 	}
 	getCity(city) {
@@ -49,6 +50,20 @@ export default class SubsidiaryAdd extends React.Component {
 		this.setState({
 			postal_code: e.target.value
 		})
+	}
+	onImageSelect() {
+		var self = this;
+		var file = this.refs.file.files[0];
+	    var reader = new FileReader();
+		var url = reader.readAsDataURL(file);
+		var images_list = this.state.images_list;
+
+			reader.onloadend = function (e) {
+				images_list.push({image: reader.result})
+				self.setState({
+					images_list: images_list
+				})
+		    }.bind(this);
 	}
 	onSubmit(e) {
 		e.preventDefault();
@@ -88,6 +103,17 @@ export default class SubsidiaryAdd extends React.Component {
 	}
 	render() {
 		console.log("subsidiary prop:", this.props.company)
+		var uploadedImages = this.state.images_list.map(function(image, i) {
+			return (
+				<li className="uploaded_file" style={{backgroundImage: 'url('+image.image+')'}}>
+					<div className="uploaded_file--overlay">
+						<div className="upload_file--buttons">
+							<a href="" className="move_left"><i className="fa fa-arrow-left" aria-hidden="true"></i></a>
+							<a href="" className="upload_file--button deleter"><i className="fa fa-trash" aria-hidden="true"></i></a>
+							<a href="" className="move_right"><i className="fa fa-arrow-right" aria-hidden="true"></i></a></div>
+						</div>
+				</li>)
+		})
 		return (
 			<div>
 				<div className="post-job-content-header align-center">
@@ -141,11 +167,12 @@ export default class SubsidiaryAdd extends React.Component {
 
 						<label className="label-big">Filialbilder</label>
 						<label className="upload-button" htmlFor="subsidiaryFile"><i className="fa fa-plus" aria-hidden="true"></i></label>
-						<input className="subsidiaryFile" accept="image/*" name="subsidiaryFile" id="subsidiaryFile" type="file" />
-						<ul id="subsidiary_uploaded_files"></ul>
+						<input onChange={this.onImageSelect.bind(this)} ref="file" className="subsidiaryFile" accept="image/*" name="subsidiaryFile" id="subsidiaryFile" type="file" />
+						<ul id="subsidiary_uploaded_files">
+							{uploadedImages}
+						</ul>
 						<div className="clear"></div>
 
-						// <SubsidiaryManagers subsidiary={this.props.subsidiary} />
 
 					</div>
 					<div className="buttons">
@@ -160,3 +187,4 @@ export default class SubsidiaryAdd extends React.Component {
 		);
 	}
 }
+						/*<SubsidiaryManagers subsidiary={this.props.subsidiary} />*/

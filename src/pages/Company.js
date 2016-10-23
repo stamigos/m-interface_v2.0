@@ -30,7 +30,6 @@ class CompanyMain extends React.Component {
 	}
 	componentWillUpdate() {
 		AppActions.getSubsidiaries();
-
 	}
 	render() {
 		if (JobStore.get('subsidiariesLoading')) {
@@ -41,27 +40,37 @@ class CompanyMain extends React.Component {
 			)
 		}
 		else {
-			return (
-				<div>
-					<div className="post-job-content-header align-center">
-						<h1 className="title">Unternehmen & Filialen</h1>
-						<h2 className="subtitle">Ändern Sie Ihre Unternehmens- und Filialinformationen hier.</h2>
-					</div>
-					<div id="company-wrapper" className="company-subsidiary-wrapper">
-						<h1 className="top-title">Unternehmensdaten</h1>
-						<div id="company-subsidiary-company" className="company-subsidiary">
-							<ListCompanies model={JobStore} openCompanyMain={this.props.openCompanyMain} openCompanyEdit={this.props.openCompanyEdit} />
+			if (JobStore.get('subsidiaries')[0] == null) {
+				return (<div>
+							<div className="post-job-content-header align-center">
+								<h1 className="title">Unternehmen & Filialen</h1>
+								<h2 className="subtitle">Ändern Sie Ihre Unternehmens- und Filialinformationen hier.</h2>
+							</div>
+						</div>)
+			}
+			else {
+				return (
+					<div>
+						<div className="post-job-content-header align-center">
+							<h1 className="title">Unternehmen & Filialen</h1>
+							<h2 className="subtitle">Ändern Sie Ihre Unternehmens- und Filialinformationen hier.</h2>
+						</div>
+						<div id="company-wrapper" className="company-subsidiary-wrapper">
+							<h1 className="top-title">Unternehmensdaten</h1>
+							<div id="company-subsidiary-company" className="company-subsidiary">
+								<ListCompanies model={JobStore} openCompanyMain={this.props.openCompanyMain} openCompanyEdit={this.props.openCompanyEdit} />
+							</div>
+						</div>
+						<div id="subsidiary-wrapper" className="company-subsidiary-wrapper">
+							<h1 className="top-title">Filialen</h1>
+							<button onClick={this.props.openSubsidiaryAdd.bind(this, JobStore.get("subsidiaries")[0].company)} type="button" id="addNewSubsidiary" className="button-cv button-cv-full-red">Neue Filiale hinzufugen</button>
+							<div id="company-subsidiary-subsidiary" className="company-subsidiary">
+								<ListSubsidiaries model={JobStore} openCompanyMain={this.props.openCompanyMain} openSubsidiaryEdit={this.props.openSubsidiaryEdit} />
+							</div>
 						</div>
 					</div>
-					<div id="subsidiary-wrapper" className="company-subsidiary-wrapper">
-						<h1 className="top-title">Filialen</h1>
-						<button onClick={this.props.openSubsidiaryAdd.bind(this, JobStore.get("subsidiaries")[0].company)} type="button" id="addNewSubsidiary" className="button-cv button-cv-full-red">Neue Filiale hinzufugen</button>
-						<div id="company-subsidiary-subsidiary" className="company-subsidiary">
-							<ListSubsidiaries model={JobStore} openCompanyMain={this.props.openCompanyMain} openSubsidiaryEdit={this.props.openSubsidiaryEdit} />
-						</div>
-					</div>
-				</div>
-			);
+				);
+			}
 		}
 	}
 }

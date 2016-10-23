@@ -69,7 +69,7 @@ class Job extends Backbone.Model {
                 video: '',
                 payment: '',
                 top_job: '',
-                image_list: '',
+                image_list: [{image: ''}, {image: ''}],
                 is_favored: '',
                 created_at: '',
                 last_modified: '',
