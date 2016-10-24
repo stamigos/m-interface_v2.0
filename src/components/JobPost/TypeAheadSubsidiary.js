@@ -44,9 +44,9 @@ export default class TypeAheadSubsidiary extends React.Component {
 						console.log("obj.pk:", obj.pk)
 						console.log("selectedId:", self.props.selectedId)
 						if (obj.pk == self.props.selectedId) {
-							selected = obj.name
+							selected = {id: obj.pk, label: obj.name ? obj.name : ''}
 						}
-						return obj.name
+						return {id: obj.pk, label: obj.name ? obj.name : ''}
 					})
 					console.log("result selected:", selected)
 					self.setState({
@@ -78,6 +78,7 @@ export default class TypeAheadSubsidiary extends React.Component {
 		this.props.getSubsidiary(subsidiary)
 	}
 	render() {
+		console.log("options:", this.state.options)
 		return (
 			<div>
 				<Typeahead ref="typeaheadSubsidiary" selected={[this.state.selected]} placeholder="Subsidiary" onChange={this._handleChange.bind(this)} onInputChange={this._handleInputChange.bind(this)} options={this.state.options}/>
