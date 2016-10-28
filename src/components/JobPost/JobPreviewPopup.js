@@ -131,8 +131,8 @@ export default class JobPreviewPopup extends React.Component {
 				  				        </Video>) : null}
 								    {data.image_list ? (
 								    	<div>
-							    			<Img width="237" height="140" src={data.image_list[0].image} />
-								    		<Img width="237" height="140" src={data.image_list[1].image} />
+							    			<img width="237" height="140" src={data.image_list[0].image} />
+								    		<img width="237" height="140" src={data.image_list[1].image} />
 								    	</div>) : null}
 									</Carousel>
 								</div>
