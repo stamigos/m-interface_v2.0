@@ -60,6 +60,7 @@
 .job-preview .iphone-screen .body-right .box .name {
     color: #f54b5d;
     font-weight: 600;
+    width: 135px;
 }
 .job-preview .iphone-screen .body-right .box .place {
     padding-left: 15px;
@@ -74,8 +75,9 @@
     bottom: 0px;
 }
 .job-preview .iphone-screen .body-right .box .avatar img {
-    height: 100%;
     border-radius: 50%;
+    width: 45px;
+    height: 45px;
 }
 .job-preview .iphone-screen .body-right .image {
     background-size: cover;
