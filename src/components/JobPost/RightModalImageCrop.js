@@ -116,13 +116,8 @@ export default class RightModalImageCrop extends React.Component {
 		return (
 			<div>
 				<label className="upload-button" htmlFor="postjobImage_2" id="postjobImage_2_block">
-					{!this.state.imageSelected ?
-						(
-							<i className="fa fa-camera" aria-hidden="true"></i>
-						) : (
-							<img src={this.state.result}/>
-						)
-					}
+					<i className="fa fa-camera" aria-hidden="true"></i>
+					{this.props.right_image_html}
 					<input ref="file2" key={timestamp-1} accept="image/*" name="postjobImage_2" id="postjobImage_2" className="postjobImage" type="file" onChange={this.selectImage.bind(this)} />
 				</label>
 

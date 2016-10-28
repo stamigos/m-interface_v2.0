@@ -19,7 +19,8 @@ import VideoPreview from './VideoPreview'
 				              //     <VideoButton type="stop"/>
 				              // </Controls>
 var $ = jquery;
-console.log("jquery:", $("div"))
+
+
 export default class ModalVideoCrop extends React.Component {
 	constructor(props) {
 		super(props);

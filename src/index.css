@@ -38,6 +38,22 @@ select {
     -ms-appearance: none !important;
     appearance: none!important;
 }
+.dashboard-wrapper {
+    position: fixed;
+    left: 50%;
+    top: 40%;
+}
+.animate {
+    zoom: 0.5;
+}
+.text-animate {
+    margin-top:200px;
+    width:515px;
+    color: #9f92b1;
+    position: absolute;
+    top: calc(50% - 130px);
+    left: calc(50% - 252px);
+}
 .align-center {
     text-align: center;
 }
@@ -774,18 +790,18 @@ h2.location {
     font-size: 14px;
     padding: 20px 0;
 }
-.uploaded_file {
+/*.uploaded_file {
     list-style: none;
-    position: relative;
-    float: left;
+    position: absolute;
+    left: 237px;
     overflow: hidden;
-    width: 100%;
+    width: inherit;
     height: 165px;
     border-radius: 5px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-}
+}*/
 .uploaded_file--overlay {
     position: absolute;
     top: 0;
@@ -1141,6 +1157,14 @@ h2.location {
     margin: 45px;
     padding: 0;
 }
+.modal-applicant-info-wrapper h3.info-message {
+    font-size: 10px;
+    line-height: 12px;
+    position: absolute;
+    top: 255px;
+    width: 320px;
+    color: #9f92b1;
+}
 .modal-applicant-info a {
     cursor: pointer;
     font-family: 'Open Sans', sans-serif;
@@ -1162,6 +1186,16 @@ h2.location {
     border: 2px solid #f2415f;
     background-color: #f2415f;
 }
+.modal-applicant-info .accept.disabled {
+    color: #e4e2e7;
+    border-color: #e4e2e7;
+    background-color: #8b8b8b;
+}
+.modal-applicant-info .accept.disabled:hover {
+    color: #e4e2e7;
+    border-color: #e4e2e7;
+    background-color: #8b8b8b;
+}
 .modal-applicant-info .accept:hover {
     color: #f2415f;
     background-color: #fff;
@@ -1175,6 +1209,14 @@ h2.location {
 .modal-applicant-info .reject:hover {
     color: #fff;
     border: 2px solid #fff;
+}
+.modal-applicant-info .reject.disabled {
+    color: #e4e2e7;
+    border-color: #e4e2e7;
+}
+.modal-applicant-info .reject.disabled:hover {
+    color: #e4e2e7;
+    border-color: #e4e2e7;
 }
 .modal-applicant-info h1.title {
     color: #fff;
@@ -1666,6 +1708,14 @@ div#subsidiary-wrapper
 #profile-subsidiary-form div.half
 {
     margin-top: 20px;
+}
+#profile-subsidiary-form #subsidiary_uploaded_files {
+    margin-top: 190px;
+}
+#profile-subsidiary-form .uploaded_file {
+    position: relative;
+    left:0;
+    width: 290px;
 }
 span.green {
     font-family: 'Gotham Rounded', sans-serif;
@@ -2573,6 +2623,63 @@ input#EditPostjobVideo {
 }
 #EditPostjobImage {
     display: none;
+}
+.uploaded_file {
+    list-style: none;
+    overflow: hidden;
+    width: inherit;
+    position: absolute;
+    left: 237px;
+    height: 165px;
+    /* margin-top: 10px; */
+    /* margin-bottom: 10px; */
+    /* margin-left: 15px; */
+    border-radius: 5px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.uploaded_file--overlay {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: opacity .5s ease-in-out;
+    -moz-transition: opacity .5s ease-in-out;
+    transition: opacity .5s ease-in-out;
+    opacity: 0;
+    opacity: 0;
+    border-radius: 10px;
+    background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5));
+}
+#post_job .upload_file--buttons {
+    padding: 0px 10px;
+}
+#post_job .btns {
+    margin: 0px 5px;
+}
+.upload_file--buttons a {
+    color: #fff;
+    padding: 10px;
+}
+.upload_file--buttons a:hover {
+    color: #000;
+    cursor: pointer;
+}
+.upload_file--button {
+    cursor: pointer;
+}
+#postJobUploadedFilesImage {
+
+}
+#postJobUploadedFilesImage .uploaded_file {
+    margin-top: 10px;
+    margin-left: -2px;
+    width: 294px;
+    height: 170px;
+}
+#postJobUploadedFilesImage .uploaded_file.right-image {
+    left: 540px;
 }
 /*---------------------JOB POST END----------------------*/
 .loading-wrapper {

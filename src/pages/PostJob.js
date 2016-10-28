@@ -8,6 +8,7 @@ import NormalTopJob from '../components/JobPost/NormalTopJob'
 import Benefits from '../components/JobPost/Benefits'
 import AvailabilityList from '../components/JobPost/AvailabilityList'
 import ModalVideoCrop from '../components/JobPost/ModalVideoCrop'
+import ModalImageCrop from '../components/JobPost/ModalImageCrop'
 import LeftModalImageCrop from '../components/JobPost/LeftModalImageCrop'
 import RightModalImageCrop from '../components/JobPost/RightModalImageCrop'
 import TypeAheadSubsidiary from '../components/JobPost/TypeAheadSubsidiary'
@@ -30,6 +31,12 @@ class PostJobContent extends React.Component {
 			dateToCheck: null,
 			isDateFromCheckToday: false,
 			isShowingPreview: false,
+			isShowingLeftModal: false,
+			leftImageSelected: false,
+			left_image: '',
+			isShowingRightModal: false,
+			rightImageSelected: false,
+			right_image: '',
 
 			form_data: {
 				image_list: [
@@ -166,29 +173,23 @@ class PostJobContent extends React.Component {
 			benefit_2: benefit_2
 		})
 	}
-	getLeftImage(imgSrc) {
-		this.setState({
-			leftImageSrc: imgSrc
-		})
-	}
-	getRightImage(imgSrc) {
-		this.setState({
-			rightImageSrc: imgSrc
-		})
-	}
 	get_image_list() {
 		var image_list   = new Array();
 		// create left image instance
-	    var imageLeft    = new Object();
-		imageLeft.image  = this.state.leftImageSrc.split(',')[1];
-		imageLeft.index  = 0;
-		image_list.push(imageLeft);
+		if (this.state.left_image) {
+		    var imageLeft    = new Object();
+			imageLeft.image  = this.state.left_image;
+			imageLeft.index  = 0;
+			image_list.push(imageLeft);
+		}
 		// create right image instance
-		var imageRight   = new Object();
-		imageRight.image = this.state.rightImageSrc.split(',')[1];
-		imageRight.index = 1;
-		image_list.push(imageRight);
-
+		if (this.state.right_image) {
+			var imageRight   = new Object();
+			imageRight.image = this.state.right_image;
+			imageRight.index = 1;
+			image_list.push(imageRight);
+		}
+		console.log("in get_image_list:", image_list)
 		return image_list;
 	}
 	getVideoCropParams(params) {
@@ -248,8 +249,101 @@ class PostJobContent extends React.Component {
 
 		// console.log("data on submit:", data)
 	}
+	leftImageSelected() {
+		this.setState({
+			leftImageSelected: true,
+			isShowingLeftModal: true
+		})
+	}
+	getLeftImage(image) {
+		console.log("got left image:", image)
+		this.setState({
+			isShowingLeftModal: false,
+			left_image: image
+		})
+	}
+	rightImageSelected() {
+		this.setState({
+			rightImageSelected: true,
+			isShowingRightModal: true
+		})
+	}
+	getRightImage(image) {
+		console.log("got right image:", image)
+		this.setState({
+			isShowingRightModal: false,
+			right_image: image
+		})
+	}
+	onEditLeftImage() {
+		this.setState({
+			isShowingLeftModal: true
+		})
+	}
+	onEditRightImage() {
+		this.setState({
+			isShowingRightModal: true
+		})
+	}
+	onLeftDrop() {
+		this.setState({
+			left_image: ''
+		})
+	}
+	onRightDrop() {
+		this.setState({
+			right_image: ''
+		})
+	}
+	onLeftClose() {
+		this.setState({
+			isShowingLeftModal: false
+		})
+	}
+	onRightClose() {
+		this.setState({
+			isShowingRightModal: false
+		})
+	}
+	onLeftSelectNew() {
+		this.refs.file1.click();
+	}
+	onRightSelectNew() {
+		this.refs.file2.click();
+	}
+	cancelPreviewModal() {
+		this.setState({
+			isShowingPreview: false
+		})
+	}
 	render() {
 		var today = new Date();
+		var image_list = this.get_image_list()
+		var left_image = null;
+		var right_image = null;
+		image_list.map(function(image, i) {
+			if (image.index == 0) {
+				left_image = image
+			} else if (image.index == 1) {
+				right_image = image
+			}
+		})
+		// var left_image_html = left_image ?
+		// 						(<li className="uploaded_file" style={{backgroundImage: 'url('+left_image.image+')'}}>
+		// 							<div className="uploaded_file--overlay">
+		// 								<div className="uploaded_file--overlay">
+		// 									<div className="upload_file--buttons">
+		// 										<a href="#" className="btns btn-change"><i className="fa fa-exchange" aria-hidden="true"></i></a>
+		// 										<a href="#" className="btns btn-edit"><i className="fa fa-pencil" aria-hidden="true"></i></a>
+		// 										<a href="#" className="upload_file--button deleter btns"><i className="fa fa-trash" aria-hidden="true"></i></a>
+		// 									</div>
+		// 								</div>
+		// 							</div>
+		// 						</li>) : null
+
+	// <LeftModalImageCrop getLeftImage={this.getLeftImage.bind(this)} left_image_html={left_image_html} isShowingLeftModal={this.state.isShowingLeftModal}/>
+							// <RightModalImageCrop getRightImage={this.getRightImage.bind(this)} right_image_html={right_image_html} />
+
 		return (
 			<div className="job-post-content">
 				<div className="post-job-content-header align-center">
@@ -283,11 +377,42 @@ class PostJobContent extends React.Component {
 						<p className="JobDescAbout">Füge Bilder von der Stelle oder dem Team hinzu. JobUFO’s Bilder sind 1115px X 625px groß.
 						Wenn dein Bild zu groß ist, helfen wir dir es hier zuzuschneiden.</p>
 						<div className="images">
-							<LeftModalImageCrop getLeftImage={this.getLeftImage.bind(this)} />
-							<RightModalImageCrop getRightImage={this.getRightImage.bind(this)} />
+							<label className="upload-button" htmlFor="postjobImage_1" id="postjobImage_1_block">
+								<i className="fa fa-camera" aria-hidden="true"></i>
+								<input onChange={this.leftImageSelected.bind(this)} ref="file1" accept="image/*" name="postjobImage_1" id="postjobImage_1" className="postjobImage" type="file" />
+							</label>
+							<ModalImageCrop key={1} file={this.refs.file1} imageSelected={this.state.leftImageSelected} getImage={this.getLeftImage.bind(this)} isShowingModal={this.state.isShowingLeftModal} close={this.onLeftClose.bind(this)}/>
+							<ul id="postJobUploadedFilesImage">
+								{left_image ?
+									<li className="uploaded_file" style={{backgroundImage: 'url('+left_image.image+')'}}>
+										<div className="uploaded_file--overlay">
+												<div className="upload_file--buttons">
+													<a onClick={this.onLeftSelectNew.bind(this)} className="btns btn-change"><i className="fa fa-exchange" aria-hidden="true"></i></a>
+													<a onClick={this.onEditLeftImage.bind(this)} className="btns btn-edit"><i className="fa fa-pencil" aria-hidden="true"></i></a>
+													<a onClick={this.onLeftDrop.bind(this)} className="upload_file--button deleter btns"><i className="fa fa-trash" aria-hidden="true"></i></a>
+												</div>
+										</div>
+									</li> : null}
+							</ul>
+							<label className="upload-button" htmlFor="postjobImage_2" id="postjobImage_2_block">
+								<i className="fa fa-camera" aria-hidden="true"></i>
+								<input onChange={this.rightImageSelected.bind(this)} ref="file2" accept="image/*" name="postjobImage_2" id="postjobImage_2" className="postjobImage" type="file" />
+							</label>
+							<ModalImageCrop key={2} file={this.refs.file2} imageSelected={this.state.rightImageSelected} getImage={this.getRightImage.bind(this)} isShowingModal={this.state.isShowingRightModal} close={this.onRightClose.bind(this)}/>
+							<ul id="postJobUploadedFilesImage">	
+								{right_image ?
+									<li className="uploaded_file right-image" style={{backgroundImage: 'url('+right_image.image+')'}}>
+										<div className="uploaded_file--overlay">
+												<div className="upload_file--buttons">
+													<a onClick={this.onRightSelectNew.bind(this)} className="btns btn-change"><i className="fa fa-exchange" aria-hidden="true"></i></a>
+													<a onClick={this.onEditRightImage.bind(this)} className="btns btn-edit"><i className="fa fa-pencil" aria-hidden="true"></i></a>
+													<a onClick={this.onRightDrop.bind(this)} className="upload_file--button deleter btns"><i className="fa fa-trash" aria-hidden="true"></i></a>
+												</div>
+										</div>
+									</li> : null}
+							</ul>
 						</div>
 
-						<ul id="postJobUploadedFilesImage"></ul>
 						<div className="clear"></div>
 						<select onChange={this.handleKind.bind(this)} name="JobType" id="Kind" name="Kind" className="default">
 							<option value="">Art des Jobs</option>
@@ -366,7 +491,7 @@ class PostJobContent extends React.Component {
 						</div>
 					</div>
 				</form>
-				<JobPreviewPopup form_data={this.state.form_data} show={this.state.isShowingPreview} subsidiary={this.state.subsidiary}/>
+				<JobPreviewPopup form_data={this.state.form_data} show={this.state.isShowingPreview} subsidiary={this.state.subsidiary} cancel={this.cancelPreviewModal.bind(this)}/>
 			</div>
 		);
 	}

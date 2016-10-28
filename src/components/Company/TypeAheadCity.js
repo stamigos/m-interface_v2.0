@@ -63,7 +63,9 @@ export default class TypeAheadCity extends React.Component {
 	}
 	_handleInputChange(value) {
 		var city = this.get_city(value);
-		this.props.setReset(false)
+		if (this.props.setReset) { 
+			this.props.setReset(false)
+		}
 		this.props.getCity(city)
 	}
 	render() {

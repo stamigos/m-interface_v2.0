@@ -3,6 +3,9 @@ import { ModalContainer, ModalDialog } from 'react-modal-dialog';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { default as Video, Controls, Play, Mute, Seek, Fullscreen, Time, Overlay } from 'react-html5video';
 import VideoButton from '../components/VideoButton'
+import AcceptMessageModal from '../components/AcceptMessageModal'
+import RejectMessageModal from '../components/RejectMessageModal'
+
 
 function getMonth(date) {
 	var str = '';
@@ -78,19 +81,50 @@ class DescriptionItem extends React.Component {
 	}
 };
 
+
 export default class ModalProfile extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 		   isShowingModal: false,
+		   isShowingMessageModal: false,
+		   isShowingRejectMessageModal: false,
 		   application: null, 
 		   fullApplication: null
 		}
 		this.handleClose = this.handleClose.bind(this);
 		this.getFullApplication = this.getFullApplication.bind(this);
 		this.getDescriptionListHtml = this.getDescriptionListHtml.bind(this);
-
+		this.checkMessages = this.checkMessages.bind(this);
+		this.acceptApplication = this.acceptApplication.bind(this);
 	}
+    checkMessages(application) {
+        var html_message = null;
+        if(application.status == "DECLINED" || application.status == "CONTACTED"){
+          // var current_user  = $('#logged_in-user-name h2').text();
+          // var recruiter     = application.message.recruiter.first_name + ' ' + application.message.recruiter.last_name;
+          // var name = (current_user == recruiter) ? 'You' : recruiter;
+
+          var full_time     = application.message.created;
+          var full_time_sp  = full_time.split('T');
+          var date      = full_time_sp[0].split('-');
+          var time_sp     = full_time_sp[1].split('.');
+          var time      = time_sp[0].split(':');
+          var message = "";
+          // $('#applicant_id_' + application.pk + ' .button-cv').addClass('disabled');
+          if(application.status == "CONTACTED"){
+            message = 'accepted this application on the ' + date[2] + '.' + date[1] + '.' + date[0] + ' at ' + time[0] + ':' + time[1] + ' oclock.'
+            html_message = <h3 className="info-message">{message}</h3>;
+          }
+          // Click <a class="info_link">here</a> to check the message you sent to the applicant
+          //  Click <a className="info_link">here</a> to check the message you sent to the applicant
+          if(application.status == "DECLINED"){
+            message = 'rejected this application on the ' + date[2] + '.' + date[1] + '.' + date[0] + ' at ' + time[0] + ':' + time[1] + ' oclock.'
+            html_message = <h3 className="info-message">{message}</h3>;
+          }
+        }
+        return html_message
+    }
 	componentWillReceiveProps(nextProps) {
 		this.setState({
 			isShowingModal: nextProps.isShowingModal,
@@ -142,7 +176,34 @@ export default class ModalProfile extends React.Component {
 		}
 		
 	}
+	acceptApplication() {
+		this.setState({
+			isShowingMessageModal: true
+		})
+	}
+	rejectApplication() {
+		this.setState({
+			isShowingRejectMessageModal: true
+		})
+	}
+	handleCloseMessageModal() {
+		this.setState({
+			isShowingMessageModal: false
+		})
+	}
+	handleCloseRejectMessageModal() {
+		this.setState({
+			isShowingRejectMessageModal: false
+		})
+	}
 	render() {
+		var message = null;
+		if (this.state.fullApplication) {
+			message = this.checkMessages(this.state.fullApplication);
+		}
+		console.log("full applciation in modal:", this.state.fullApplication)
+		console.log("applciation in modal:", this.state.application)
+
 		return (
 			<div>
 		      {
@@ -153,10 +214,20 @@ export default class ModalProfile extends React.Component {
 		            	<div className="modal-applicant-info-wrapper">
 		            		<h1 className="title">Hallo!<br/>Ich bin {this.state.application.owner.first_name}.</h1>
 		            		<h2 className="location"></h2>
-		            		<div className="info-buttons">
-		            			<a className="accept">Bestätigen</a>
-		            			<a className="reject">Absagen</a>
-		            		</div>
+		            		{message ? message : null}
+		            		{!message ? (
+			            		<div className="info-buttons">
+			            			<a onClick={this.acceptApplication.bind(this)} className="accept">Bestätigen</a>
+			            			<a onClick={this.rejectApplication.bind(this)} className="reject">Absagen</a>
+			            			<AcceptMessageModal application={this.state.application} full_application={this.state.fullApplication} isShowingModal={this.state.isShowingMessageModal} close={this.handleCloseMessageModal.bind(this)} first_name={this.state.application.owner.first_name} last_name={this.state.application.owner.last_name} />
+			            			<RejectMessageModal application={this.state.application} isShowingModal={this.state.isShowingRejectMessageModal} close={this.handleCloseRejectMessageModal.bind(this)} />
+			            		</div>
+	            			) : (
+			            		<div className="info-buttons">
+			            			<a className="accept disabled">Bestätigen</a>
+			            			<a className="reject disabled">Absagen</a>
+			            		</div>
+		            		)}
 		            	</div>
 		            </div>
 		            <div className="modal-applicant-video">

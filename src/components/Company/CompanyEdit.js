@@ -13,7 +13,8 @@ export default class CompanyEdit extends React.Component {
 			instagram: '',
 			tag: this.props.company.category,
 			website: this.props.company.website.url,
-			selectedLogo: null
+			selectedLogo: this.props.company.logo ? this.props.company.logo : null,
+			newLogo: false
 		}
 		this.get_tags = this.get_tags.bind(this);
 		this.get_full_tag = this.get_full_tag.bind(this);
@@ -74,6 +75,12 @@ export default class CompanyEdit extends React.Component {
 			instagram: ''
 		})
 	}
+	onImageRemove() {
+		this.setState({
+			newLogo: false,
+			selectedLogo: null
+		})
+	}
 	onLogoSelect() {
 		var self = this;
 		var file = this.refs.file.files[0];
@@ -82,6 +89,7 @@ export default class CompanyEdit extends React.Component {
 
 			reader.onloadend = function (e) {
 					self.setState({
+						newLogo: true,
 						selectedLogo: reader.result
 					})
 		    }.bind(this);
@@ -132,13 +140,13 @@ export default class CompanyEdit extends React.Component {
 		var body = {}
 		var social_media_list = new Array();
 		social_media_list.push({type: "URL", handle: this.state.website});
-		social_media_list.push({type: 'FACEBOOK', handle: this.state.facebook});
-		social_media_list.push({type: 'TWITTER', handle: this.state.twitter});
-		social_media_list.push({type: 'INSTAGRAM', handle: this.state.instagram});
+		social_media_list.push({type: 'FACEBOOK', handle: this.state.facebook.split("/").pop()});
+		social_media_list.push({type: 'TWITTER', handle: this.state.twitter.split("/").pop()});
+		social_media_list.push({type: 'INSTAGRAM', handle: this.state.instagram.split("/").pop()});
 		body.social_media_list = social_media_list;
 		body.category = this.get_full_tag(this.state.tag);
-		if (this.state.selectedLogo) {
-			body.logo = this.state.selectedLogo;
+		if (this.state.newLogo) {
+			body.logo = this.state.selectedLogo.split(",")[1];
 		}
 		console.log("body:", body)
 		var headers = new Headers();
@@ -165,9 +173,9 @@ export default class CompanyEdit extends React.Component {
 		var uploadedImageOption = {};
 		var imageLabelOption = {};
 		var overlayOption = {};
-		if (this.props.company.logo) {
+		if (this.state.selectedLogo) {
 			uploadedImageOption = {
-				backgroundImage: 'url('+this.props.company.logo+')'
+				backgroundImage: 'url('+this.state.selectedLogo+')'
 			}
 			imageLabelOption = {
 				display: 'none'
@@ -184,11 +192,7 @@ export default class CompanyEdit extends React.Component {
 				display: 'none'
 			}
 		}
-		if (this.state.selectedLogo) {
-			uploadedImageOption = {
-				backgroundImage: 'url('+this.state.selectedLogo+')'
-			}
-		}
+
 		return (
 			<div>
 				<div className="post-job-content-header align-center">
@@ -221,7 +225,7 @@ export default class CompanyEdit extends React.Component {
 									<div className="profile-logo-preview-button editor">
 										<label id="profile-logo-preview-upload-button" htmlFor="profileCompanyLogo"><i className="fa fa-pencil" aria-hidden="true"></i></label>
 									</div>
-									<div className="profile-logo-preview-button deleter">
+									<div onClick={this.onImageRemove.bind(this)} className="profile-logo-preview-button deleter">
 										<i className="fa fa-trash" aria-hidden="true"></i>
 									</div>
 								</div>

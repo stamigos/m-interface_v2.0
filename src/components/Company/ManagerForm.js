@@ -1,15 +1,20 @@
 import React from 'react'
 
+function getFullName(first_name, last_name) {
+	return first_name + " " + last_name
+}
 
 export default class ManagerForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			fullname: '',
-			email: '',
+			fullname: this.props.preloaded ? getFullName(this.props.member.user.first_name, this.props.member.user.last_name) : '',
+			email: this.props.preloaded ? this.props.member.user.email : '',
+			pk: this.props.preloaded ? this.props.member.pk : null,
 			managerForm: false,
 			addManagerButton: true,
 			submitManagerForm: false,
+			removed: false,
 			count: this.props.managersCount
 		}
 		console.log("number:", typeof(this.props.number))
@@ -34,7 +39,7 @@ export default class ManagerForm extends React.Component {
 		});
 	}
 	deleteManagerForm() {
-		this.props.getOperation("-")
+		this.props.getOperation("-", this.state.pk)
 		var addManagerButton = false;
 		if (this.props.number == this.props.managersCount) {
 			addManagerButton = true;
@@ -45,6 +50,7 @@ export default class ManagerForm extends React.Component {
 		// }
 		this.setState({
 			managerForm: false,
+			removed: true,
 			addManagerButton: addManagerButton
 		});
 	}
@@ -82,21 +88,25 @@ export default class ManagerForm extends React.Component {
 			})
 	}
 	render() {
+		console.log("this state pk:", this.state.pk)
 		return (
 			<div>
-				<div className="manager-item" style={this.state.managerForm ? ({display: 'block'}):({display: 'none'})}>
-					<div className="half">
-						<label className="label">Manager Name</label>
-						<input onChange={this.handleNameChange.bind(this)} type="text" className="fullname half" placeholder="Manager Name" value={this.state.fullname}/>
-					</div>
-					<div className="half right">
-						<label className="label">Manager Email</label>	
-						<input onChange={this.handleEmailChange.bind(this)} type="text" className="email half" placeholder="Manager Email" value={this.state.email}/>
-					</div>
+				<div className="manager-item" style={(!this.props.preloaded && this.state.managerForm) || (this.props.preloaded && !this.state.removed) ? ({display: 'block'}):({display: 'none'})}>
+					{(!this.props.preloaded && this.state.managerForm) || (this.props.preloaded && !this.state.removed) ?
+						<div>
+							<div className="half">
+								<label className="label">Manager Name</label>
+								<input onChange={this.handleNameChange.bind(this)} type="text" className="fullname half" placeholder="Manager Name" value={this.state.fullname}/>
+							</div>
+							<div className="half right">
+								<label className="label">Manager Email</label>	
+								<input onChange={this.handleEmailChange.bind(this)} type="text" className="email half" placeholder="Manager Email" value={this.state.email}/>
+							</div>
+						</div> : null}
 					<a onClick={this.deleteManagerForm.bind(this)} className="manager-delete"><i className="fa fa-times" aria-hidden="true"></i></a>
 				</div>
 				<div className="clear"></div>
-				{this.state.addManagerButton ? (<span onClick={this.addManagerForm.bind(this)} id="addManagerButton" className="green">Manager hinzufügen</span>):(null)}
+				{this.state.addManagerButton && !this.props.preloaded ? (<span onClick={this.addManagerForm.bind(this)} id="addManagerButton" className="green">Manager hinzufügen</span>):(null)}
 				<div className="clear"></div>
 				{!this.state.submitManagerForm ? (
 					<span onClick={this.inviteManager.bind(this)} id="inviteManagerButton" className="green" style={!this.state.managerForm ? {display:'none'}: {display:'inline-block'}}>invite manager</span>

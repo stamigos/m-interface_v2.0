@@ -85,4 +85,12 @@
 .popup-content.job-list {
     margin-bottom: 0;
     padding-bottom: 80px;
+    overflow: visible;
+}
+.popup-content .form-title {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #9f92b1;
+    font-size: 14px;
+    padding: 20px 0;
 }

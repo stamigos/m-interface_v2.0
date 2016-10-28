@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CustomDecorators = [
+const CustomDecoratorsLarge = [
   {
     component: React.createClass({
       render() {
@@ -15,7 +15,6 @@ const CustomDecorators = [
                     <button
                       style={self.getButtonStyles(self.props.currentSlide === index)}
                       onClick={self.props.goToSlide.bind(null, index)}>
-                      &bull;
                     </button>
                   </li>
                 )
@@ -35,31 +34,39 @@ const CustomDecorators = [
         return {
           position: 'relative',
           margin: 0,
-          top: -10,
-          padding: 0
+          bottom: 108,
+          padding: 0,
+          marginLeft: -41,
+          width: 85,
         }
       },
       getListItemStyles() {
         return {
           listStyleType: 'none',
-          display: 'inline-block'
+          display: 'inline-block',
+          padding: 10
         }
       },
       getButtonStyles(active) {
         return {
-          border: 0,
-          background: 'transparent',
-          color: active ? 'white' : 'black',
+          content: 'none',
+          border: "1px solid #f2415f",
+          marginBottom: 0,
+          width: 14,
+          height: 14,
+          borderRadius: '50%',
+          background: active ? 'red' : 'white',
+          color: active ? 'red' : 'white',
           cursor: 'pointer',
-          padding: 10,
+          padding: 5,
           outline: 0,
-          fontSize: 36,
-          opacity: active ? 1 : 0.7
+          fontSize: 48,
+          opacity: active ? 1 : 0.5
         }
       }
     }),
-    position: 'BottomCenter'
+    position: 'TopCenter'
   }
 ];
 
-export default CustomDecorators;
+export default CustomDecoratorsLarge;

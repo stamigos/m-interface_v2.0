@@ -3,7 +3,6 @@ import ReactCrop from 'react-image-crop'
 
 import Popup from '../Popup'
 
-
 function resizeImage(url, width, height, x, y, callback) {
     var canvas = document.createElement("canvas");
     var context = canvas.getContext('2d');
@@ -22,12 +21,15 @@ function resizeImage(url, width, height, x, y, callback) {
     imageObj.src = url;
 }
 
-export default class LeftModalImageCrop extends React.Component {
+
+export default class ModalImageCrop extends React.Component {
 	constructor(props) {
 		super()
 		this.state = {
 			imgSrc: "",
+			ref_value: "",
 			imageSelected: false,
+			isShowingModal: false,
 		    crop: {
 		    	x: 0,
 		   	 	y: 0,
@@ -39,9 +41,12 @@ export default class LeftModalImageCrop extends React.Component {
 		this.selectImage = this.selectImage.bind(this);
 	}
 	componentWillReceiveProps(nextProps) {
-		this.setState({
-			isShowingModal: nextProps.isShowingLeftModal
-		})
+		console.log("componentWillReceiveProps")
+		this.selectImage(nextProps);
+	}
+	componentDidMount() {
+		console.log("componentDidMount")
+		this.selectImage(this.props);
 	}
 	onComplete(crop, pixelCrop) {
 		var self = this;
@@ -62,7 +67,7 @@ export default class LeftModalImageCrop extends React.Component {
 		var self = this;
 		resizeImage(this.state.imgSrc, 
 					pixelCrop.width, 
-					pixelCrop.heights, 
+					pixelCrop.height, 
 					pixelCrop.x, 
 					pixelCrop.y, 
 					function(dataUrl) { 
@@ -72,58 +77,45 @@ export default class LeftModalImageCrop extends React.Component {
 						}) 
 					})
 	}
-	onInvalidImage() {
-		console.log("invalid image")
-	}
-	onRemoveImage() {
-		console.log("onRemoveImage")
-	}
-	async selectImage() {
+	async selectImage(props) {
 		var self = this;
-		this.setState({
-			isShowingModal: true
-		})
-		var file = this.refs.file1.files[0];
-	    var reader = new FileReader();
-		var url = reader.readAsDataURL(file);
+		console.log("imageSelected:", props.imageSelected)
+		if (props.imageSelected) {
+			var file = props.file.files[0];
+		    var reader = new FileReader();
+			var url = reader.readAsDataURL(file);
 
-			reader.onloadend = function (e) {
-					self.setState({
-						imgSrc: reader.result
-					})
-		    }.bind(this);
+				reader.onloadend = function (e) {
+						self.setState({
+							imgSrc: reader.result
+						})
+			    }.bind(this);
+			this.setState({
+				isShowingModal: props.isShowingModal
+			})
+		}
 	}
 	render() {
-		var timestamp = Math.round(new Date().getTime()/1000);
-		var timestamp_popup = Math.round(new Date().getTime()/1010);
-
 		var htmlContent = <ReactCrop {...this.state} src={this.state.imgSrc} crop={this.state.crop} keepSelection={true} onComplete={this.onComplete.bind(this)} onImageLoaded={this.onImageLoaded.bind(this)}/>
 		var popupOptions = {
 			title: "Foto auswählen und bearbeiten",
 			subtitle: "",
 			contentClassName: "popup-content-image",
-			isShowingModal: this.state.isShowingModal ,
+			isShowingModal: this.props.isShowingModal ,
 			button: {left: "HOCHLADEN", right: "ABBRECHEN"},
 			htmlContent: htmlContent,
 			onLeftClick: function() {
 				if (this.state.result) {
-					this.props.getLeftImage(this.state.result);
+					this.props.getImage(this.state.result);
 				}
 				// var image = this.state.result;
 				// this.props.getCroppedImg(image); 
 				// this.uploadAvatar(); 
 			}.bind(this),
-			onRightClick: function() { this.setState({isShowingModal: false, result: null}) }.bind(this)
+			onRightClick: function() { this.props.close(); }.bind(this)
 		}
 		return (
-			<div>
-				<label className="upload-button" htmlFor="postjobImage_1" id="postjobImage_1_block">
-					<i className="fa fa-camera" aria-hidden="true"></i>
-					<input ref="file1" key={timestamp} accept="image/*" name="postjobImage_1" id="postjobImage_1" className="postjobImage" type="file" onChange={this.selectImage.bind(this)} />
-				</label>
-				{this.props.left_image_html}
-				<Popup {...popupOptions}/>
-			</div>
+			<Popup {...popupOptions}/>
 		);
 	}
 }

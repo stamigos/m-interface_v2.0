@@ -53,13 +53,14 @@ export default class SubsidiaryAdd extends React.Component {
 	}
 	onImageSelect() {
 		var self = this;
-		var file = this.refs.file.files[0];
+		var file = this.refs.imageFile.files[0];
 	    var reader = new FileReader();
 		var url = reader.readAsDataURL(file);
 		var images_list = this.state.images_list;
 
 			reader.onloadend = function (e) {
 				images_list.push({image: reader.result})
+				console.log("images_list", images_list)
 				self.setState({
 					images_list: images_list
 				})
@@ -82,6 +83,14 @@ export default class SubsidiaryAdd extends React.Component {
 		body.company = this.props.company.api_url;
 		body.address = address;
 
+		if (this.state.images_list[0] != null) {
+			var images_list = this.state.images_list.map(function(image) {
+				image.image = image.image.split(",")[1]
+				return image
+			})
+			body.image_list = this.state.images_list
+		}
+
 		var headers = new Headers();
 		headers.append("Content-Type", "application/json")
 		headers.append("Authorization", "Token " + localStorage.token);
@@ -98,19 +107,114 @@ export default class SubsidiaryAdd extends React.Component {
 				})
 				.then(function(result) {
 					console.log('result:', result)
+					self.props.openCompanyMain();
 					// window.location.reload();
 				})
 	}
+	removeImage(removeIndex) {
+		var images_list = this.state.images_list;
+		var result = []
+		images_list.map(function(image, i) {
+			if (image.index != removeIndex) {
+				result.push(image)
+			}
+		})
+		this.setState({
+			images_list: result
+		})
+	}
+	changeImageIndexLeft() {
+		var images_list = this.state.images_list;
+		var first_element = images_list[0]
+		var last_element = images_list[images_list.length-1]
+		var last_index = last_element.index;
+        var images_list = images_list.map(function(image, i) {
+        	if (last_index < image.index) {
+        		last_index = image.index;
+        	}
+        	if (image.index == last_index) {
+        		image.index = last_index - 1
+        	} else {
+	        	if (image.index > 0) {
+        			image.index = image.index - 1
+        		} 
+	        	if (image.index == 0) {
+        			image.index = last_index
+        		}
+        	}
+        	return image
+        })
+        console.log("images after sort:", images_list)
+		images_list.shift()
+		images_list.push(first_element)
+		this.setState({
+			images_list: images_list
+		})
+	}
+	changeImageIndexRight() {
+		var images_list = this.state.images_list;
+		var last_element = images_list[images_list.length-1]
+		var last_index = last_element.index;
+        var images_list = images_list.map(function(image, i) {
+        	if (last_index < image.index) {
+        		last_index = image.index;
+        	}
+        	if (image.index == last_index) {
+        		image.index = 0
+        	} else {
+        		image.index = image.index + 1
+        	}
+
+        	return image
+        })
+        console.log("images before sort:", images_list)
+		// images_list.pop()
+		// images_list.unshift(last_element)
+		images_list.sort(function(a, b) {
+			if (a.index > b.index) {
+				return 1;
+			}
+		})
+		console.log("images after sort:", images_list)
+
+		this.setState({
+			images_list: images_list
+		})
+	}
+	onImageSelect() {
+		var self = this;
+		var file = this.refs.imageFile.files[0];
+	    var reader = new FileReader();
+		var url = reader.readAsDataURL(file);
+		var images_list = this.state.images_list;
+
+			reader.onloadend = function (e) {
+				var count = images_list.length;
+				images_list.push({image: reader.result, index: count != 0 ? images_list.length + 1 : 0})
+				self.setState({
+					images_list: images_list
+				})
+		    }.bind(this);
+	}
 	render() {
-		console.log("subsidiary prop:", this.props.company)
-		var uploadedImages = this.state.images_list.map(function(image, i) {
+		var self = this;
+		var images_list = this.state.images_list;
+		console.log("before:", images_list)
+		images_list.sort(function(a, b) {
+			if (a.index > b.index) {
+				return 1;
+			}
+		})
+		console.log("after:", images_list)
+
+		var uploadedImages = images_list.map(function(image, i) {
 			return (
-				<li className="uploaded_file" style={{backgroundImage: 'url('+image.image+')'}}>
+				<li key={i} className="uploaded_file" style={{backgroundImage: 'url('+image.image+')'}}>
 					<div className="uploaded_file--overlay">
 						<div className="upload_file--buttons">
-							<a href="" className="move_left"><i className="fa fa-arrow-left" aria-hidden="true"></i></a>
-							<a href="" className="upload_file--button deleter"><i className="fa fa-trash" aria-hidden="true"></i></a>
-							<a href="" className="move_right"><i className="fa fa-arrow-right" aria-hidden="true"></i></a></div>
+							<a onClick={self.changeImageIndexLeft.bind(self)} className="move_left"><i className="fa fa-arrow-left" aria-hidden="true"></i></a>
+							<a onClick={self.removeImage.bind(self, image.index)} className="upload_file--button deleter"><i className="fa fa-trash" aria-hidden="true"></i></a>
+							<a onClick={self.changeImageIndexRight.bind(self)} className="move_right"><i className="fa fa-arrow-right" aria-hidden="true"></i></a></div>
 						</div>
 				</li>)
 		})
@@ -147,30 +251,15 @@ export default class SubsidiaryAdd extends React.Component {
 							<TypeAheadCity getCity={this.getCity.bind(this)} city_name={this.state.city_name} />
 						</div>
 
-						<label className="label-big">Filialvideo</label>
-						<label id="subsidiaryVideo-label" htmlFor="subsidiaryVideo"><i className="fa fa-plus" aria-hidden="true"></i></label>
-						<input className="subsidiaryVideo" accept="video/*" name="subsidiaryVideo" id="subsidiaryVideo" type="file" />
-						<div id="subsidiaryVideo-preview">
-							<div id="videoFile"></div>
-							<div className="overlay">
-								<div className="subsidiaryVideo-preview-buttons">
-									<div className="subsidiaryVideo-preview-button editor">
-										<label id="subsidiaryVideo-preview-upload-button" htmlFor="subsidiaryVideo"><i className="fa fa-pencil" aria-hidden="true"></i></label>
-									</div>
-									<div className="subsidiaryVideo-preview-button deleter">
-										<a href=""><i className="fa fa-trash" aria-hidden="true"></i></a>
-									</div>
-								</div>
-							</div>
-						</div>
 						<div className="clear"></div>
 
 						<label className="label-big">Filialbilder</label>
 						<label className="upload-button" htmlFor="subsidiaryFile"><i className="fa fa-plus" aria-hidden="true"></i></label>
-						<input onChange={this.onImageSelect.bind(this)} ref="file" className="subsidiaryFile" accept="image/*" name="subsidiaryFile" id="subsidiaryFile" type="file" />
-						<ul id="subsidiary_uploaded_files">
-							{uploadedImages}
-						</ul>
+						<input ref="imageFile" onChange={this.onImageSelect.bind(this)} className="subsidiaryFile" accept="image/*" name="subsidiaryFile" id="subsidiaryFile" type="file" />
+						
+							<ul id="subsidiary_uploaded_files">
+								{uploadedImages}
+							</ul>
 						<div className="clear"></div>
 
 

@@ -2,11 +2,12 @@ import React from 'react'
 import Carousel from 'nuka-carousel'
 import Img from 'react-image-load'
 import Video from 'react-html5video'
+import UserAvatar from 'react-user-avatar';
 
-import CustomDecorators from './JobPreviewDecorators'
-import CustomDecoratorsLarge from './JobPreviewDecoratorsLarge'
-import Popup from '../Popup'
-import '../../JobPreview.css'
+import CustomDecorators from './JobPost/JobPreviewDecorators'
+import CustomDecoratorsLarge from './JobPost/JobPreviewDecoratorsLarge'
+import Popup from './Popup'
+import '../JobPreview.css'
 
 
 export default class JobPreviewPopup extends React.Component {
@@ -15,68 +16,14 @@ export default class JobPreviewPopup extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			method: "POST",
-			form_data: {
-				image_list: [
-					{image: ''},
-					{image: ''}
-				],
-				title: '',
-				vacancy_start: '',
-				kind: '',
-				address: {
-					city: {
-						name: ''
-					}
-				},
-				video: {
-					video: ''
-				}, 
-				payment: '',
-				working_hours: '', 
-				publication_date: ''
-			},
-			subsidiary: {
-				company: {
-					name: ''
-				}
-			}
+			job: null,
+			subsidiary: null
 		}
 		// this.get_capture = this.get_capture.bind(this);
 	}
-	post_job() {
-		console.log("post job")
-		console.log("form_data:", this.state.form_data)
-		// this.get_capture()
-		var headers = new Headers();
-		headers.append("Content-Type", "application/json")
-		headers.append("Authorization", "Token " + localStorage.token);
-		var request = new Request(
-			'http://dev.jobufo.com/api/v1/recruiting/vacancy/',
-			{
-				method: this.state.method,
-				headers: headers,
-				body: JSON.stringify(this.state.form_data)
-			})
-		fetch(request)
-				.then(function(r) {
-					console.log('then1:', r)
-					return r.json();
-				})
-				.then(function(result) {
-					console.log("result post:", result);
-					window.location.reload();
-				}).catch(function(reason) {
-					console.log("Error:", reason)
-				});
-	}
-	cancel() {
-		this.props.cancel()
-	}
 	componentWillReceiveProps(nextProps) {
 		this.setState({
-			method: nextProps.method ? nextProps.method : "POST",
-			form_data: nextProps.form_data,
+			job: nextProps.job,
 			subsidiary: nextProps.subsidiary
 		})
 	}
@@ -112,10 +59,19 @@ export default class JobPreviewPopup extends React.Component {
  
    //  }
 	render() {
-		var data = this.state.form_data;
+		var data = this.state.job;
 		var subsidiary = this.state.subsidiary;
-		console.log("data:", this.state.form_data)
-		var preview_html = (
+		console.log("data:", this.props.job)
+		var preview_html = <div></div>
+		if (this.state.job && this.state.job.title != "") {
+			var image_list = data.image_list.map(function(image, i) {
+				return <Img key={i} width="237" height="140" src={image.image} />
+			})
+			if (data.video) {
+				image_list.push(<Img width="237" height="140" key={3} src={data.video.preview_image_list[0].image} />)
+			}
+
+			preview_html = (
 				<div className="job-preview">
 					<div className="iphone-screen">
 						<Carousel decorators={CustomDecoratorsLarge}>
@@ -123,17 +79,7 @@ export default class JobPreviewPopup extends React.Component {
 								<div className="header"></div>
 								<div className="image-slider">
 									<Carousel decorators={CustomDecorators}>
-									{data.video ? (
-								        <Video width="237" height="140">
-											  <source type="video/mp4" src={data.video.video} /> 
-											  <source type="video/ogg" src={data.video.video} /> 
-											  <source type="video/webm" src={data.video.video} /> 
-				  				        </Video>) : null}
-								    {data.image_list ? (
-								    	<div>
-							    			<Img width="237" height="140" src={data.image_list[0].image} />
-								    		<Img width="237" height="140" src={data.image_list[1].image} />
-								    	</div>) : null}
+										{image_list}
 									</Carousel>
 								</div>
 								<div className="body">
@@ -158,17 +104,16 @@ export default class JobPreviewPopup extends React.Component {
 									<div className="company-section">
 										<div className="job-preview-company-block">
 											<img src="http://dev.jobufo.com/media/logos/6a6b9657-9eb.png" className="company-logo" alt="" />
-											{this.subsidiary ? (<h2 className="iphone-section-title">{subsidiary.company.name}</h2>):(null)}
-											{data.address ?
-												(<h2 className="location">
-													<i className="fa fa-map-marker" aria-hidden="true"></i> <span className="align-left">{data.address.city.name}</span>
-												</h2>) : null}
+											<h2 className="iphone-section-title">{data.company.name}</h2>
+											<h2 className="location">
+												<i className="fa fa-map-marker" aria-hidden="true"></i> <span className="align-left">{data.address.city.name}</span>
+											</h2>
 											<div className="clear"></div>
 										</div>
 									</div>
 									<div className="bottom-section">
 										<h2 className="iphone-title">Diese Anzeige wurde zur Verfügung gestellt von:</h2>
-										<img className="job-provider" src={require("../../img/job-provider.png")} alt=""/>
+										<img className="job-provider" src={require("../img/job-provider.png")} alt=""/>
 									</div>
 								</div>
 							</div>
@@ -178,7 +123,7 @@ export default class JobPreviewPopup extends React.Component {
 									<div className="box" id="box_edit">
 										<div className="info">
 											<div className="name">{data.title}</div>
-											<div className="company">{subsidiary.company.name}</div>
+											<div className="company">{data.company.name}</div>
 											<div className="place">{data.address.city.name}</div>
 											<div className="avatar">
 												<img src="http://dev.jobufo.com/media/avatars/a29002ff-1e8.png" />
@@ -204,11 +149,11 @@ export default class JobPreviewPopup extends React.Component {
 											<div className="company">JobUFO - Team</div>
 											<div className="place">Germany, Berlin</div>
 											<div className="avatar">
-												<img src={require("../../img/video.jpg")} />
+												<img src={require("../img/video.jpg")} />
 											</div>
 										</div>
 
-										<div className="image" style={{backgroundImage: "url("+require('../../img/android.jpg')+")"}}>
+										<div className="image" style={{backgroundImage: "url("+require('../img/android.jpg')+")"}}>
 											<div className="benefs">
 												<div className="benefit_1 ben">123</div>
 												<div className="benefit_2 ben">123</div>
@@ -223,18 +168,24 @@ export default class JobPreviewPopup extends React.Component {
 			)
 		var popupOptions = {
 			title: "Anzeige uberprufen",
-			subtitle: "This job will be posted on " + this.state.form_data.publication_date,
+			subtitle: "This job will be posted on " + data.publication_date,
 			isShowingModal: this.props.show,
 			contentClassName: "popup-content job-list",
-			button: {left: "Hinzufügen", right: "ABBRECHEN"},
+			close: this.props.close,
+			button: {visible: false, left:"", right: ""},
 			htmlContent: preview_html,
-			onLeftClick: this.post_job.bind(this),
-			onRightClick: this.cancel.bind(this)
+			onLeftClick: function(){},
+			onRightClick: function(){}
 		}
-		return (
-			<div>
-				<Popup {...popupOptions} />
-			</div>
-		);
+
+			return (
+				<div>
+					<Popup {...popupOptions} />
+				</div>
+			)
+		}
+		else {
+			return (<div></div>)
+		}
 	}
 }
