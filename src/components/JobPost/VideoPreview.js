@@ -70,7 +70,7 @@ export default class VideoPreview extends React.Component {
 		console.log("y_offset:", y_offset)
 		if (!isNaN(y_offset)) {
 			this.setState({
-				y_offset: -Math.floor(y_offset)
+				y_offset: -Math.floor(y_min)
 			})
 		}
 	}
