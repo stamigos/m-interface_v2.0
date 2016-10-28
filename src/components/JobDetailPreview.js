@@ -2,7 +2,14 @@ import React from 'react'
 import Carousel from 'nuka-carousel'
 import Img from 'react-image-load'
 import Video from 'react-html5video'
-import UserAvatar from 'react-user-avatar';
+import UserAvatar from 'react-user-avatar'
+
+//Stores
+import JobStore from '../store/JobStore';
+
+//Mixin
+import mixins from 'es6-mixins';
+import BackboneMixin from '../mixin/BackboneMixin';
 
 import CustomDecorators from './JobPost/JobPreviewDecorators'
 import CustomDecoratorsLarge from './JobPost/JobPreviewDecoratorsLarge'
@@ -18,6 +25,7 @@ export default class JobPreviewPopup extends React.Component {
 		this.state = {
 			job: null
 		}
+		mixins(BackboneMixin,this);
 		// this.get_capture = this.get_capture.bind(this);
 	}
 	componentWillReceiveProps(nextProps) {
@@ -57,6 +65,11 @@ export default class JobPreviewPopup extends React.Component {
  
    //  }
 	render() {
+		console.log("user JobStore:", JobStore.get("currentUser"))
+		var avatar = null;
+	    if (!JobStore.get("currentUserLoading")) {
+        	avatar = JobStore.get('currentUser').ufouser.avatar;
+    	}
 		var data = this.state.job;
 		// var subsidiary = this.state.subsidiary;
 		console.log("data:", this.props.job)
@@ -124,7 +137,7 @@ export default class JobPreviewPopup extends React.Component {
 											<div className="company">{data.company.name}</div>
 											<div className="place">{data.address.city.name}</div>
 											<div className="avatar">
-												<img src="http://dev.jobufo.com/media/avatars/a29002ff-1e8.png" />
+												<img src={avatar} />
 											</div>
 										</div>
 										{data.image_list[0] != null ? (
