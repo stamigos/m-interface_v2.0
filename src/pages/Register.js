@@ -87,7 +87,7 @@ export default class Register extends React.Component {
 									</div>
 									<input onChange={this.handleFieldChange} type="text" className="" name="company_name" id="Company" placeholder="Company"/>
 									<input onChange={this.handleFieldChange} type="text" className="" name="subsidiary_location" id="SubsidiaryLocation" placeholder="Subsidiary Location"/>
-									<input onChange={this.handleFieldChange} type="email" className="" id="Email" name="email" placeholder="Email" required/>
+									<input onChange={this.handleFieldChange} type="email" className="" id="Email" name="email" placeholder="E-mail" required/>
 									<input onChange={this.handleFieldChange} type="tel" className="" id="Phone" name="phone_number" placeholder="Phone"/>
 									<input onChange={this.handleFieldChange} type="password" className="" id="Password" name="password1" placeholder="Password" required/>
 									<input onChange={this.handleFieldChange} type="password" className="" id="RepeatPassword" name="password2" placeholder="Repeat Password" required/>

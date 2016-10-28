@@ -126,6 +126,7 @@ export default class ModalVideoCrop extends React.Component {
 			crop_params.y_min = this.state.crop_params.y_min;
 			crop_params.y_max = this.state.crop_params.y_max;
 		}
+		this.setState({crop_params: crop_params})
 		console.log("crop_params:", crop_params)
 		this.props.getVideoCropParams(crop_params)
     }

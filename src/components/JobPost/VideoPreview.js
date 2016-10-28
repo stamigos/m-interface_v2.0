@@ -38,8 +38,10 @@ export default class VideoPreview extends React.Component {
 			selector_width: 0,
 			duration: 0,
 			current_duration: 0,
-			startedFrom: 0
+			startedFrom: 0,
+			y_offset: 0
 		}
+		this.convertCropToVirtual = this.convertCropToVirtual.bind(this)
 	}
 	componentWillMount() {
 		this.props.getCropParams({
@@ -50,6 +52,27 @@ export default class VideoPreview extends React.Component {
 			y_max: this.props.xy_params.y_max,
 			video: this.props.videoSrc
 		})
+		var crop = {
+			slice_start: 0,
+			x_min: this.props.xy_params.x_min,
+			x_max: this.props.xy_params.x_max,
+			y_min: this.props.xy_params.y_min,
+			y_max: this.props.xy_params.y_max,
+			video: this.props.videoSrc	
+		}
+	}
+	convertCropToVirtual() {
+		var y_min = this.props.xy_params.y_min;
+		var real_height = $("#videoFile video")[0].videoHeight;
+		console.log("videoHeight:", real_height);
+		console.log("y_min:", y_min)
+		var y_offset = (y_min*338)/real_height
+		console.log("y_offset:", y_offset)
+		if (!isNaN(y_offset)) {
+			this.setState({
+				y_offset: -Math.floor(y_offset)
+			})
+		}
 	}
 	onPlay() {
 		var self = this;
@@ -105,6 +128,7 @@ export default class VideoPreview extends React.Component {
 	}
 	onLoadedData() {
 		console.log("loaded")
+		this.convertCropToVirtual()
 		this.setState({
 			duration: this.refs.video.state.duration,
 			current_duration: this.refs.video.state.currentTime,
@@ -131,7 +155,7 @@ export default class VideoPreview extends React.Component {
 		return (
 			<div>
 				<div id="postJobUploadedFilesVideo">
-					<div id="videoFile">
+					<div id="videoFile" style={{marginTop: this.state.y_offset}}>
 				        <Video controls ref="video" onTimeUpdate={this.onTimeUpdate.bind(this)} onLoadedData={this.onLoadedData.bind(this)}>
 							  <source type="video/mp4" src={this.props.videoSrc} /> 
 							  <source type="video/ogg" src={this.props.videoSrc} /> 

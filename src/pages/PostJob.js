@@ -297,18 +297,26 @@ class PostJobContent extends React.Component {
 	}
 	onLeftClose() {
 		this.setState({
-			isShowingLeftModal: false
+			isShowingLeftModal: false,
+			leftImageSelected: false
 		})
 	}
 	onRightClose() {
 		this.setState({
-			isShowingRightModal: false
+			isShowingRightModal: false,
+			rightImageSelected: false
 		})
 	}
 	onLeftSelectNew() {
+		this.setState({
+			leftImageSelected: false
+		})
 		this.refs.file1.click();
 	}
 	onRightSelectNew() {
+		this.setState({
+			rightImageSelected: false
+		})
 		this.refs.file2.click();
 	}
 	cancelPreviewModal() {
@@ -359,7 +367,7 @@ class PostJobContent extends React.Component {
 						<input type="text" className="" name="Title" id="Title" placeholder="Stellenbezeichnung" onChange={this.handleTitle.bind(this)}/>
 						<div className="clear"></div>
 
-						<label className="label" htmlFor="Location">Subsidiary</label>
+						<label className="label" htmlFor="Location">Filiale</label>
 						<div className="Location citySearchSelect" id="Location">
 							<TypeAheadSubsidiary getSubsidiary={this.getSubsidiary.bind(this)}/>
 						</div>
@@ -377,40 +385,53 @@ class PostJobContent extends React.Component {
 						<p className="JobDescAbout">Füge Bilder von der Stelle oder dem Team hinzu. JobUFO’s Bilder sind 1115px X 625px groß.
 						Wenn dein Bild zu groß ist, helfen wir dir es hier zuzuschneiden.</p>
 						<div className="images">
+						{left_image ?
+							<label className="upload-button" id="postjobImage_1_block">
+								<i className="fa fa-camera" aria-hidden="true"></i>
+								<input onChange={this.leftImageSelected.bind(this)} disabled={this.state.leftImageSelected ? "disabled": ""} ref="file1" accept="image/*" name="postjobImage_1" id="postjobImage_1" className="postjobImage" type="file" />
+								<ul id="postJobUploadedFilesImage">
+										<li className="uploaded_file" style={{backgroundImage: 'url('+left_image.image+')'}}>
+											<div className="uploaded_file--overlay">
+													<div className="upload_file--buttons">
+														<a onClick={this.onLeftSelectNew.bind(this)} className="btns btn-change"><i className="fa fa-exchange" aria-hidden="true"></i></a>
+														<a onClick={this.onEditLeftImage.bind(this)} className="btns btn-edit"><i className="fa fa-pencil" aria-hidden="true"></i></a>
+														<a onClick={this.onLeftDrop.bind(this)} className="upload_file--button deleter btns"><i className="fa fa-trash" aria-hidden="true"></i></a>
+													</div>
+											</div>
+										</li>
+								</ul>
+							</label> : (
 							<label className="upload-button" htmlFor="postjobImage_1" id="postjobImage_1_block">
 								<i className="fa fa-camera" aria-hidden="true"></i>
-								<input onChange={this.leftImageSelected.bind(this)} ref="file1" accept="image/*" name="postjobImage_1" id="postjobImage_1" className="postjobImage" type="file" />
-							</label>
+								<input onChange={this.leftImageSelected.bind(this)} disabled={this.state.leftImageSelected ? "disabled": ""} ref="file1" accept="image/*" name="postjobImage_1" id="postjobImage_1" className="postjobImage" type="file" />
+								<ul id="postJobUploadedFilesImage">
+								</ul>
+							</label>)}
 							<ModalImageCrop key={1} file={this.refs.file1} imageSelected={this.state.leftImageSelected} getImage={this.getLeftImage.bind(this)} isShowingModal={this.state.isShowingLeftModal} close={this.onLeftClose.bind(this)}/>
-							<ul id="postJobUploadedFilesImage">
-								{left_image ?
-									<li className="uploaded_file" style={{backgroundImage: 'url('+left_image.image+')'}}>
-										<div className="uploaded_file--overlay">
-												<div className="upload_file--buttons">
-													<a onClick={this.onLeftSelectNew.bind(this)} className="btns btn-change"><i className="fa fa-exchange" aria-hidden="true"></i></a>
-													<a onClick={this.onEditLeftImage.bind(this)} className="btns btn-edit"><i className="fa fa-pencil" aria-hidden="true"></i></a>
-													<a onClick={this.onLeftDrop.bind(this)} className="upload_file--button deleter btns"><i className="fa fa-trash" aria-hidden="true"></i></a>
+							{right_image ?
+								<label className="upload-button" id="postjobImage_2_block">
+									<i className="fa fa-camera" aria-hidden="true"></i>
+									<input onChange={this.rightImageSelected.bind(this)} disabled={this.state.rightImageSelected ? "disabled": ""} ref="file2" accept="image/*" name="postjobImage_2" id="postjobImage_2" className="postjobImage" type="file" />
+									<ul id="postJobUploadedFilesImage">	
+											<li className="uploaded_file right-image" style={{backgroundImage: 'url('+right_image.image+')'}}>
+												<div className="uploaded_file--overlay">
+														<div className="upload_file--buttons">
+															<a onClick={this.onRightSelectNew.bind(this)} className="btns btn-change"><i className="fa fa-exchange" aria-hidden="true"></i></a>
+															<a onClick={this.onEditRightImage.bind(this)} className="btns btn-edit"><i className="fa fa-pencil" aria-hidden="true"></i></a>
+															<a onClick={this.onRightDrop.bind(this)} className="upload_file--button deleter btns"><i className="fa fa-trash" aria-hidden="true"></i></a>
+														</div>
 												</div>
-										</div>
-									</li> : null}
-							</ul>
-							<label className="upload-button" htmlFor="postjobImage_2" id="postjobImage_2_block">
-								<i className="fa fa-camera" aria-hidden="true"></i>
-								<input onChange={this.rightImageSelected.bind(this)} ref="file2" accept="image/*" name="postjobImage_2" id="postjobImage_2" className="postjobImage" type="file" />
-							</label>
+											</li>
+									</ul>
+								</label>: (
+								<label className="upload-button" htmlFor="postjobImage_2" id="postjobImage_2_block">
+									<i className="fa fa-camera" aria-hidden="true"></i>
+									<input onChange={this.rightImageSelected.bind(this)} disabled={this.state.rightImageSelected ? "disabled": ""} ref="file2" accept="image/*" name="postjobImage_2" id="postjobImage_2" className="postjobImage" type="file" />
+									<ul id="postJobUploadedFilesImage">	
+									</ul>
+								</label>
+								)}
 							<ModalImageCrop key={2} file={this.refs.file2} imageSelected={this.state.rightImageSelected} getImage={this.getRightImage.bind(this)} isShowingModal={this.state.isShowingRightModal} close={this.onRightClose.bind(this)}/>
-							<ul id="postJobUploadedFilesImage">	
-								{right_image ?
-									<li className="uploaded_file right-image" style={{backgroundImage: 'url('+right_image.image+')'}}>
-										<div className="uploaded_file--overlay">
-												<div className="upload_file--buttons">
-													<a onClick={this.onRightSelectNew.bind(this)} className="btns btn-change"><i className="fa fa-exchange" aria-hidden="true"></i></a>
-													<a onClick={this.onEditRightImage.bind(this)} className="btns btn-edit"><i className="fa fa-pencil" aria-hidden="true"></i></a>
-													<a onClick={this.onRightDrop.bind(this)} className="upload_file--button deleter btns"><i className="fa fa-trash" aria-hidden="true"></i></a>
-												</div>
-										</div>
-									</li> : null}
-							</ul>
 						</div>
 
 						<div className="clear"></div>
@@ -424,7 +445,7 @@ class PostJobContent extends React.Component {
 						</select>
 						<div className="clear"></div>
 						<label className="label" htmlFor="WorkingHours">Zeitlicher Arbeitsaufwand</label>
-						<input onChange={this.handleWorkingHours.bind(this)} type="text" name="WorkingHours" id="WorkingHours" className="half" />
+						<input onChange={this.handleWorkingHours.bind(this)} type="text" name="WorkingHours" id="WorkingHours" placeholder="Zeitlicher Arbeitsaufwand" className="half" />
 						<select name="Per" id="Per" className="half right">
 							<option value="day">Per day</option>
 							<option value="week">Per week</option>
@@ -468,7 +489,8 @@ class PostJobContent extends React.Component {
 						<div id="Schedule" className={this.state.scheduleClicked ? ("expanded"):("")}>
 							<div className="half">
 									<DatePicker dateFormat="YYYY-MM-DD" 
-										className="date datePicker half" 
+										className="date datePicker half"
+										placeholderText="Datum" 
 										onChange={this.handleDateScheduleChange.bind(this)} 
 										selected={this.state.dateSchedule}
 										todayButton={'Today'} />
@@ -477,7 +499,7 @@ class PostJobContent extends React.Component {
 							  <TimePicker
 								    style={{ width: 100 }}
 								    showSecond={false}
-								    placeholder="Time"
+								    placeholder="Zeit"
 								    className="timePicker half right"
 								    onChange={this.onTimeChange.bind(this)}/>
 							</div>

@@ -68,7 +68,7 @@ export default class Login extends React.Component {
 						</div>
 						<div className="popup-content-login">
 							<form onSubmit={this.onSubmit.bind(this)} action="/jobs" method="POST" role="form" className="login-registration-popup-form" id="login-popup-form">
-								<input onChange={this.onChange.bind(this)} type="email" className={this.state.errors ? ("input-error"):("")} id="Email" name="email" placeholder="Email" required="required"/>
+								<input onChange={this.onChange.bind(this)} type="email" className={this.state.errors ? ("input-error"):("")} id="Email" name="email" placeholder="E-Mail" required="required"/>
 								<input onChange={this.onChange.bind(this)} type="password" className={this.state.errors ? ("input-error"):("")} id="Password" name="password" placeholder="Passwort" required="required"/>
 								<div className="clear"></div>
 								<a className="forgot" href="forgot_password.html">Passwort vergessen?</a>
@@ -80,6 +80,9 @@ export default class Login extends React.Component {
 				</section>
 				<div className="after-form">
 					<h2 >Don’t have an account yet? <IndexLink className="sing-up" to='register'>Sign Up</IndexLink></h2>
+				</div>
+				<div className="after-form">
+					<h2><a className="sing-up" href="http://jobufo.com/legal">Impress</a> / <a className="sing-up" href="http://jobufo.com/legal/#privacy-policy-web">Privacy Policy</a></h2>
 				</div>
 			</div>
 		);

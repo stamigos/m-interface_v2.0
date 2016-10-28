@@ -81,7 +81,7 @@ export default class TypeAheadSubsidiary extends React.Component {
 		console.log("options:", this.state.options)
 		return (
 			<div>
-				<Typeahead ref="typeaheadSubsidiary" selected={[this.state.selected]} placeholder="Subsidiary" onChange={this._handleChange.bind(this)} onInputChange={this._handleInputChange.bind(this)} options={this.state.options}/>
+				<Typeahead ref="typeaheadSubsidiary" selected={[this.state.selected]} placeholder="Filiale" onChange={this._handleChange.bind(this)} onInputChange={this._handleInputChange.bind(this)} options={this.state.options}/>
 			</div>
 		);
 	}

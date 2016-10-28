@@ -167,7 +167,7 @@ export default class JobPreviewPopup extends React.Component {
 				</div>
 			)
 		var popupOptions = {
-			title: "Anzeige uberprufen",
+			title: "Anzeige überprüfen",
 			subtitle: "This job will be posted on " + data.publication_date,
 			isShowingModal: this.props.show,
 			contentClassName: "popup-content job-list",

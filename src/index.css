@@ -1716,6 +1716,11 @@ div#subsidiary-wrapper
     position: relative;
     left:0;
     width: 290px;
+    top: 0;
+}
+.job-detail-wrapper .uploaded_file {
+    width: 300px;
+    top: 0;
 }
 span.green {
     font-family: 'Gotham Rounded', sans-serif;
@@ -2152,6 +2157,9 @@ form#job-post-form
 }
 #postjobVideo, .postjobImage {
     display: none;
+}
+#postjobVideo .upload-button {
+    overflow: visible;
 }
 .upload-button
 {
@@ -2628,8 +2636,9 @@ input#EditPostjobVideo {
     list-style: none;
     overflow: hidden;
     width: inherit;
-    position: absolute;
-    left: 237px;
+    position: relative;
+    left: 0;
+    top: -176px;
     height: 165px;
     /* margin-top: 10px; */
     /* margin-bottom: 10px; */
@@ -2677,9 +2686,6 @@ input#EditPostjobVideo {
     margin-left: -2px;
     width: 294px;
     height: 170px;
-}
-#postJobUploadedFilesImage .uploaded_file.right-image {
-    left: 540px;
 }
 /*---------------------JOB POST END----------------------*/
 .loading-wrapper {
