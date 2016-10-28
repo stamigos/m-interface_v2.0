@@ -63,10 +63,10 @@ export default class JobPreviewPopup extends React.Component {
 		var preview_html = <div></div>
 		if (this.state.job && this.state.job.title != "") {
 			var image_list = data.image_list.map(function(image, i) {
-				return <Img key={i} width="237" height="140" src={image.image} />
+				return <img key={i} width="237" height="140" src={image.image} />
 			})
 			if (data.video) {
-				image_list.push(<Img width="237" height="140" key={3} src={data.video.preview_image_list[0].image} />)
+				image_list.push(<img width="237" height="140" key={3} src={data.video.preview_image_list[0].image} />)
 			}
 
 			preview_html = (
