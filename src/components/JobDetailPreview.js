@@ -144,10 +144,10 @@ export default class JobPreviewPopup extends React.Component {
 												<img width="20" src={require("../img/popup-time.png")}/><p>{data.working_hours}</p>
 											</li>
 											<li>
-												<img width="20" src={require("../img/popup-vacation.png")}/><p>{data.benefit_1}</p>
+												<img width="20" src={require("../img/popup-bonus.png")}/><p>{data.benefit_1}</p>
 											</li>
 											<li>
-												<img width="20" src={require("../img/popup-bonus.png")}/><p>{data.benefit_2}</p>
+												<img width="20" src={require("../img/popup-vacation.png")}/><p>{data.benefit_2}</p>
 											</li>
 											{data.top_job ? (
 												<li>
@@ -201,22 +201,6 @@ export default class JobPreviewPopup extends React.Component {
 																<div className="benefit_2 ben">{data.benefit_1}</div>
 															</div>
 													    </div>)}
-									</div>
-									<div className="box">
-										<div className="info">
-											<div className="name">Android Developer</div>
-											<div className="company">JobUFO - Team</div>
-											<div className="place">Germany, Berlin</div>
-											<div className="avatar">
-												<img src={require("../img/video.jpg")} />
-											</div>
-										</div>
-										<div className="image" style={{backgroundImage: "url("+require('../img/android.jpg')+")"}}>
-											<div className="benefs">
-												<div className="benefit_1 ben">123</div>
-												<div className="benefit_2 ben">123</div>
-											</div>
-										</div>
 									</div>
 								</div>
 							</div>
