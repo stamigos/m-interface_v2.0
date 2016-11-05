@@ -13,7 +13,10 @@
     height: 283px;
     cursor: default;
 }
-.clear {
+.job-preview .iphone-screen * {
+    word-wrap: break-word;
+}
+.job-preview .iphone-screen .clear {
     clear: both;
 }
 .job-preview .iphone-screen .left-iphone-screen,
@@ -46,7 +49,6 @@
     line-height: 1.5;
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
-    word-wrap: break-word;
     color: #f2415f;
 }
 .job-preview .iphone-screen .title-section .job_preview-subtitle {
@@ -87,7 +89,6 @@
     font-weight: 400;
     font-size: 10px;
     line-height: 1.5;
-    word-wrap: break-word;
     color: #796a8f;
 }
 .job-preview .iphone-screen .options-section ul li img {
@@ -208,7 +209,7 @@
     height: 45px;
 }
 .job-preview .iphone-screen .description-section .text-right {
-    margin-left: 60px;
+    margin-left: 55px;
 }
 .job-preview .iphone-screen .video .video--paused {
 	width: 237px !important;
@@ -252,7 +253,6 @@
     font-weight: 600;
     width: 145px;
     margin-bottom: 3px;
-    word-wrap: break-word;
 }
 .job-preview .iphone-screen .body-left .box .place {
     margin-top: 3px;
