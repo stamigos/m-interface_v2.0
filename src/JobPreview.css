@@ -143,6 +143,9 @@
     float: right;
     text-align: right;
 }
+.job-preview .iphone-screen .description-links {
+    margin-top: 10px;
+}
 .job-preview .iphone-screen .image-slider {
     margin-top: 37px;
 }
