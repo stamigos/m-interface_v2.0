@@ -11,6 +11,7 @@
     margin-left: 191px;
     margin-top: 2px;
     height: 283px;
+    cursor: default;
 }
 .clear {
     clear: both;
@@ -21,7 +22,7 @@
     overflow-x: hidden;
     height: 283px;
 }
-.job-preview .iphone-screen .header-left {
+.job-preview .iphone-screen .header-right {
 	background-image: url("img/header-left.png");
 	width: 238px;
 	height: 37px;
@@ -30,7 +31,7 @@
     top: 0;
     z-index: 1;
 }
-.job-preview .iphone-screen .body-left {
+.job-preview .iphone-screen .body-right {
 	width: 100%;
     padding: 0 10px;
     margin: 0 auto;
@@ -70,12 +71,17 @@
 .job-preview .iphone-screen .options-section ul {
     margin-top: 0 !important;
 }
+.job-preview .iphone-screen .options-section .ul-left {
+    padding-right: 2px;
+}
+.job-preview .iphone-screen .options-section .ul-right {
+    padding-left: 2px;
+}
 .job-preview .iphone-screen .options-section ul li {
     margin: 5px 0;
 }
 .job-preview .iphone-screen .options-section ul li .text {
     padding-left: 20px;
-    padding-right: 5px;
     text-align: left;
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
@@ -161,10 +167,14 @@
 }
 .job-preview .iphone-screen .image-slider {
     margin-top: 37px;
+    height: 140px;
+    width: 100%;
+    background-color: rgba(0,0,0,0.05); 
 }
 .job-preview .iphone-screen .image-slider img {
     height: 140px!important;
-    width: 100%;
+    width: auto;
+    margin: 0 auto;
 }
 .job-preview .iphone-screen .bottom-section {
 	border: none;
@@ -208,22 +218,22 @@
 	width: 237px !important;
 	height: 140px !important;
 }
-.job-preview .iphone-screen .header-right {
+.job-preview .iphone-screen .header-left {
     background-image: url("img/header-right.png");
     width: 238px;
     height: 66px;
     background-size: 238px;
     position: fixed;
     top: 0;
-    box-shadow: 1px 1.732px 10px 0px rgb( 49, 43, 58 );
+    box-shadow: -5px 1.7px 10px 0 rgb( 49, 43, 58 );
     z-index: 1;
 }
-.job-preview .iphone-screen .body-right {
+.job-preview .iphone-screen .body-left {
     width: 100%;
     padding-top: 66px;
     margin: 0 auto;
 }
-.job-preview .iphone-screen .body-right .box {
+.job-preview .iphone-screen .body-left .box {
     padding: 20px 10px;
     font-size: 11px;
     line-height: 1.5;
@@ -231,37 +241,38 @@
     color: #8c7da2;
     border-bottom: 1px solid rgba(0,0,0,0.1);
 }
-.job-preview .iphone-screen .body-right .box .info {
+.job-preview .iphone-screen .body-left .box .info {
     text-align: left;
     position: relative;
     margin-bottom: 13px;
 }
-.job-preview .iphone-screen .body-right .box .name {
+.job-preview .iphone-screen .body-left .box .name {
     color: #f54b5d;
+    font-size: 12px;
     font-weight: 600;
     width: 145px;
     margin-bottom: 3px;
     word-wrap: break-word;
 }
-.job-preview .iphone-screen .body-right .box .place {
+.job-preview .iphone-screen .body-left .box .place {
     margin-top: 3px;
     padding-left: 15px;
     background-repeat: no-repeat;
     background-position: 0px 50%;
     background-image: url('img/place.png');
 }
-.job-preview .iphone-screen .body-right .box .avatar {
+.job-preview .iphone-screen .body-left .box .avatar {
     position: absolute;
     top: 0px;
     right: 0px;
     bottom: 0px;
 }
-.job-preview .iphone-screen .body-right .box .avatar img {
+.job-preview .iphone-screen .body-left .box .avatar img {
     border-radius: 50%;
     width: 45px;
     height: 45px;
 }
-.job-preview .iphone-screen .body-right .image {
+.job-preview .iphone-screen .body-left .image {
     background-size: cover;
     background-position: center;
     height: 120px;
@@ -270,17 +281,18 @@
     width: 100%;
     position: relative;
 }
-.job-preview .iphone-screen .body-right .image .benefs {
+.job-preview .iphone-screen .body-left .image .benefs {
     position: absolute;
     bottom: 0px;
     left: 0px;
     right: 0px;
     text-align: left;
+    padding-right: 5px;
 }
-.job-preview .iphone-screen .body-right .image .benefs .ben {
+.job-preview .iphone-screen .body-left .image .benefs .ben {
     padding: 2px 10px 2px 20px;
     min-height: 14px;
-    margin: 0 0 5px 8px;
+    margin: 0 0 5px 5px;
     font-size: 10px;
     background-color: #08b698;
     color: white;

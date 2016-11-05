@@ -115,14 +115,52 @@ export default class JobPreviewPopup extends React.Component {
 				<div className="job-preview">
 					<div className="iphone-screen">
 						<Carousel decorators={CustomDecoratorsLarge}>
-							<div className="left-iphone-screen">
+							<div className="right-iphone-screen">
 								<div className="header-left"></div>
+								<div className="body-left">
+									<div className="box">
+										<div className="info">
+											<div className="name">{data.title}</div>
+											<div className="company">{data.company.name}</div>
+											<div className="place">{data.address.city.name}</div>
+											<div className="avatar">
+												<img src={data.company.logo} />
+											</div>
+										</div>
+										{data.image_list[0] != null ? (
+											<div className="image" style={{backgroundImage: "url("+data.image_list[0].image+")"}} >
+												<div className="benefs">
+													{data.benefit_1 != "" ? (
+														<div className="benefit_1 ben">{data.benefit_1}</div>
+													) : null}
+													{data.benefit_2 != "" ? (
+														<div className="benefit_2 ben">{data.benefit_1}</div>
+													) : null}
+												</div>
+											</div>
+										) : (
+											<div className="image">
+												<div className="benefs">
+													{data.benefit_1 != "" ? (
+														<div className="benefit_1 ben">{data.benefit_1}</div>
+													) : null}
+													{data.benefit_2 != "" ? (
+														<div className="benefit_2 ben">{data.benefit_1}</div>
+													) : null}
+												</div>
+											</div>
+										)}
+									</div>
+								</div>
+							</div>
+							<div className="left-iphone-screen">
+								<div className="header-right"></div>
 								<div className="image-slider">
 									<Carousel decorators={CustomDecorators}>
 										{image_list}
 									</Carousel>
 								</div>
-								<div className="body-left">
+								<div className="body-right">
 									<div className="title-section">
 										<h2 className="job_preview-title">
 											<span className="job-preview-title">{data.title}</span>
@@ -130,39 +168,51 @@ export default class JobPreviewPopup extends React.Component {
 										<h3 className="job_preview-subtitle">Zeitraum: {data.vacancy_start}</h3>
 									</div>
 									<div className="options-section">
-										<ul className="options-section-half">
-											<li>
-												<img width="15" src={require("../img/popup-salary.png")}/>
-												<div className="text">{data.payment}</div>
-												<div className="clear"></div>
-											</li>
-											<li>
-												<img width="15" src={require("../img/popup-type.png")}/>
-												<div className="text">{data.kind}</div>
-												<div className="clear"></div>
-											</li>
-											<li>
-												<img width="15" src={require("../img/popup-location.png")}/>
-												<div className="text">{data.address.city.name}</div>
-												<div className="clear"></div>
-											</li>
-											<li>
-												<img width="15" src={require("../img/popup-time.png")}/>
-												<div className="text">{data.working_hours}</div>
-												<div className="clear"></div>
-											</li>
+										<ul className="options-section-half ul-left">
+											{data.payment != "" ? (
+												<li>
+													<img width="15" src={require("../img/popup-salary.png")}/>
+													<div className="text">{data.payment}</div>
+													<div className="clear"></div>
+												</li>
+											) : null}
+											{data.kind != "" ? (
+												<li>
+													<img width="15" src={require("../img/popup-type.png")}/>
+													<div className="text">{data.kind}</div>
+													<div className="clear"></div>
+												</li>
+											) : null}
+											{data.address.city.name != "" ? (
+												<li>
+													<img width="15" src={require("../img/popup-location.png")}/>
+													<div className="text">{data.address.city.name}</div>
+													<div className="clear"></div>
+												</li>
+											) : null}
+											{data.working_hours != "" ? (
+												<li>
+													<img width="15" src={require("../img/popup-time.png")}/>
+													<div className="text">{data.working_hours}</div>
+													<div className="clear"></div>
+												</li>
+											) : null}
 										</ul>
-										<ul className="options-section-half">
-											<li>
-												<img width="15" src={require("../img/popup-benefit1.png")}/>
-												<div className="text">{data.benefit_1}</div>
-												<div className="clear"></div>
-											</li>
-											<li>
-												<img width="15" src={require("../img/popup-benefit2.png")}/>
-												<div className="text">{data.benefit_2}</div>
-												<div className="clear"></div>
-											</li>
+										<ul className="options-section-half ul-right">
+											{data.benefit_1 != "" ? (
+												<li>
+													<img width="15" src={require("../img/popup-benefit1.png")}/>
+													<div className="text">{data.benefit_1}</div>
+													<div className="clear"></div>
+												</li>
+											) : null}
+											{data.benefit_2 != "" ? (
+												<li>
+													<img width="15" src={require("../img/popup-benefit2.png")}/>
+													<div className="text">{data.benefit_2}</div>
+													<div className="clear"></div>
+												</li>
+											) : null}
 											{data.top_job ? (
 												<li>
 													<img width="15" src={require("../img/popup-top.png")}/>
@@ -218,33 +268,6 @@ export default class JobPreviewPopup extends React.Component {
 									</div>
 								</div>
 								<div className="section-button">APPLY</div>
-							</div>
-							<div className="right-iphone-screen">
-								<div className="header-right"></div>
-								<div className="body-right">
-									<div className="box">
-										<div className="info">
-											<div className="name">{data.title}</div>
-											<div className="company">{data.company.name}</div>
-											<div className="place">{data.address.city.name}</div>
-											<div className="avatar">
-												<img src={data.company.logo} />
-											</div>
-										</div>
-										{data.image_list[0] != null ? (
-											<div className="image" style={{backgroundImage: "url("+data.image_list[0].image+")"}} >
-												<div className="benefs">
-													<div className="benefit_1 ben">{data.benefit_1}</div>
-													<div className="benefit_2 ben">{data.benefit_1}</div>
-												</div>
-											</div>) : (<div className="image">
-														    <div className="benefs">
-																<div className="benefit_1 ben">{data.benefit_1}</div>
-																<div className="benefit_2 ben">{data.benefit_1}</div>
-															</div>
-													    </div>)}
-									</div>
-								</div>
 							</div>
 						</Carousel>
 					</div>
