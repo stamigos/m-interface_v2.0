@@ -65,34 +65,6 @@ export default class JobPreviewPopup extends React.Component {
  
    //  }
 
-//    <ul className="options-section-half">
-// 		<li>
-// 			<img width="16" src={require("../img/popup-salary.png")}/><p>{data.payment}€ / Monat</p>
-// 		</li>
-// 		<li>
-// 			<img width="16" src={require("../img/popup-type.png")}/><p>{data.kind}</p>
-// 		</li>
-// 		<li>
-// 			<img width="16" src={require("../img/popup-location.png")}/><p>{data.address.city.name}</p>
-// 		</li>
-// 		<li>
-// 			<img width="16" src={require("../img/popup-time.png")}/><p>{data.working_hours}</p>
-// 		</li>
-// 	</ul>
-// 	<ul className="options-section-half">
-// 		<li>
-// 			<img width="16" src={require("../img/popup-vacation.png")}/><p>{data.benefit_1}</p>
-// 		</li>
-// 		<li>
-// 			<img width="16" src={require("../img/popup-bonus.png")}/><p>{data.benefit_2}</p>
-// 		</li>
-// 		{data.top_job ? (
-// 			<li>
-// 				<img width="16" src={require("../img/popup-top.png")}/><p>Top job</p>
-// 			</li>
-// 		) : null}
-// 	</ul>
-
 	render() {
 		console.log("user JobStore:", JobStore.get("currentUser"))
 		var avatar = null;
@@ -100,7 +72,6 @@ export default class JobPreviewPopup extends React.Component {
         	avatar = JobStore.get('currentUser').ufouser.avatar;
     	}
 		var data = this.state.job;
-		// var subsidiary = this.state.subsidiary;
 		console.log("data:", this.props.job)
 		var preview_html = <div></div>
 		if (this.state.job && this.state.job.title != "") {
@@ -131,25 +102,44 @@ export default class JobPreviewPopup extends React.Component {
 											<div className="image" style={{backgroundImage: "url("+data.image_list[0].image+")"}} >
 												<div className="benefs">
 													{data.benefit_1 != "" ? (
-														<div className="benefit_1 ben">{data.benefit_1}</div>
+														<div className="ben">{data.benefit_1}</div>
 													) : null}
 													{data.benefit_2 != "" ? (
-														<div className="benefit_2 ben">{data.benefit_1}</div>
+														<div className="ben">{data.benefit_1}</div>
 													) : null}
+													<div className="clear"></div>
 												</div>
 											</div>
 										) : (
 											<div className="image">
 												<div className="benefs">
 													{data.benefit_1 != "" ? (
-														<div className="benefit_1 ben">{data.benefit_1}</div>
+														<div className="ben">{data.benefit_1}</div>
 													) : null}
 													{data.benefit_2 != "" ? (
-														<div className="benefit_2 ben">{data.benefit_1}</div>
+														<div className="ben">{data.benefit_1}</div>
 													) : null}
+													<div className="clear"></div>
 												</div>
 											</div>
 										)}
+									</div>
+									<div className="box">
+										<div className="info">
+											<div className="name">Android Developer</div>
+											<div className="company">JobUFO Team</div>
+											<div className="place">Berlin, Germany</div>
+											<div className="avatar">
+												<img src={require("../img/video.jpg")} />
+											</div>
+										</div>
+										<div className="image" style={{backgroundImage: "url("+require('../img/android.jpg')+")"}}>
+											<div className="benefs">
+												<div className="ben">300€ bonus</div>
+												<div className="ben">35 vacations days</div>
+												<div className="clear"></div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -159,13 +149,15 @@ export default class JobPreviewPopup extends React.Component {
 									<Carousel decorators={CustomDecorators}>
 										{image_list}
 									</Carousel>
+									<div className="video-controls">
+										<img width="30" src={require("../img/play-button.png")} />
+										<img width="30" src={require("../img/360.png")} />
+									</div>
 								</div>
 								<div className="body-right">
 									<div className="title-section">
-										<h2 className="job_preview-title">
-											<span className="job-preview-title">{data.title}</span>
-										</h2>
-										<h3 className="job_preview-subtitle">Zeitraum: {data.vacancy_start}</h3>
+										<h2 className="job_preview-title">{data.title}</h2>
+										<h3 className="job_preview-subtitle">Zeitraum: {data.publication_date}</h3>
 									</div>
 									<div className="options-section">
 										<ul className="options-section-half ul-left">

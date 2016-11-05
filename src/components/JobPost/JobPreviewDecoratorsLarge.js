@@ -36,7 +36,6 @@ const CustomDecoratorsLarge = [
           margin: 0,
           bottom: 108,
           padding: 0,
-          // marginLeft: -41,
           marginLeft: 0,
           width: 85,
         }

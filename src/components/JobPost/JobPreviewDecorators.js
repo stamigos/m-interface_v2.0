@@ -54,7 +54,7 @@ const CustomDecorators = [
           padding: '0 5px',
           textAlign: 'center',
           outline: 0,
-          fontSize: 30,
+          fontSize: 25,
           opacity: active ? 1 : 0.7
         }
       }
