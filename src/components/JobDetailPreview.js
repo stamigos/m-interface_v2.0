@@ -190,15 +190,15 @@ export default class JobPreviewPopup extends React.Component {
 											</h3>
 											<h3 className="description-category">{data.company.category.name}</h3>
 											<div className="description-links">
-												<ul className="company-subsidiary-social-media">
-													<li className="company-subsidiary-social-media-item">
-														<img width="30" src={require("../img/facebook.png")} alt="" />
+												<ul>
+													<li className="description-links-item">
+														<img width="30" src={require("../img/iphone-mail.png")} alt="" />
 													</li>
-													<li className="company-subsidiary-social-media-item">
-														<img width="30" src={require("../img/twetter.png")} alt="" />
+													<li className="description-links-item">
+														<img width="30" src={require("../img/iphone-facebook.png")} alt="" />
 													</li>
-													<li className="company-subsidiary-social-media-item">
-														<img width="30" src={require("../img/instagram.png")} alt="" />
+													<li className="description-links-item">
+														<img width="30" src={require("../img/iphone-youtube.png")} alt="" />
 													</li>
 												</ul>
 											</div>
