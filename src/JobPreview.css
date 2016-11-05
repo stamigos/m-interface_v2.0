@@ -7,46 +7,48 @@
     background-size: 320px;
 }
 .job-preview .iphone-screen {
-	width: 237px;
+	width: 238px;
     margin-left: 191px;
     margin-top: 2px;
     height: 283px;
-/*    overflow-y: auto;
-*/}
-.job-preview .iphone-screen .header {
-	background-image: url("img/iphone-header.png");
+}
+.job-preview .iphone-screen .header-left {
+	background-image: url("img/header-left.png");
 	width: 238px;
-	height: 36px;
+	height: 37px;
 	background-size: 238px;
 	position: fixed;
     top: 0;
     z-index: 1;
 }
 .job-preview .iphone-screen .header-right {
-    background-image: url("img/phone_top_2.jpg");
+    background-image: url("img/header-right.png");
     width: 238px;
-    height: 72px;
+    height: 66px;
     background-size: 238px;
     position: fixed;
     top: 0;
+    box-shadow: 1px 1.732px 10px 0px rgb( 49, 43, 58 );
     z-index: 1;
 }
 .job-preview .iphone-screen .left-iphone-screen,
 .job-preview .iphone-screen .right-iphone-screen {
     overflow-y: auto;
+    overflow-x: hidden;
     height: 283px;
 }
-.job-preview .iphone-screen .body {
-	width: 200px;
+.job-preview .iphone-screen .body-left {
+	width: 100%;
+    padding: 0 10px;
     margin: 0 auto;
 }
 .job-preview .iphone-screen .body-right {
-    width: 200px;
+    width: 100%;
+    padding-top: 66px;
     margin: 0 auto;
-    padding-top: 75px;
 }
 .job-preview .iphone-screen .body-right .box {
-    padding: 10px;
+    padding: 20px 10px;
     font-size: 11px;
     font-family: "Open Sans";
     color: #8c7da2;
@@ -55,7 +57,7 @@
 .job-preview .iphone-screen .body-right .box .info {
     text-align: left;
     position: relative;
-    margin-bottom: 5px;
+    margin-bottom: 13px;
 }
 .job-preview .iphone-screen .body-right .box .name {
     color: #f54b5d;
@@ -63,6 +65,7 @@
     width: 135px;
 }
 .job-preview .iphone-screen .body-right .box .place {
+    margin-top: 3px;
     padding-left: 15px;
     background-repeat: no-repeat;
     background-position: 0px 50%;
@@ -81,7 +84,8 @@
 }
 .job-preview .iphone-screen .body-right .image {
     background-size: cover;
-    height: 122px;
+    background-position: center;
+    height: 120px;
     background-color: rgba(0,0,0,0.05);
     border-radius: 3px;
     width: 100%;
@@ -92,119 +96,126 @@
     bottom: 0px;
     left: 0px;
     right: 0px;
-    padding: 5px;
-    text-align: center;
+    padding: 5px 0;
+    text-align: left;
 }
 .job-preview .iphone-screen .body-right .image .benefs .ben {
-    padding: 2px 10px;
-    padding-left: 20px;
+    padding: 2px 10px 2px 20px;
+    min-height: 14px;
+    margin: 0 0 0 8px;
     font-size: 10px;
     background-color: #08b698;
     color: white;
     background-repeat: no-repeat;
-    background-position: 5px 50%;
+    background-position: 5px 49%;
     display: inline-block;
     border-radius: 200px;
     background-image: url('img/Benefit_white.png');
     background-size: 11px;
 }
-.job-preview.iphone-screen .title-section {
-    padding: 16px 0;
-    border-bottom: 1px solid #d1c7df;
+.job-preview .iphone-screen .title-section {
+    padding: 20px 0 15px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    text-align: left;
 }
 .job-preview .iphone-screen .title-section .job_preview-title {
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 16px;
+    line-height: 1.8;
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     color: #f2415f;
 }
 .job-preview .iphone-screen .title-section .job_preview-subtitle {
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 13px;
+    line-height: 1.5;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 400;
+    font-weight: 300;
     color: #796a8f;
 }
 .job-preview .iphone-screen .options-section {
-	padding: 16px 0;
-	border-bottom: 1px solid #d1c7df;
+	padding: 15px 0;
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+    display: block;
+}
+.job-preview .iphone-screen .options-section-half {
+    display: block;
+    float: left;
+    width: 50%;
 }
 .job-preview .iphone-screen .options-section ul {
-	display: inline-block;
     margin-top: 0 !important;
 }
 .job-preview .iphone-screen .options-section ul li {
-	font-size: 10px;
-    line-height: 18px;
-    margin: 5px 5px 5px 0;
-    padding: 3px 8px;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-    display: block;
-    float: left;
-    color: #fff;
-    border-radius: 20px;
-}
-.job-preview .iphone-screen .options-section li.workingHours {
-    background-color: #f9c843;
-}
-.job-preview .iphone-screen .options-section li.sallary {
-    background-color: #4bbf6b;
-}
-.job-preview .iphone-screen .options-section li.typeOfJob {
-    background-color: #e46763;
-}
-.job-preview .iphone-screen .description-section {
-    padding: 16px 0;
-    border-bottom: 1px solid #d1c7df;
-}
-.job-preview .iphone-screen .description-section .job_preview-subtitle {
-    font-size: 12px;
-    line-height: 16px;
+    height: 20px;
+    text-align: left;
+    margin: 5px 0;
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     color: #796a8f;
 }
-.job-preview .iphone-screen .company-section {
-	padding: 16px 0;
-	border-bottom: 1px solid #d1c7df;
+.job-preview .iphone-screen .options-section ul li img {
+    float: left;
 }
-.job-preview .iphone-screen .company-section .job-preview-company-block {
-    margin: 15px 0 -15px;
+.job-preview .iphone-screen .options-section ul li p {
+    float: left;
+    line-height: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    padding-left: 8px;
+}
+.job-preview .iphone-screen .description-section {
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    text-align: left;
+}
+.job-preview .iphone-screen .description-section .job_preview-subtitle {
+    font-size: 14px;
+    line-height: 1.5;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #796a8f;
+    margin-bottom: 5px;
+}
+.job-preview .iphone-screen .description-section .job_preview-description {
+    font-size: 12px;
+    line-height: 1.8;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    color: #9f92b1;
+}
+.job-preview .iphone-screen .company-section {
+	padding: 15px 0;
+    text-align: left;
+	border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 .job-preview .iphone-screen .company-section .iphone-section-title {
     font-size: 12px;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 400;
+    font-weight: 300;
     color: #796a8f;
 }
-.job-preview .iphone-screen .company-section img.company-logo {
-    width: 38px;
-    height: 38px;
-    float: left;
-    margin-right: 15px;
-    border-radius: 50%;
-}
-.job-preview .iphone-screen .company-section .clear {
-    display: inline-block;
-    clear: both;
-    overflow: hidden;
-    width: 100%;
-    height: 1px;
-}
-.job-preview .iphone-screen .company-section h2.location {
+.job-preview .iphone-screen .company-section .location {
     font-size: 12px;
     font-family: 'Open Sans', sans-serif;
-    margin-top: 0;
+    font-weight: 300;
+    color: #9f92b1;
+}
+.job-preview .iphone-screen .company-section .location span {
+    font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
     color: #9f92b1;
 }
 .job-preview .iphone-screen .image-slider {
-    margin-top: 36px;
+    margin-top: 37px;
+}
+.job-preview .iphone-screen .image-slider img {
+    height: 140px!important;
+    width: 100%;
 }
 .job-preview .iphone-screen .bottom-section {
 	border: none;
-    padding: 16px 0;
+    padding: 15px 0;
     text-align: center;
 }
 .job-preview .iphone-screen .bottom-section .iphone-title {
@@ -224,4 +235,16 @@
 .job-preview .iphone-screen .video__el {
 	width: 237px !important;
 	height: 140px !important;
+}
+.job-preview .iphone-screen .section-button {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    color: #fff;
+    background-color: #f2415f;
+    border: none;
+    outline: none;
+    font-size: 12px;
+    padding-top: 12px;
+    font-weight: 400;
 }

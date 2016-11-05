@@ -33,7 +33,7 @@ export default class JobPreviewPopup extends React.Component {
 			job: nextProps.job
 		})
 	}
-   //  get_capture(){
+    // get_capture(){
  		// var video = $( "#videoFile video" );
    //          var time = 15;
    //          var scale = 1;
@@ -64,6 +64,35 @@ export default class JobPreviewPopup extends React.Component {
    //          }, false);
  
    //  }
+
+//    <ul className="options-section-half">
+// 		<li>
+// 			<img width="16" src={require("../img/popup-salary.png")}/><p>{data.payment}€ / Monat</p>
+// 		</li>
+// 		<li>
+// 			<img width="16" src={require("../img/popup-type.png")}/><p>{data.kind}</p>
+// 		</li>
+// 		<li>
+// 			<img width="16" src={require("../img/popup-location.png")}/><p>{data.address.city.name}</p>
+// 		</li>
+// 		<li>
+// 			<img width="16" src={require("../img/popup-time.png")}/><p>{data.working_hours}</p>
+// 		</li>
+// 	</ul>
+// 	<ul className="options-section-half">
+// 		<li>
+// 			<img width="16" src={require("../img/popup-vacation.png")}/><p>{data.benefit_1}</p>
+// 		</li>
+// 		<li>
+// 			<img width="16" src={require("../img/popup-bonus.png")}/><p>{data.benefit_2}</p>
+// 		</li>
+// 		{data.top_job ? (
+// 			<li>
+// 				<img width="16" src={require("../img/popup-top.png")}/><p>Top job</p>
+// 			</li>
+// 		) : null}
+// 	</ul>
+
 	render() {
 		console.log("user JobStore:", JobStore.get("currentUser"))
 		var avatar = null;
@@ -76,10 +105,10 @@ export default class JobPreviewPopup extends React.Component {
 		var preview_html = <div></div>
 		if (this.state.job && this.state.job.title != "") {
 			var image_list = data.image_list.map(function(image, i) {
-				return <img key={i} width="237" height="140" src={image.image} />
-			})
+				return <img key={i} src={image.image} />
+			});
 			if (data.video) {
-				image_list.push(<img width="237" height="140" key={3} src={data.video.preview_image_list[0].image} />)
+				image_list.push(<img width="238" height="120" key={3} src={data.video.preview_image_list[0].image} />)
 			}
 
 			preview_html = (
@@ -87,72 +116,91 @@ export default class JobPreviewPopup extends React.Component {
 					<div className="iphone-screen">
 						<Carousel decorators={CustomDecoratorsLarge}>
 							<div className="left-iphone-screen">
-								<div className="header"></div>
+								<div className="header-left"></div>
 								<div className="image-slider">
 									<Carousel decorators={CustomDecorators}>
 										{image_list}
 									</Carousel>
 								</div>
-								<div className="body">
+								<div className="body-left">
 									<div className="title-section">
 										<h2 className="job_preview-title">
-											<span className="job-preview-title">{data.title}</span> in <span className="job-preview-location">{data.address.city.name}</span>
+											<span className="job-preview-title">{data.title}</span>
 										</h2>
-										<h3 className="job_preview-subtitle">ab {data.vacancy_start}</h3>
+										<h3 className="job_preview-subtitle">Zeitraum: {data.vacancy_start}</h3>
 									</div>
 									<div className="options-section">
 										<ul>
-											<li className="workingHours">
-												<i className="fa fa-clock-o" aria-hidden="true"></i> <span>{data.working_hours}H per day</span></li>
-											<li className="sallary">
-												<i className="fa fa-clock-o" aria-hidden="true"></i> <span>{data.payment}€ pro Monat</span></li>
-											<li className="typeOfJob"><i className="fa fa-clock-o" aria-hidden="true"></i> <span>{data.kind}</span></li>
+											<li>
+												<img width="20" src={require("../img/popup-salary.png")}/><p>{data.payment}€ / Monat</p>
+											</li>
+											<li>
+												<img width="20" src={require("../img/popup-type.png")}/><p>{data.kind}</p>
+											</li>
+											<li>
+												<img width="20" src={require("../img/popup-location.png")}/><p>{data.address.city.name}</p>
+											</li>
+											<li>
+												<img width="20" src={require("../img/popup-time.png")}/><p>{data.working_hours}</p>
+											</li>
+											<li>
+												<img width="20" src={require("../img/popup-vacation.png")}/><p>{data.benefit_1}</p>
+											</li>
+											<li>
+												<img width="20" src={require("../img/popup-bonus.png")}/><p>{data.benefit_2}</p>
+											</li>
+											{data.top_job ? (
+												<li>
+													<img width="20" src={require("../img/popup-top.png")}/><p>Top job</p>
+												</li>
+											) : null}
 										</ul>
 									</div>
-									<div className="description-section">
-										<h3 className="job_preview-subtitle">Description</h3>
-									</div>
 									<div className="company-section">
-										<div className="job-preview-company-block">
-											<img src="http://dev.jobufo.com/media/logos/6a6b9657-9eb.png" className="company-logo" alt="" />
-											<h2 className="iphone-section-title">{data.company.name}</h2>
-											<h2 className="location">
-												<i className="fa fa-map-marker" aria-hidden="true"></i> <span className="align-left">{data.address.city.name}</span>
-											</h2>
-											<div className="clear"></div>
-										</div>
+										<h3 className="iphone-section-title">{data.company.name}</h3>
+										<h3 className="location">
+											<i className="fa fa-map-marker" aria-hidden="true"></i> <span>{data.address.city.name}</span>
+										</h3>
+									</div>
+									<div className="description-section">
+										<h3 className="job_preview-subtitle">Detaillierte Beschreibung</h3>
+										<p className="job_preview-description">{data.description}</p>
+									</div>
+									<div className="description-section">
+										<h3 className="job_preview-subtitle">Unternehmensinformationen</h3>
+										<img src={data.company.logo} width="45" height="45" alt="" />
 									</div>
 									<div className="bottom-section">
-										<h2 className="iphone-title">Diese Anzeige wurde zur Verfügung gestellt von:</h2>
+										<h3 className="iphone-title">Diese Anzeige wurde zur Verfügung gestellt von:</h3>
 										<img className="job-provider" src={require("../img/job-provider.png")} alt=""/>
 									</div>
 								</div>
+								<div className="section-button">APPLY</div>
 							</div>
 							<div className="right-iphone-screen">
 								<div className="header-right"></div>
 								<div className="body-right">
-									<div className="box" id="box_edit">
+									<div className="box">
 										<div className="info">
 											<div className="name">{data.title}</div>
 											<div className="company">{data.company.name}</div>
 											<div className="place">{data.address.city.name}</div>
 											<div className="avatar">
-												<img src={avatar} />
+												<img src={data.company.logo} />
 											</div>
 										</div>
 										{data.image_list[0] != null ? (
 											<div className="image" style={{backgroundImage: "url("+data.image_list[0].image+")"}} >
 												<div className="benefs">
-													<div className="benefit_1 ben">123</div>
-													<div className="benefit_2 ben">123</div>
+													<div className="benefit_1 ben">{data.benefit_1}</div>
+													<div className="benefit_2 ben">{data.benefit_1}</div>
 												</div>
 											</div>) : (<div className="image">
 														    <div className="benefs">
-																<div className="benefit_1 ben">123</div>
-																<div className="benefit_2 ben">123</div>
+																<div className="benefit_1 ben">{data.benefit_1}</div>
+																<div className="benefit_2 ben">{data.benefit_1}</div>
 															</div>
 													    </div>)}
-
 									</div>
 									<div className="box">
 										<div className="info">
@@ -163,7 +211,6 @@ export default class JobPreviewPopup extends React.Component {
 												<img src={require("../img/video.jpg")} />
 											</div>
 										</div>
-
 										<div className="image" style={{backgroundImage: "url("+require('../img/android.jpg')+")"}}>
 											<div className="benefs">
 												<div className="benefit_1 ben">123</div>

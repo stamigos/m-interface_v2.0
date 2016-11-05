@@ -35,7 +35,7 @@ const CustomDecorators = [
         return {
           position: 'relative',
           margin: 0,
-          top: -10,
+          top: 10,
           padding: 0
         }
       },
@@ -51,9 +51,10 @@ const CustomDecorators = [
           background: 'transparent',
           color: active ? 'white' : 'black',
           cursor: 'pointer',
-          padding: 10,
+          padding: '0 10px',
+          textAlign: 'center',
           outline: 0,
-          fontSize: 36,
+          fontSize: 30,
           opacity: active ? 1 : 0.7
         }
       }
