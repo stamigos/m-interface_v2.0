@@ -51,7 +51,7 @@ const CustomDecorators = [
           background: 'transparent',
           color: active ? 'white' : 'black',
           cursor: 'pointer',
-          padding: '0 10px',
+          padding: '0 5px',
           textAlign: 'center',
           outline: 0,
           fontSize: 30,

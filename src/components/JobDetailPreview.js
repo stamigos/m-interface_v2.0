@@ -130,37 +130,49 @@ export default class JobPreviewPopup extends React.Component {
 										<h3 className="job_preview-subtitle">Zeitraum: {data.vacancy_start}</h3>
 									</div>
 									<div className="options-section">
-										<ul>
+										<ul className="options-section-half">
 											<li>
-												<img width="20" src={require("../img/popup-salary.png")}/><p>{data.payment}€ / Monat</p>
+												<p><img width="15" align="top" src={require("../img/popup-salary.png")}/>
+												{data.payment}€ / Monat</p>
 											</li>
 											<li>
-												<img width="20" src={require("../img/popup-type.png")}/><p>{data.kind}</p>
+												<p><img width="15" align="middle" src={require("../img/popup-type.png")}/>
+												{data.kind}</p>
 											</li>
 											<li>
-												<img width="20" src={require("../img/popup-location.png")}/><p>{data.address.city.name}</p>
+												<p><img width="15" align="middle" src={require("../img/popup-location.png")}/>
+												{data.address.city.name}</p>
 											</li>
 											<li>
-												<img width="20" src={require("../img/popup-time.png")}/><p>{data.working_hours}</p>
+												<p><img width="15" align="middle" src={require("../img/popup-time.png")}/>
+												{data.working_hours}</p>
+											</li>
+										</ul>
+										<ul className="options-section-half">
+											<li>
+												<p><img width="15" align="middle" src={require("../img/popup-bonus.png")}/>
+												{data.benefit_1}</p>
 											</li>
 											<li>
-												<img width="20" src={require("../img/popup-bonus.png")}/><p>{data.benefit_1}</p>
-											</li>
-											<li>
-												<img width="20" src={require("../img/popup-vacation.png")}/><p>{data.benefit_2}</p>
+												<p><img width="15" align="middle" src={require("../img/popup-vacation.png")}/>
+												{data.benefit_2}</p>
 											</li>
 											{data.top_job ? (
 												<li>
-													<img width="20" src={require("../img/popup-top.png")}/><p>Top job</p>
+													<p><img width="15" align="middle" src={require("../img/popup-top.png")}/>
+													Top job</p>
 												</li>
 											) : null}
 										</ul>
+										<div className="clear"></div>
 									</div>
 									<div className="company-section">
 										<h3 className="iphone-section-title">{data.company.name}</h3>
-										<h3 className="location">
-											<i className="fa fa-map-marker" aria-hidden="true"></i> <span>{data.address.city.name}</span>
+										<h3 className="description-location">
+											<i className="fa fa-map-marker" aria-hidden="true"></i> <span>{data.company.address.city.name}</span>
 										</h3>
+										<h3 className="description-date">{data.vacancy_start}</h3>
+										<div className="clear"></div>
 									</div>
 									<div className="description-section">
 										<h3 className="job_preview-subtitle">Detaillierte Beschreibung</h3>
@@ -168,7 +180,20 @@ export default class JobPreviewPopup extends React.Component {
 									</div>
 									<div className="description-section">
 										<h3 className="job_preview-subtitle">Unternehmensinformationen</h3>
-										<img src={data.company.logo} width="45" height="45" alt="" />
+										<div className="image-left">
+											<img src={data.company.logo} width="45" height="45" alt="" />
+										</div>
+										<div className="text-right">
+											<h3 className="iphone-section-title">{data.company.name}</h3>
+											<h3 className="description-location">
+												<i className="fa fa-map-marker" aria-hidden="true"></i> <span>{data.company.address.city.name}</span>
+											</h3>
+											<h3 className="description-category">{data.company.category.name}</h3>
+											<div className="description-links">
+
+											</div>
+										</div>
+										<div className="clear"></div>
 									</div>
 									<div className="bottom-section">
 										<h3 className="iphone-title">Diese Anzeige wurde zur Verfügung gestellt von:</h3>
