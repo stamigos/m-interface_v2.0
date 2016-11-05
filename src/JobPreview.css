@@ -42,9 +42,10 @@
 }
 .job-preview .iphone-screen .title-section .job_preview-title {
     font-size: 14px;
-    line-height: 1.8;
+    line-height: 1.5;
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
+    word-wrap: break-word;
     color: #f2415f;
 }
 .job-preview .iphone-screen .title-section .job_preview-subtitle {
@@ -53,9 +54,10 @@
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
     color: #796a8f;
+    margin-top: 3px;
 }
 .job-preview .iphone-screen .options-section {
-	padding: 15px 0;
+	padding: 10px 0;
     min-height: 100px;
 	border-bottom: 1px solid rgba(0,0,0,0.1);
     display: block;
@@ -69,18 +71,21 @@
     margin-top: 0 !important;
 }
 .job-preview .iphone-screen .options-section ul li {
-    text-align: left;
     margin: 5px 0;
+}
+.job-preview .iphone-screen .options-section ul li .text {
+    padding-left: 20px;
+    padding-right: 5px;
+    text-align: left;
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
+    font-size: 10px;
+    line-height: 1.5;
+    word-wrap: break-word;
     color: #796a8f;
 }
-.job-preview .iphone-screen .options-section ul li p {
-    font-size: 10px;
-    font-weight: 400;
-}
-.job-preview .iphone-screen .options-section ul li p img {
-    margin-right: 3px;
+.job-preview .iphone-screen .options-section ul li img {
+    float: left;
 }
 .job-preview .iphone-screen .description-section {
     padding: 15px 0;
@@ -93,7 +98,7 @@
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     color: #796a8f;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 .job-preview .iphone-screen .description-section .job_preview-description {
     font-size: 11px;
@@ -148,6 +153,7 @@
 }
 .job-preview .iphone-screen .description-links .description-links-item {
     float: left;
+    height: 30px;
     margin-right: 10px;
 }
 .job-preview .iphone-screen .description-links img {
@@ -220,6 +226,7 @@
 .job-preview .iphone-screen .body-right .box {
     padding: 20px 10px;
     font-size: 11px;
+    line-height: 1.5;
     font-family: "Open Sans";
     color: #8c7da2;
     border-bottom: 1px solid rgba(0,0,0,0.1);
@@ -232,7 +239,9 @@
 .job-preview .iphone-screen .body-right .box .name {
     color: #f54b5d;
     font-weight: 600;
-    width: 135px;
+    width: 145px;
+    margin-bottom: 3px;
+    word-wrap: break-word;
 }
 .job-preview .iphone-screen .body-right .box .place {
     margin-top: 3px;
@@ -266,13 +275,12 @@
     bottom: 0px;
     left: 0px;
     right: 0px;
-    padding: 5px 0;
     text-align: left;
 }
 .job-preview .iphone-screen .body-right .image .benefs .ben {
     padding: 2px 10px 2px 20px;
     min-height: 14px;
-    margin: 0 0 0 8px;
+    margin: 0 0 5px 8px;
     font-size: 10px;
     background-color: #08b698;
     color: white;

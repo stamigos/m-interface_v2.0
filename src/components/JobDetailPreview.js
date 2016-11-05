@@ -132,35 +132,42 @@ export default class JobPreviewPopup extends React.Component {
 									<div className="options-section">
 										<ul className="options-section-half">
 											<li>
-												<p><img width="15" align="top" src={require("../img/popup-salary.png")}/>
-												{data.payment}€ / Monat</p>
+												<img width="15" src={require("../img/popup-salary.png")}/>
+												<div className="text">{data.payment}</div>
+												<div className="clear"></div>
 											</li>
 											<li>
-												<p><img width="15" align="middle" src={require("../img/popup-type.png")}/>
-												{data.kind}</p>
+												<img width="15" src={require("../img/popup-type.png")}/>
+												<div className="text">{data.kind}</div>
+												<div className="clear"></div>
 											</li>
 											<li>
-												<p><img width="15" align="middle" src={require("../img/popup-location.png")}/>
-												{data.address.city.name}</p>
+												<img width="15" src={require("../img/popup-location.png")}/>
+												<div className="text">{data.address.city.name}</div>
+												<div className="clear"></div>
 											</li>
 											<li>
-												<p><img width="15" align="middle" src={require("../img/popup-time.png")}/>
-												{data.working_hours}</p>
+												<img width="15" src={require("../img/popup-time.png")}/>
+												<div className="text">{data.working_hours}</div>
+												<div className="clear"></div>
 											</li>
 										</ul>
 										<ul className="options-section-half">
 											<li>
-												<p><img width="15" align="middle" src={require("../img/popup-bonus.png")}/>
-												{data.benefit_1}</p>
+												<img width="15" src={require("../img/popup-benefit1.png")}/>
+												<div className="text">{data.benefit_1}</div>
+												<div className="clear"></div>
 											</li>
 											<li>
-												<p><img width="15" align="middle" src={require("../img/popup-vacation.png")}/>
-												{data.benefit_2}</p>
+												<img width="15" src={require("../img/popup-benefit2.png")}/>
+												<div className="text">{data.benefit_2}</div>
+												<div className="clear"></div>
 											</li>
 											{data.top_job ? (
 												<li>
-													<p><img width="15" align="middle" src={require("../img/popup-top.png")}/>
-													Top job</p>
+													<img width="15" src={require("../img/popup-top.png")}/>
+													<div className="text">Top job</div>
+													<div className="clear"></div>
 												</li>
 											) : null}
 										</ul>
