@@ -178,7 +178,10 @@
     background-color: rgba(0,0,0,0.05);
     position: relative; 
 }
-.job-preview .iphone-screen .image-slider img {
+.job-preview .iphone-screen .image-slider .image-slider-carousel {
+    height: 120px!important;
+}
+.job-preview .iphone-screen .image-slider .image-slider-carousel img {
     min-height: 120px;
     width: 100%;
 }
@@ -186,12 +189,12 @@
     position: absolute;
     bottom: 0;
     right: 0;
+    height: 30px;
     top: calc(100% - 40px);
 }
 .job-preview .iphone-screen .image-slider .video-controls img {
     float: left;
     width: 30px;
-    min-height: 30px;
     height: 30px;
     margin: 0 10px 0 0;
     border-radius: 50%;

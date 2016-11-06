@@ -146,7 +146,7 @@ export default class JobPreviewPopup extends React.Component {
 							<div className="left-iphone-screen">
 								<div className="header-right"></div>
 								<div className="image-slider">
-									<Carousel decorators={CustomDecorators}>
+									<Carousel className="image-slider-carousel" decorators={CustomDecorators}>
 										{image_list}
 									</Carousel>
 									<div className="video-controls">
