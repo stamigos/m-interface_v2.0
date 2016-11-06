@@ -61,7 +61,6 @@
 }
 .job-preview .iphone-screen .options-section {
 	padding: 10px 0;
-    min-height: 100px;
 	border-bottom: 1px solid rgba(0,0,0,0.1);
     display: block;
 }
@@ -173,28 +172,29 @@
 }
 .job-preview .iphone-screen .image-slider {
     margin-top: 37px;
-    height: 140px;
+    height: 120px;
     width: 100%;
+    overflow: hidden;
     background-color: rgba(0,0,0,0.05);
     position: relative; 
+}
+.job-preview .iphone-screen .image-slider img {
+    min-height: 120px;
+    width: 100%;
 }
 .job-preview .iphone-screen .image-slider .video-controls {
     position: absolute;
     bottom: 0;
     right: 0;
-    top: 100px;
+    top: calc(100% - 40px);
 }
 .job-preview .iphone-screen .image-slider .video-controls img {
     float: left;
     width: 30px;
-    height: 30px!important;
+    min-height: 30px;
+    height: 30px;
     margin: 0 10px 0 0;
     border-radius: 50%;
-}
-.job-preview .iphone-screen .image-slider img {
-    height: 140px!important;
-    width: auto;
-    margin: 0 auto;
 }
 .job-preview .iphone-screen .bottom-section {
 	border: none;
@@ -226,6 +226,9 @@
 .job-preview .iphone-screen .description-section .image-left {
     float: left;
     height: 45px;
+}
+.job-preview .iphone-screen .description-section .image-left img {
+    border-radius: 50%;
 }
 .job-preview .iphone-screen .description-section .text-right {
     margin-left: 55px;

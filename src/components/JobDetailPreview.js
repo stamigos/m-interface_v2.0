@@ -79,7 +79,7 @@ export default class JobPreviewPopup extends React.Component {
 				return <img key={i} src={image.image} />
 			});
 			if (data.video) {
-				image_list.push(<img width="238" height="120" key={3} src={data.video.preview_image_list[0].image} />)
+				image_list.push(<img key={3} src={data.video.preview_image_list[0].image} />)
 			}
 
 			preview_html = (
@@ -150,8 +150,8 @@ export default class JobPreviewPopup extends React.Component {
 										{image_list}
 									</Carousel>
 									<div className="video-controls">
-										<img width="30" src={require("../img/play-button.png")} />
-										<img width="30" src={require("../img/360.png")} />
+										<img width="30" height="30" src={require("../img/play-button.png")} />
+										<img width="30" height="30" src={require("../img/360.png")} />
 									</div>
 								</div>
 								<div className="body-right">
@@ -237,7 +237,9 @@ export default class JobPreviewPopup extends React.Component {
 											<h3 className="description-location">
 												<i className="fa fa-map-marker" aria-hidden="true"></i> <span>{data.company.address.city.name}</span>
 											</h3>
-											<h3 className="description-category">{data.company.category.name}</h3>
+											{data.company.category != null ? (
+												<h3 className="description-category">{data.company.category.name}</h3>
+											) : null}
 											<div className="description-links">
 												<ul>
 													<li className="description-links-item">
