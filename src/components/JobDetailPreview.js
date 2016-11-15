@@ -34,6 +34,9 @@ const CarouselLarge = React.createClass({
 		var image_list = data.image_list.map(function(image, i) {
 			return <img key={i} src={image.image} />
 		});
+		// if (data.video) {
+		// 	image_list.push(<img key={3} src={data.video.preview_image_list[0].image} />)
+		// }
 
 		return (
 			<Carousel decorators={CustomDecoratorsLarge} dragging={false} ref="carousel">
@@ -42,7 +45,7 @@ const CarouselLarge = React.createClass({
 					<div className="body-left">
 						<div className="box">
 							<div className="info">
-								<div className="name" onClick={(e)=>this.handlesNext(e)}>{data.title}</div>
+								<div className="name name-clickable" onClick={(e)=>this.handlesNext(e)}>{data.title}</div>
 								<div className="company">{data.company.name}</div>
 								<div className="place">{data.address.city.name}</div>
 								<div className="avatar">

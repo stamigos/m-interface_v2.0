@@ -280,6 +280,8 @@
     line-height: 1.5;
     width: 145px;
     margin-bottom: 3px;
+}
+.job-preview .iphone-screen .body-left .box .name.name-clickable {
     cursor: pointer;
 }
 .job-preview .iphone-screen .body-left .box .company {
