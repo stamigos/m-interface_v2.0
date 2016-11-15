@@ -65,6 +65,15 @@ export default class JobPreviewPopup extends React.Component {
  
    //  }
 
+// <div className="company-section">
+// 	<h3 className="iphone-section-title">{data.company.name}</h3>
+// 	<h3 className="description-location">
+// 		<i className="fa fa-map-marker" aria-hidden="true"></i> <span>{data.company.address.city.name}</span>
+// 	</h3>
+// 	<h3 className="description-date">{data.vacancy_start}</h3>
+// 	<div className="clear"></div>
+// </div>
+
 	render() {
 		console.log("user JobStore:", JobStore.get("currentUser"))
 		var avatar = null;
@@ -213,14 +222,6 @@ export default class JobPreviewPopup extends React.Component {
 												</li>
 											) : null}
 										</ul>
-										<div className="clear"></div>
-									</div>
-									<div className="company-section">
-										<h3 className="iphone-section-title">{data.company.name}</h3>
-										<h3 className="description-location">
-											<i className="fa fa-map-marker" aria-hidden="true"></i> <span>{data.company.address.city.name}</span>
-										</h3>
-										<h3 className="description-date">{data.vacancy_start}</h3>
 										<div className="clear"></div>
 									</div>
 									<div className="description-section">
