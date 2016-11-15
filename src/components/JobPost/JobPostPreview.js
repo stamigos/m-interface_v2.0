@@ -25,11 +25,19 @@ const CarouselLarge = React.createClass({
 	render() {
 		var data = this.props.job;
 		var image_list = data.image_list.map(function(image, i) {
-			return <img key={i} src={image.image} />
+			return <img className="image-slider-img" key={i} src={image.image} />
 		});
-		// if (data.video) {
-		// 	image_list.push(<img key={3} src={data.video.preview_image_list[0].image} />)
-		// }
+		if (data.video) {
+			image_list.unshift(
+				<div className="video-container">
+					<img className="image-slider-img" key={3} src={data.video.preview_image_list[0].image} />
+					<div className="video-controls">
+						<img width="30" height="30" src={require("../img/play-button.png")} />
+						<img width="30" height="30" src={require("../img/360.png")} />
+					</div>
+				</div>
+			)
+		}
 
 		return (
 			<Carousel decorators={CustomDecoratorsLarge} dragging={false} ref="carousel">
@@ -98,10 +106,6 @@ const CarouselLarge = React.createClass({
 						<Carousel className="image-slider-carousel" decorators={CustomDecorators}>
 							{image_list}
 						</Carousel>
-						<div className="video-controls">
-							<img width="30" height="30" src={require("../img/play-button.png")} />
-							<img width="30" height="30" src={require("../img/360.png")} />
-						</div>
 					</div>
 					<div className="body-right">
 						<div className="title-section">

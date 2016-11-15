@@ -193,18 +193,24 @@
 .job-preview .iphone-screen .image-slider .image-slider-carousel {
     height: 120px!important;
 }
-.job-preview .iphone-screen .image-slider .image-slider-carousel img {
+.job-preview .iphone-screen .image-slider .image-slider-carousel img.image-slider-img {
     min-height: 120px;
     width: 100%;
 }
-.job-preview .iphone-screen .image-slider .video-controls {
+.job-preview .iphone-screen .video-container {
+    height: 120px;
+    width: 100%;
+    overflow: hidden;
+    position: relative; 
+}
+.job-preview .iphone-screen .video-container .video-controls {
     position: absolute;
     bottom: 0;
     right: 0;
     height: 30px;
     top: calc(100% - 40px);
 }
-.job-preview .iphone-screen .image-slider .video-controls img {
+.job-preview .iphone-screen .video-container .video-controls img {
     float: left;
     width: 30px;
     height: 30px;
