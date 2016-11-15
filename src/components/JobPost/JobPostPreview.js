@@ -24,6 +24,9 @@ const CarouselLarge = React.createClass({
 
 	render() {
 		var data = this.props.job;
+		if (!JobStore.get("currentUserLoading")) {
+        	avatar = JobStore.get('currentUser').ufouser.avatar;
+    	}
 		var image_list = data.image_list.map(function(image, i) {
 			return <img className="image-slider-img" key={i} src={image.image} />
 		});
@@ -50,7 +53,7 @@ const CarouselLarge = React.createClass({
 								<div className="company">{data.company.name}</div>
 								<div className="place">{data.address.city.name}</div>
 								<div className="avatar">
-									<img src={data.company.logo} />
+									<img src={avatar} />
 								</div>
 							</div>
 							{data.image_list[0] != null ? (
