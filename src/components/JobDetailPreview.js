@@ -36,7 +36,7 @@ const CarouselLarge = React.createClass({
 		});
 
 		return (
-			<Carousel decorators={CustomDecoratorsLarge} ref="carousel">
+			<Carousel decorators={CustomDecoratorsLarge} dragging={false} ref="carousel">
 				<div className="left-iphone-screen">
 					<div className="header-left"></div>
 					<div className="body-left">
