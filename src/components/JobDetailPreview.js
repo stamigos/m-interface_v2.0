@@ -2,7 +2,6 @@ import React from 'react'
 import Carousel from 'nuka-carousel'
 import Img from 'react-image-load'
 import Video from 'react-html5video'
-import UserAvatar from 'react-user-avatar'
 
 //Mixin
 import mixins from 'es6-mixins';
@@ -114,7 +113,9 @@ const CarouselLarge = React.createClass({
 					<div className="body-right">
 						<div className="title-section">
 							<h2 className="job_preview-title">{data.title}</h2>
-							<h3 className="job_preview-subtitle">Zeitraum: {data.vacancy_start}</h3>
+							{data.vacancy_start ? (
+								<h3 className="job_preview-subtitle">Zeitraum: {data.vacancy_start}</h3>
+							) : null}
 						</div>
 						<div className="options-section">
 							<ul>
@@ -268,38 +269,6 @@ export default class JobPreviewPopup extends React.Component {
 		}
 	}
 }
-
-    // get_capture(){
- 		// var video = $( "#videoFile video" );
-   //          var time = 15;
-   //          var scale = 1;
-
-   //          var video_obj = null;
-
-   //     	    video.addEventListener('loadedmetadata', function() {
-   //               this.currentTime = time;
-   //               video_obj = this;
-
-   //          }, false);
-
-   //          video.addEventListener('loadeddata', function() {
-   //               var video = document.getElementById('video');
-
-   //               var canvas = document.createElement("canvas");
-   //               canvas.width = video.videoWidth * scale;
-   //               canvas.height = video.videoHeight * scale;
-   //               canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-
-   //               var img = document.createElement("img");
-   //              img.src = canvas.toDataURL();
-   //              console.log("toDataURL:", canvas.toDataURL())
-   //              // $('#thumbnail').append(img);
-
-   //              video_obj.currentTime = 0;
-
-   //          }, false);
- 
-   //  }
 
 // <ul className="options-section-half ul-left">
 // 	{data.payment != "" ? (

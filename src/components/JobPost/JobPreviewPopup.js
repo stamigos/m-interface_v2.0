@@ -31,6 +31,21 @@ const CarouselLarge = React.createClass({
 		var image_list = data.image_list.map(function(image, i) {
 			return <img className="image-slider-img" key={i} src={image.image} />
 		});
+		if (data.video) {
+			image_list.unshift(
+				<div className="video-container">
+					<Video>
+						<source type="video/mp4" src={"data:video/mp4;base64," + data.video.video} /> 
+						<source type="video/ogg" src={"data:video/ogg;base64," + data.video.video} /> 
+						<source type="video/webm" src={"data:video/webm;base64," + data.video.video} />
+					</Video>
+					<div className="video-controls">
+						<img width="30" height="30" src={require("../../img/play-button.png")} />
+						<img width="30" height="30" src={require("../../img/360.png")} />
+					</div>
+				</div>
+			)
+		}
 
 		return (
 			<Carousel decorators={CustomDecoratorsLarge} dragging={false} ref="carousel">
@@ -97,26 +112,15 @@ const CarouselLarge = React.createClass({
 					</div>
 					<div className="image-slider">
 						<Carousel decorators={CustomDecorators} className="image-slider-carousel">
-							{data.video ? (
-								<div className="video-container">
-									<Video>
-										<source type="video/mp4" src={data.video.video} /> 
-										<source type="video/ogg" src={data.video.video} /> 
-										<source type="video/webm" src={data.video.video} /> 
-									</Video>
-									<div className="video-controls">
-										<img width="30" height="30" src={require("../../img/play-button.png")} />
-										<img width="30" height="30" src={require("../../img/360.png")} />
-									</div>
-								</div>
-							) : null}
 							{image_list}
 						</Carousel>
 					</div>
 					<div className="body-right">
 						<div className="title-section">
 							<h2 className="job_preview-title">{data.title}</h2>
-							<h3 className="job_preview-subtitle">Zeitraum: {data.vacancy_start}</h3>
+							{data.vacancy_start ? (
+								<h3 className="job_preview-subtitle">Zeitraum: {data.vacancy_start}</h3>
+							) : null}
 						</div>
 						<div className="options-section">
 							<ul>
@@ -230,6 +234,8 @@ export default class JobPreviewPopup extends React.Component {
 				}, 
 				payment: '',
 				working_hours: '', 
+				benefit_1: '',
+				benefit_2: '',
 				publication_date: ''
 			},
 			subsidiary: {
@@ -303,34 +309,3 @@ export default class JobPreviewPopup extends React.Component {
 			);
 	}
 }
-//  get_capture(){
- 		// var video = $( "#videoFile video" );
-   //          var time = 15;
-   //          var scale = 1;
-
-   //          var video_obj = null;
-
-   //     	    video.addEventListener('loadedmetadata', function() {
-   //               this.currentTime = time;
-   //               video_obj = this;
-
-   //          }, false);
-
-   //          video.addEventListener('loadeddata', function() {
-   //               var video = document.getElementById('video');
-
-   //               var canvas = document.createElement("canvas");
-   //               canvas.width = video.videoWidth * scale;
-   //               canvas.height = video.videoHeight * scale;
-   //               canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-
-   //               var img = document.createElement("img");
-   //              img.src = canvas.toDataURL();
-   //              console.log("toDataURL:", canvas.toDataURL())
-   //              // $('#thumbnail').append(img);
-
-   //              video_obj.currentTime = 0;
-
-   //          }, false);
- 
-   //  }

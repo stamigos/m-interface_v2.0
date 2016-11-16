@@ -192,6 +192,7 @@
 }
 .job-preview .iphone-screen .image-slider .image-slider-carousel {
     height: 120px!important;
+    width: 100%;
 }
 .job-preview .iphone-screen .image-slider .image-slider-carousel img.image-slider-img {
     min-height: 120px;
