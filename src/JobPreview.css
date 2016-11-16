@@ -203,6 +203,11 @@
     overflow: hidden;
     position: relative; 
 }
+.job-preview .iphone-screen .video-container Video {
+    min-height: 120px;
+    width: 100%;
+    cursor: default;
+}
 .job-preview .iphone-screen .video-container .video-controls {
     position: absolute;
     bottom: 0;

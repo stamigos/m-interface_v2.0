@@ -9,7 +9,6 @@ import JobPreviewPopup from '../components/JobPost/JobPreviewPopup'
 
 import { getMonth, formatCheckFromDate } from '../utils'
 
-
 class JobEditContent extends React.Component {
 	constructor(props) {
 		super(props);
@@ -36,6 +35,8 @@ class JobEditContent extends React.Component {
 			payment: this.props.job.payment,
 			working_hours: this.props.job.working_hours,
 			image_list: this.props.job.image_list,
+			benefit_1: this.props.job.benefit_1,
+			benefit_2: this.props.job.benefit_2,
 			video: this.props.job.video ? this.props.job.video.preview_image_list[0] : null
 			}
 	}
@@ -115,6 +116,16 @@ class JobEditContent extends React.Component {
 		this.setState({
 			working_hours: e.target.value
 		})
+	}
+	handleBenefit_1(e) {
+		this.setState({
+			benefit_1: e.target.value
+		});
+	}
+	handleBenefit_2(e) {
+		this.setState({
+			benefit_2: e.target.value
+		});
 	}
 	openVacancyDetail() {
 		this.props.openVacancyDetail();
@@ -232,6 +243,7 @@ class JobEditContent extends React.Component {
 									</div>
 							</div>)
 		}
+		var number = this.state.benefit_1.length + this.state.benefit_2.length;
 		return (
 			<div className="job-post-content">
 				<div className="post-job-content-header align-center">
@@ -299,8 +311,17 @@ class JobEditContent extends React.Component {
 						<div className="clear"></div>
 						<input value={this.state.payment} onChange={this.handleSalary.bind(this)} type="text" name="Salary" id="Salary" className="Salary" placeholder="Bezahlung" />
 						<div className="clear"></div>
-						
-
+						<div className="benefits">
+							<div className="half Benefit">
+								<input value={this.state.benefit_1} onChange={this.handleBenefit_1.bind(this)} type='text' className="half benefit_1" placeholder="Job Vorteil 1" name="benefit_1" />
+								<p>Maximale Zeichen: 35</p>
+							</div>
+							<div className="half right Benefit">
+								<input value={this.state.benefit_2} onChange={this.handleBenefit_2.bind(this)} type='text' className="half right benefit_2" placeholder="Job Vorteil 2" name="benefit_2"  />
+								<p><b>{number}</b> / 35</p>	
+							</div>
+							<div className="clear"></div>
+						</div>
 						<div className="half">
 							<DatePicker dateFormat="YYYY-MM-DD" 
 										className="date datePicker half" 

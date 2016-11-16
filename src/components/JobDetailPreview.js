@@ -60,10 +60,10 @@ const CarouselLarge = React.createClass({
 							{data.image_list[0] != null ? (
 								<div className="image" style={{backgroundImage: "url("+data.image_list[0].image+")"}} >
 									<div className="benefs">
-										{data.benefit_1 != "" ? (
+										{data.benefit_1 ? (
 											<div className="ben">{data.benefit_1}</div>
 										) : null}
-										{data.benefit_2 != "" ? (
+										{data.benefit_2 ? (
 											<div className="ben">{data.benefit_1}</div>
 										) : null}
 										<div className="clear"></div>
@@ -72,10 +72,10 @@ const CarouselLarge = React.createClass({
 							) : (
 								<div className="image">
 									<div className="benefs">
-										{data.benefit_1 != "" ? (
+										{data.benefit_1 ? (
 											<div className="ben">{data.benefit_1}</div>
 										) : null}
-										{data.benefit_2 != "" ? (
+										{data.benefit_2 ? (
 											<div className="ben">{data.benefit_1}</div>
 										) : null}
 										<div className="clear"></div>
@@ -107,53 +107,53 @@ const CarouselLarge = React.createClass({
 						<div className="arrow-back" onClick={(e)=>this.handlesPrev(e)}></div>
 					</div>
 					<div className="image-slider">
-						<Carousel className="image-slider-carousel" decorators={CustomDecorators}>
+						<Carousel decorators={CustomDecorators} className="image-slider-carousel">
 							{image_list}
 						</Carousel>
 					</div>
 					<div className="body-right">
 						<div className="title-section">
 							<h2 className="job_preview-title">{data.title}</h2>
-							<h3 className="job_preview-subtitle">Zeitraum: {data.publication_date}</h3>
+							<h3 className="job_preview-subtitle">Zeitraum: {data.vacancy_start}</h3>
 						</div>
 						<div className="options-section">
 							<ul>
-								{data.payment != "" ? (
+								{data.payment ? (
 									<li>
 										<img width="15" src={require("../img/popup-salary.png")}/>
 										<div className="text">{data.payment}</div>
 										<div className="clear"></div>
 									</li>
 								) : null}
-								{data.kind != "" ? (
+								{data.kind ? (
 									<li>
 										<img width="15" src={require("../img/popup-type.png")}/>
 										<div className="text">{data.kind}</div>
 										<div className="clear"></div>
 									</li>
 								) : null}
-								{data.address.city.name != "" ? (
+								{data.address.city.name ? (
 									<li>
 										<img width="15" src={require("../img/popup-location.png")}/>
 										<div className="text">{data.address.city.name}</div>
 										<div className="clear"></div>
 									</li>
 								) : null}
-								{data.working_hours != "" ? (
+								{data.working_hours ? (
 									<li>
 										<img width="15" src={require("../img/popup-time.png")}/>
 										<div className="text">{data.working_hours}</div>
 										<div className="clear"></div>
 									</li>
 								) : null}
-								{data.benefit_1 != "" ? (
+								{data.benefit_1 ? (
 									<li>
 										<img width="15" src={require("../img/popup-benefit1.png")}/>
 										<div className="text">{data.benefit_1}</div>
 										<div className="clear"></div>
 									</li>
 								) : null}
-								{data.benefit_2 != "" ? (
+								{data.benefit_2 ? (
 									<li>
 										<img width="15" src={require("../img/popup-benefit2.png")}/>
 										<div className="text">{data.benefit_2}</div>
@@ -184,7 +184,7 @@ const CarouselLarge = React.createClass({
 								<h3 className="description-location">
 									<i className="fa fa-map-marker" aria-hidden="true"></i> <span>{data.company.address.city.name}</span>
 								</h3>
-								{data.company.category != null ? (
+								{data.company.category ? (
 									<h3 className="description-category">{data.company.category.name}</h3>
 								) : null}
 								<div className="description-links">

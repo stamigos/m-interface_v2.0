@@ -5,8 +5,8 @@ export default class Benefits extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			benefit1: 0,
-			benefit2: 0
+			benefit1: '',
+			benefit2: ''
 		}
 		this.changeBenefit1 = this.changeBenefit1.bind(this);
 		this.changeBenefit2 = this.changeBenefit2.bind(this);
@@ -25,7 +25,7 @@ export default class Benefits extends React.Component {
 	}
 
 	render() {
-		var number = this.state.benefit1 + this.state.benefit2;
+		var number = this.state.benefit1.length + this.state.benefit2.length;
 
 		return (
 			<div className="benefits">
