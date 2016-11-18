@@ -76,6 +76,7 @@ select {
 */  height: calc(100% - 80px);
 /*    min-height: 550px;
 */    background-color: #f6f4f9;
+    transition: left 0.5s linear;
     -webkit-transition: left 0.5s linear;
 }
 .content {
@@ -339,6 +340,7 @@ header {
     background: #40384c;
     font-family:sans-serif;
     color:#fff;
+    transition: width 0.5s linear;
     -webkit-transition: width 0.5s linear;
     overflow-y: auto; 
 }
@@ -381,6 +383,7 @@ header {
     background: #40384c;;
     font-family:sans-serif;
     color:#fff;
+    transition: width 0.5s linear;
     -webkit-transition: width 0.5s linear;
     overflow:hidden;
 }
@@ -431,6 +434,7 @@ header {
     font-size: 14px;
     font-weight: 400;
     opacity: 0; 
+    transition: opacity 0.5s ease-out;
     -webkit-transition: opacity 0.5s ease-out;
 }
 .sidebar .fa {
@@ -713,7 +717,8 @@ h2.location {
     top: 80px;
     height: 100%;
     overflow-y: auto;
-   -webkit-transition: left 0.5s linear;
+    transition: left 0.5s linear;
+    -webkit-transition: left 0.5s linear;
 }
 .job-detail {
     padding: 30px;
