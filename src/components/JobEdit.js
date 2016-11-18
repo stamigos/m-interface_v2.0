@@ -343,11 +343,14 @@ class JobEditContent extends React.Component {
 							<label className="label-for-check" htmlFor="DateToCheck">Nicht festgelegt</label>
 						</div>
 						<div className="clear"></div>
-						<label className="label-big">mogliche Arbeitstage</label>
 
-						<AvailabilityList />
+			             {/* TODO: remove comment, if API supports this
+			 						<label className="label-big">mogliche Arbeitstage</label>
+			  
+			             <AvailabilityList />
+			 						<div className="clear"></div>
+			             */}
 
-						<div className="clear"></div>
 						<input type="checkbox" name="SheduleJob" id="SheduleJob" defaultChecked="checked"/>
 						<label onClick={this.onScheduleClick.bind(this)} className="label-for-check label-big" htmlFor="SheduleJob">Job erst veröffentlichen am:</label>
 						<div className="clear"></div>

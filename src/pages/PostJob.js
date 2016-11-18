@@ -478,10 +478,11 @@ class PostJobContent extends React.Component {
 							<label className="label-for-check" htmlFor="DateToCheck">Nicht festgelegt</label>
 						</div>
 						<div className="clear"></div>
-						<label className="label-big">mogliche Arbeitstage</label>
+						{/* TODO: remove comment, if API supports this
+							<label className="label-big">mogliche Arbeitstage</label>
 
-						<AvailabilityList />
-
+							<AvailabilityList /> 
+						*/}
 						<div className="clear"></div>
 						<input type="checkbox" name="SheduleJob" id="SheduleJob" />
 						<label onClick={this.onScheduleClick.bind(this)} className="label-for-check label-big" htmlFor="SheduleJob">Job erst veröffentlichen am:</label>

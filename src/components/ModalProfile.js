@@ -294,6 +294,7 @@ export default class ModalProfile extends React.Component {
 					        	<div className="modal-applicant-profile-more">
 					        		<div className="more_info_wrapper">
 					        			<ul className="more_info_list">
+                          				 {/* TODO: remove comment, if API supports this 
 					        				<li className="more_info_wrapper-item">
 					        					<h2 className="title">Verfügbarkeit</h2>
 				        						<ul className="availability-list">
@@ -346,7 +347,7 @@ export default class ModalProfile extends React.Component {
 													</li>
 													<li className="location-list-item">
 														<i className="fa fa-map-marker" aria-hidden="true"></i> London, England
-													</li>
+													</li> 
 												</ul>
 											</li>
 											<li className="more_info_wrapper-item">
@@ -359,7 +360,7 @@ export default class ModalProfile extends React.Component {
 												<h2 className="title">Interessiert an:</h2>
 												<span className="more-info-point">Part-time</span>
 												<span className="more-info-point">Temporary</span>
-											</li>
+											</li> */}
 										</ul>
 									</div>
 								</div>
