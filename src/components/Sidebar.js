@@ -24,6 +24,11 @@ export default class Sidebar extends React.Component {
 	              </li>
 	            </ul>
 	          </div>
+						<div id="smile">
+							<a href="mailto:info@jobufo.com?subject=Ihr%20Feedback&amp;body=Liebes%20JobUFO-Team%2C%0Aich%20habe%20folgende%20Anregungen%20oder%20Lob%3A%0A%0A-%20%0A-%20%0A-%20%0A%0A%0AMit%20freundlichen%20Gr%C3%BC%C3%9Fen%0A%0AIhr%20JobUFO-Recruiter">
+								<div><i className="fa fa-smile-o" aria-hidden="true"></i></div>
+							</a>
+						</div>
 	      	</div>
 		);
 	}

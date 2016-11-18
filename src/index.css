@@ -336,11 +336,39 @@ header {
     top: 80px;
     height:100%;
     width:60px;
-    background: #40384c;;
+    background: #40384c;
     font-family:sans-serif;
     color:#fff;
     -webkit-transition: width 0.5s linear;
     overflow-y: auto; 
+}
+.sidebar-wrapper #smile
+{
+    position: absolute;
+    bottom: 100px;
+    height: 30px;
+    width: 100%;
+    text-align: center;
+}
+.sidebar-wrapper #smile a {
+    cursor: default!important;
+}
+.sidebar-wrapper #smile a div
+{
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
+    margin-left: 20px;
+    border-radius: 50%;
+    background-color: #685b7c;
+}
+.sidebar-wrapper #smile i.fa.fa-smile-o
+{
+    font-size: 38px;
+    line-height: 28px;
+    margin-left: -1px;
+    color: #40384c;
+    cursor: pointer;
 }
 .sidebar {
     position: absolute;
