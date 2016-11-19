@@ -79,6 +79,7 @@ class PostJobContent extends React.Component {
 			is_active: true,
 			benefit_1: null,
 			benefit_2: null,
+			workdays: null,
 			top_job: false,
 			video_crop_params: null
 		}
@@ -163,14 +164,19 @@ class PostJobContent extends React.Component {
 			working_hours: e.target.value
 		})
 	}
-	changeBenefit1(benefit_1) {
+	handleBenefit1(benefit_1) {
 		this.setState({
 			benefit_1: benefit_1
 		})
 	}
-	changeBenefit2(benefit_2) {
+	handleBenefit2(benefit_2) {
 		this.setState({
 			benefit_2: benefit_2
+		})
+	}
+	handleWorkdays(workdays) {
+		this.setState({
+			workdays: workdays
 		})
 	}
 	get_image_list() {
@@ -235,6 +241,7 @@ class PostJobContent extends React.Component {
 		data.is_active		  = this.state.is_active;
 		data.benefit_1        = this.state.benefit_1;
 		data.benefit_2        = this.state.benefit_2;
+		data.workdays		  = this.state.workdays;
 		data.top_job 		  = this.state.top_job;
 		data.image_list   	  = image_list;
 		data.preview_video 	  = data_video;
@@ -455,8 +462,10 @@ class PostJobContent extends React.Component {
 						<input onChange={this.handleSalary.bind(this)} type="text" name="Salary" id="Salary" className="Salary" placeholder="Bezahlung" />
 						<div className="clear"></div>
 						
-						<Benefits changeBenefit1={this.changeBenefit1.bind(this)} changeBenefit2={this.changeBenefit2.bind(this)}/>
-
+						{this.state.top_job ? (
+							<Benefits changeBenefit1={this.handleBenefit1.bind(this)} changeBenefit2={this.handleBenefit2.bind(this)}/>
+						) : null}
+						
 						<div className="half">
 							<DatePicker dateFormat="YYYY-MM-DD" 
 										className="date datePicker half" 
@@ -480,7 +489,7 @@ class PostJobContent extends React.Component {
 						<div className="clear"></div>
 						<label className="label-big">mogliche Arbeitstage</label>
 
-						<AvailabilityList />
+						<AvailabilityList changeWorkdays={this.handleWorkdays.bind(this)} />
 
 						<div className="clear"></div>
 						<input type="checkbox" name="SheduleJob" id="SheduleJob" />
