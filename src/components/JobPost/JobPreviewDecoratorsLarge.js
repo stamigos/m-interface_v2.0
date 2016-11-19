@@ -13,6 +13,7 @@ const CustomDecoratorsLarge = [
                 return (
                   <li style={self.getListItemStyles()} key={index}>
                     <button
+                      className="DecoratorLarge"
                       style={self.getButtonStyles(self.props.currentSlide === index)}
                       onClick={self.props.goToSlide.bind(null, index)}>
                     </button>

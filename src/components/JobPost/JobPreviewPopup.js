@@ -12,6 +12,13 @@ import CustomDecoratorsLarge from './JobPreviewDecoratorsLarge'
 import Popup from '../Popup'
 import '../../JobPreview.css'
 
+function resize() {
+	var resize = new Event("resize");
+	setTimeout(function() {
+		window.dispatchEvent(resize);
+	}, 1000);
+}
+
 const CarouselLarge = React.createClass({
 	mixins: [Carousel.ControllerMixin],
 	
@@ -19,7 +26,6 @@ const CarouselLarge = React.createClass({
 		event.preventDefault();
 		this.refs.carousel.nextSlide();
 	},
-	
 	handlesPrev(event) {
 		event.preventDefault();
 		this.refs.carousel.previousSlide();
@@ -28,9 +34,11 @@ const CarouselLarge = React.createClass({
 	render() {
 		var data = this.props.job;
 		var subsidiary = this.props.subsidiary;
-		var image_list = data.image_list.map(function(image, i) {
-			return <img className="image-slider-img" key={i} src={image.image} />
-		});
+		if (data.image_list) {
+			var image_list = data.image_list.map(function(image, i) {
+				return <img className="image-slider-img" key={i} src={image.image} />
+			});
+		}
 		if (data.video) {
 			image_list.unshift(
 				<div className="video-container">
@@ -55,13 +63,17 @@ const CarouselLarge = React.createClass({
 						<div className="box">
 							<div className="info">
 								<div className="name name-clickable" onClick={(e)=>this.handlesNext(e)}>{data.title}</div>
-								<div className="company">{subsidiary.company.name}</div>
+								{subsidiary.company ? (
+									<div className="company">{subsidiary.company.name}</div>
+								) : null}
 								<div className="place">{data.address.city.name}</div>
-								<div className="avatar">
-									<img src={subsidiary.company.logo} alt="" />
-								</div>
+								{subsidiary.company ? (
+									<div className="avatar">
+										<img src={subsidiary.company.logo} alt="" />
+									</div>
+								) : null}
 							</div>
-							{data.image_list[0] != null ? (
+							{data.image_list && data.image_list[0] != null ? (
 								<div className="image" style={{backgroundImage: "url("+data.image_list[0].image+")"}} >
 									<div className="benefs">
 										{data.benefit_1 ? (
@@ -111,7 +123,7 @@ const CarouselLarge = React.createClass({
 						<div className="arrow-back" onClick={(e)=>this.handlesPrev(e)}></div>
 					</div>
 					<div className="image-slider">
-						<Carousel decorators={CustomDecorators} className="image-slider-carousel">
+						<Carousel onShow={resize()} decorators={CustomDecorators} className="image-slider-carousel">
 							{image_list}
 						</Carousel>
 					</div>
@@ -182,11 +194,13 @@ const CarouselLarge = React.createClass({
 						</div>
 						<div className="description-section">
 							<h3 className="job_preview-subtitle">Unternehmensinformationen</h3>
-							<div className="image-left">
-								<img src={subsidiary.company.logo} width="45" height="45" alt="" />
-							</div>
+							{subsidiary.company ? (
+								<div className="image-left">
+									<img src={subsidiary.company.logo} width="45" height="45" alt="" />
+								</div>
+							) : null}
 							<div className="text-right">
-								{subsidiary ? (
+								{subsidiary.company ? (
 									<h3 className="iphone-section-title">{subsidiary.company.name}</h3>
 								) : null}
 								{data.address ? (
@@ -194,7 +208,7 @@ const CarouselLarge = React.createClass({
 										<i className="fa fa-map-marker" aria-hidden="true"></i> <span className="align-left">{data.address.city.name}</span>
 									</h3>
 								) : null}
-								{subsidiary.company.category ? (
+								{subsidiary.company && subsidiary.company.category ? (
 									<h3 className="description-category">{subsidiary.company.category.name}</h3>
 								) : null}
 							</div>
