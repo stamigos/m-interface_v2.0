@@ -66,7 +66,7 @@ export default class ModalVideoCrop extends React.Component {
 	}
 	async selectVideo(e) {
 		var self = this;
-	  	var file = this.refs.file.files[0];
+	  	var file = this.refs.fileVideo.files[0];
 	  	var reader = new FileReader();
 	  	var url = reader.readAsDataURL(file);
 	  	this.setState({
@@ -80,6 +80,7 @@ export default class ModalVideoCrop extends React.Component {
 				isLoading: false
 			})
 	    }.bind(this);
+	        //$(".popup-content video")
 	}
     onDragStart(e, ui) {
         console.log("ui:", ui)
@@ -108,12 +109,19 @@ export default class ModalVideoCrop extends React.Component {
     	})
     }
     getCropParams(params) {
-    	if (Math.floor(this.state.videoRealWidth) != 600) {
+    	var videoRealWidth = this.state.videoRealWidth;
+    	var videoRealHeight = this.state.videoRealHeight;
+
+    	if (!(!!videoRealWidth) && !(!!videoRealHeight)) {
+			videoRealWidth = $("#videoFile video")[0].videoWidth;
+			videoRealHeight = $("#videoFile video")[0].videoHeight;
+    	}
+    	if (Math.floor(videoRealWidth) != 600) {
 			var crop_params = {}
-			var top = Math.floor((this.state.videoRealWidth * 338)/600);
+			var top = Math.floor((videoRealWidth * 338)/600);
 			crop_params.slice_start = params.slice_start;
 			crop_params.x_min = 0;
-			crop_params.x_max = Math.floor(this.state.videoRealWidth);
+			crop_params.x_max = Math.floor(videoRealWidth);
 			crop_params.y_min = Math.floor(this.state.top_min);
 			crop_params.y_max = top + Math.floor(this.state.top_min);
 			crop_params.video = this.state.videoSrc;
@@ -164,7 +172,7 @@ export default class ModalVideoCrop extends React.Component {
 					<span>JobUFO’s Videos sind im Format 16:9.<br />
 					Wenn dein Video größer ist, helfen wir dir hier es zuzuschneiden.</span>
 				</label>
-				<input key={timestamp} onChange={this.selectVideo.bind(this)} ref="file" className="fileinput" accept="video/mp4,video/x-m4v,video/*" name="postjobVideo" id="postjobVideo" type="file" />
+				<input key={timestamp} onChange={this.selectVideo.bind(this)} ref="fileVideo" className="fileinput" accept="video/mp4,video/x-m4v,video/*" name="postjobVideo" id="postjobVideo" type="file" />
 				<Popup {...popupOptions} />
 				{this.state.cropped ? (
 					<VideoPreview videoSrc={this.state.videoSrc} onClear={this.onClear.bind(this)} getCropParams={this.getCropParams.bind(this)} xy_params={this.state.crop_params} />

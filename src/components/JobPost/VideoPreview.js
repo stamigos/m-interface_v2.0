@@ -43,24 +43,24 @@ export default class VideoPreview extends React.Component {
 		}
 		this.convertCropToVirtual = this.convertCropToVirtual.bind(this)
 	}
-	componentWillMount() {
-		this.props.getCropParams({
-			slice_start: 0,
-			x_min: this.props.xy_params.x_min,
-			x_max: this.props.xy_params.x_max,
-			y_min: this.props.xy_params.y_min,
-			y_max: this.props.xy_params.y_max,
-			video: this.props.videoSrc
-		})
-		var crop = {
-			slice_start: 0,
-			x_min: this.props.xy_params.x_min,
-			x_max: this.props.xy_params.x_max,
-			y_min: this.props.xy_params.y_min,
-			y_max: this.props.xy_params.y_max,
-			video: this.props.videoSrc	
-		}
-	}
+	// componentWillMount() {
+	// 	this.props.getCropParams({
+	// 		slice_start: 0,
+	// 		x_min: this.props.xy_params.x_min,
+	// 		x_max: this.props.xy_params.x_max,
+	// 		y_min: this.props.xy_params.y_min,
+	// 		y_max: Math.floor((this.props.xy_params.y_max * 338)/600),
+	// 		video: this.props.videoSrc
+	// 	})
+	// 	var crop = {
+	// 		slice_start: 0,
+	// 		x_min: this.props.xy_params.x_min,
+	// 		x_max: this.props.xy_params.x_max,
+	// 		y_min: this.props.xy_params.y_min,
+	// 		y_max: this.props.xy_params.y_max,
+	// 		video: this.props.videoSrc	
+	// 	}
+	// }
 	convertCropToVirtual() {
 		var y_min = this.props.xy_params.y_min;
 		var real_height = $("#videoFile video")[0].videoHeight;
@@ -128,6 +128,18 @@ export default class VideoPreview extends React.Component {
 	}
 	onLoadedData() {
 		console.log("loaded")
+		var videoRealWidth = $("#videoFile video")[0].videoWidth;
+		var videoRealHeight = $("#videoFile video")[0].videoHeight;
+		console.log("popup-content video width:", videoRealWidth)
+		console.log("popup-content video height:", videoRealHeight)
+		this.props.getCropParams({
+			slice_start: 0,
+			x_min: this.props.xy_params.x_min,
+			x_max: videoRealWidth,
+			y_min: this.props.xy_params.y_min,
+			y_max: Math.floor((videoRealWidth * 338)/600),
+			video: this.props.videoSrc
+		})
 		this.convertCropToVirtual()
 		this.setState({
 			duration: this.refs.video.state.duration,

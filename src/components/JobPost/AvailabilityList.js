@@ -48,8 +48,7 @@ export default class AvailabilityList extends React.Component {
 	}
 	changeWorkdays(event) {
 		var day = event.target.value;
-		var workdaysArr = [];
-		var i = 0;
+		var workdaysArr = new Array();
 		switch (day) {
 			case '0': 
 				monday = !monday;
@@ -73,16 +72,15 @@ export default class AvailabilityList extends React.Component {
 				sunday = !sunday;
 				break;
 		}
-		if (monday) {workdaysArr[i] = '0'; i++;}
-		if (tuesday) {workdaysArr[i] = '1';  i++;}
-		if (wednesday) {workdaysArr[i] = '2'; i++;}
-		if (thursday) {workdaysArr[i] = '3'; i++;}
-		if (friday) {workdaysArr[i] = '4'; i++;}
-		if (saturday) {workdaysArr[i] = '5'; i++;}
-		if (sunday) {workdaysArr[i] = '6';}
-		var workdays = workdaysArr.join(',');
+		if (monday) {workdaysArr.push(0)}
+		if (tuesday) {workdaysArr.push(1)}
+		if (wednesday) {workdaysArr.push(2)}
+		if (thursday) {workdaysArr.push(3)}
+		if (friday) {workdaysArr.push(4)}
+		if (saturday) {workdaysArr.push(5)}
+		if (sunday) {workdaysArr.push(6)}
 		
-		this.props.changeWorkdays(workdays);
+		this.props.changeWorkdays(workdaysArr);
 	}
 
 	render() {

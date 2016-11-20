@@ -199,7 +199,13 @@ class PostJobContent extends React.Component {
 		return image_list;
 	}
 	getVideoCropParams(params) {
+		// if ((isNaN(params.x_max) || isNaN(params.y_max)) && $("#videoFile video")[0].videoWidth) {
+		// 	params.x_max = $("#videoFile video")[0].videoWidth;
+		// 	params.y_max = $("#videoFile video")[0].videoHeight;
+		// }
+		console.log("fileVideo")
 		console.log("video crop params:", params)
+
 		this.setState({
 			video_crop_params: params
 		})
@@ -241,7 +247,7 @@ class PostJobContent extends React.Component {
 		data.is_active		  = this.state.is_active;
 		data.benefit_1        = this.state.benefit_1;
 		data.benefit_2        = this.state.benefit_2;
-		data.workdays		  = this.state.workdays;
+		// data.workdays		  = this.state.workdays;
 		data.top_job 		  = this.state.top_job;
 		data.image_list   	  = image_list;
 		data.preview_video 	  = data_video;
@@ -263,7 +269,6 @@ class PostJobContent extends React.Component {
 		})
 	}
 	getLeftImage(image) {
-		console.log("got left image:", image)
 		this.setState({
 			isShowingLeftModal: false,
 			left_image: image
@@ -276,7 +281,6 @@ class PostJobContent extends React.Component {
 		})
 	}
 	getRightImage(image) {
-		console.log("got right image:", image)
 		this.setState({
 			isShowingRightModal: false,
 			right_image: image
