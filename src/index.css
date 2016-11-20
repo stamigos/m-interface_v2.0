@@ -709,6 +709,9 @@ h2.location {
     margin-top: 7px;
     color: #9f92b1;
 }
+h2.location i {
+    padding-right: 5px;
+}
 .job-detail-wrapper {
     position: fixed;
     background-color: #fff;
@@ -2129,16 +2132,19 @@ form#job-post-form
 }
 
 
-#post_job .Salary {
+#post_job .Salary,
+#job-post-form .Salary {
     background-image: url("img/Salary.png");
     background-repeat: no-repeat;
     background-position: 100% 50%;
+    padding-right: 25px!important;
 }
 #post_job .Benefit input,
 #job-post-form .Benefit input {
     background-image: url("img/Benefit.png");
     background-repeat: no-repeat;
     background-position: 100% 50%;
+    padding-right: 25px!important;
 }
 #post_job .Benefit p,
 #job-post-form .Benefit p {
@@ -2534,6 +2540,7 @@ input[type='text'].half, select.half {
 
     width: 33px;
     margin-right: 25px;
+    margin-top: 10px;
 }
 #job-post-form h2.day,
 #job-post-edit-form h2.day

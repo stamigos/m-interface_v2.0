@@ -3,6 +3,7 @@ import DatePicker from 'react-datepicker'
 import TimePicker from 'rc-time-picker';
 import moment from 'moment'
 
+import Benefits from '../components/JobPost/Benefits'
 import AvailabilityList from '../components/JobPost/AvailabilityList'
 import TypeAheadSubsidiary from '../components/JobPost/TypeAheadSubsidiary'
 import JobPreviewPopup from '../components/JobPost/JobPreviewPopup'
@@ -37,6 +38,7 @@ class JobEditContent extends React.Component {
 			image_list: this.props.job.image_list,
 			benefit_1: this.props.job.benefit_1,
 			benefit_2: this.props.job.benefit_2,
+			workdays: this.props.job.workdays,
 			video: this.props.job.video ? this.props.job.video.preview_image_list[0] : null
 			}
 	}
@@ -117,15 +119,20 @@ class JobEditContent extends React.Component {
 			working_hours: e.target.value
 		})
 	}
-	handleBenefit_1(e) {
+	handleBenefit1(benefit_1) {
 		this.setState({
-			benefit_1: e.target.value
+			benefit_1: benefit_1
 		});
 	}
-	handleBenefit_2(e) {
+	handleBenefit2(benefit_2) {
 		this.setState({
-			benefit_2: e.target.value
+			benefit_2: benefit_2
 		});
+	}
+	handleWorkdays(workdays) {
+		this.setState({
+			workdays: workdays
+		})
 	}
 	openVacancyDetail() {
 		this.props.openVacancyDetail();
@@ -192,6 +199,7 @@ class JobEditContent extends React.Component {
 		data.working_hours    = this.state.working_hours;
 		data.benefit_1        = this.state.benefit_1;
 		data.benefit_2        = this.state.benefit_2;
+		data.workdays		  = this.state.workdays;
 
 		if (image_list) {
 			data.image_list    = image_list;
@@ -243,7 +251,7 @@ class JobEditContent extends React.Component {
 									</div>
 							</div>)
 		}
-		var number = this.state.benefit_1.length + this.state.benefit_2.length;
+
 		return (
 			<div className="job-post-content">
 				<div className="post-job-content-header align-center">
@@ -311,17 +319,11 @@ class JobEditContent extends React.Component {
 						<div className="clear"></div>
 						<input value={this.state.payment} onChange={this.handleSalary.bind(this)} type="text" name="Salary" id="Salary" className="Salary" placeholder="Bezahlung" />
 						<div className="clear"></div>
-						<div className="benefits">
-							<div className="half Benefit">
-								<input value={this.state.benefit_1} onChange={this.handleBenefit_1.bind(this)} type='text' className="half benefit_1" placeholder="Job Vorteil 1" name="benefit_1" />
-								<p>Maximale Zeichen: 35</p>
-							</div>
-							<div className="half right Benefit">
-								<input value={this.state.benefit_2} onChange={this.handleBenefit_2.bind(this)} type='text' className="half right benefit_2" placeholder="Job Vorteil 2" name="benefit_2"  />
-								<p><b>{number}</b> / 35</p>	
-							</div>
-							<div className="clear"></div>
-						</div>
+						
+						{this.state.top_job ? (
+							<Benefits benefit1={this.state.benefit_1} benefit2={this.state.benefit_2} changeBenefit1={this.handleBenefit1.bind(this)} changeBenefit2={this.handleBenefit2.bind(this)} />
+						) : null}
+						
 						<div className="half">
 							<DatePicker dateFormat="YYYY-MM-DD" 
 										className="date datePicker half" 
@@ -344,12 +346,16 @@ class JobEditContent extends React.Component {
 						</div>
 						<div className="clear"></div>
 
+<<<<<<< HEAD
 			             {/* TODO: remove comment, if API supports this
 			 						<label className="label-big">mogliche Arbeitstage</label>
 			  
 			             <AvailabilityList />
 			 						<div className="clear"></div>
 			             */}
+=======
+						<AvailabilityList workdays={this.state.workdays} changeWorkdays={this.handleWorkdays.bind(this)} />
+>>>>>>> modalBranch
 
 						<input type="checkbox" name="SheduleJob" id="SheduleJob" defaultChecked="checked"/>
 						<label onClick={this.onScheduleClick.bind(this)} className="label-for-check label-big" htmlFor="SheduleJob">Job erst veröffentlichen am:</label>

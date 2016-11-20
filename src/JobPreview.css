@@ -3,7 +3,7 @@
     background-repeat: no-repeat;
     height: 350px;
     padding-top: 65px;
-    background-position-x: center;
+    background-position: center top;
     background-size: 320px;
 }
 .job-preview .iphone-screen {
@@ -184,7 +184,7 @@
 }
 .job-preview .iphone-screen .image-slider {
     margin-top: 37px;
-    height: 120px;
+    height: 120px!important;
     width: 100%;
     overflow: hidden;
     background-color: rgba(0,0,0,0.05);
@@ -193,19 +193,26 @@
 .job-preview .iphone-screen .image-slider .image-slider-carousel {
     height: 120px!important;
     width: 100%;
+    visibility: visible!important;
+}
+.job-preview .iphone-screen .image-slider .image-slider-carousel .slider-list {
+    height: 120px!important;
+}
+.job-preview .iphone-screen .image-slider .image-slider-carousel .slider-list .slider-slide {
+    height: 120px!important;
 }
 .job-preview .iphone-screen .image-slider .image-slider-carousel img.image-slider-img {
-    min-height: 120px;
+    min-height: 120px!important;
     width: 100%;
 }
 .job-preview .iphone-screen .video-container {
-    height: 120px;
+    height: 120px!important;
     width: 100%;
     overflow: hidden;
-    position: relative; 
+    position: relative;
 }
 .job-preview .iphone-screen .video-container Video {
-    min-height: 120px;
+    min-height: 120px!important;
     width: 100%;
     cursor: default;
 }
@@ -290,7 +297,6 @@
     font-size: 13px;
     font-weight: 600;
     line-height: 1.5;
-    width: 145px;
     margin-bottom: 3px;
 }
 .job-preview .iphone-screen .body-left .box .name.name-clickable {
