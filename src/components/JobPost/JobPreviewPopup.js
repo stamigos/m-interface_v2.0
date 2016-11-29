@@ -2,6 +2,8 @@ import React from 'react'
 import Carousel from 'nuka-carousel'
 import Img from 'react-image-load'
 import Video from 'react-html5video'
+import ReactSpinner from 'react-spinjs'
+
 
 //Mixin
 import mixins from 'es6-mixins';
@@ -39,7 +41,7 @@ const CarouselLarge = React.createClass({
 				return <img className="image-slider-img" key={i} src={image.image} />
 			});
 		}
-		if (data.video) {
+		if (data.preview_video) {
 			image_list.unshift(
 				<img key={image_list.length+1} className="image-slider-img" src={data.preview_video.video_capture} />
 					// <div key={image_list.length+1} className="video-container">
@@ -257,10 +259,15 @@ export default class JobPreviewPopup extends React.Component {
 				company: {
 					name: ''
 				}
-			}
+			},
+			isLoading: false
 		}
 	}
 	post_job() {
+		this.setState({
+			isLoading: true
+		})
+		var self = this;
 		console.log("post job")
 		console.log("form_data:", this.state.form_data)
 		var headers = new Headers();
@@ -281,6 +288,9 @@ export default class JobPreviewPopup extends React.Component {
 			})
 			.then(function(result) {
 				console.log("result post:", result);
+				self.setState({
+					isLoading: false
+				})
 				window.location.reload();
 			}).catch(function(reason) {
 				console.log("Error:", reason)
@@ -300,7 +310,8 @@ export default class JobPreviewPopup extends React.Component {
 	render() {
 		console.log("data:", this.state.form_data);
 		console.log("subsidiary:", this.state.subsidiary);
-		var preview_html = (
+		var preview_html = this.state.isLoading ?
+			<ReactSpinner/> : (
 				<div className="job-preview">
 					<div className="iphone-screen">
 						<CarouselLarge job={this.state.form_data} subsidiary={this.state.subsidiary} />

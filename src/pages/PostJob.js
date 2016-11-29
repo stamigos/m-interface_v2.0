@@ -214,8 +214,9 @@ class PostJobContent extends React.Component {
 	get_video() {
 		var data_video = {};
 		var params = this.state.video_crop_params;
-		    params.video_capture = this.shoot();
+
 		if (params) {
+			params.video_capture = this.shoot();
 			data_video.video = params.hasOwnProperty("video") ? params.video.split(",")[1] : null;
 			data_video.bypass_cropping = false;
 			data_video.slice_start = Math.abs(params.slice_start);
@@ -238,17 +239,20 @@ class PostJobContent extends React.Component {
  * @return {Canvas}
  */
  capture(video, scaleFactor) {
-    if(scaleFactor == null){
-        scaleFactor = 1;
-    }
-    var w = video.videoWidth * scaleFactor;
-    var h = video.videoHeight * scaleFactor;
-    var canvas = document.createElement('canvas');
-        canvas.width  = w;
-        canvas.height = h;
-    var ctx = canvas.getContext('2d');
-        ctx.drawImage(video, 0, 0, w, h);
-    return canvas;
+ 	if (video) {
+	    if(scaleFactor == null){
+	        scaleFactor = 1;
+	    }
+	    var w = video.videoWidth * scaleFactor;
+	    var h = video.videoHeight * scaleFactor;
+	    var canvas = document.createElement('canvas');
+	        canvas.width  = w;
+	        canvas.height = h;
+	    var ctx = canvas.getContext('2d');
+	        ctx.drawImage(video, 0, 0, w, h);
+	    return canvas
+ 	}
+ 	return null
 } 
  
 /**
@@ -258,15 +262,10 @@ class PostJobContent extends React.Component {
     var video  = $('#videoFile video')[0];
     // var output = document.getElementById('output');
     var canvas = this.capture(video, 1);
-    return canvas.toDataURL('image/png')
-    //     canvas.onclick = function(){
-    //         window.open(this.toDataURL());
-    //     };
-    // snapshots.unshift(canvas);
-    // output.innerHTML = '';
-    // for(var i=0; i<4; i++){
-    //     output.appendChild(snapshots[i]);
-    // }
+    if (canvas) {
+    	return canvas.toDataURL('image/png')
+    }
+    return null
 }
 	onSubmit(e) {
 		e.preventDefault();
