@@ -1,7 +1,7 @@
 .popup-container .job-preview {
 	background-image: url("img/iphone-img.png");
     background-repeat: no-repeat;
-    height: 350px;
+    height: 382px;
     padding-top: 65px;
     background-position: center top;
     background-size: 320px;
@@ -10,7 +10,7 @@
 	width: 238px;
     margin-left: 191px;
     margin-top: 2px;
-    height: 283px;
+    height: 315px;
     cursor: default;
 }
 .job-preview .iphone-screen * {
@@ -26,7 +26,7 @@
 .job-preview .iphone-screen .right-iphone-screen {
     overflow-y: auto;
     overflow-x: hidden;
-    height: 283px;
+    height: 310px;
 }
 .job-preview .iphone-screen .header-right {
 	background-image: url("img/header-left.png");

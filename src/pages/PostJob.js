@@ -219,15 +219,18 @@ class PostJobContent extends React.Component {
 	get_video() {
 		var data_video = {};
 		var params = this.state.video_crop_params;
-		data_video.video = params.video.split(",")[1];
-		data_video.bypass_cropping = false;
-		data_video.slice_start = Math.abs(params.slice_start);
-		data_video.x_min = Math.abs(params.x_min);
-		data_video.x_max = Math.abs(params.x_max);
-		data_video.y_min = Math.abs(params.y_min);
-		data_video.y_max = Math.abs(params.y_max);
-		data_video.mute  = true;
-		return data_video;
+		if (params) {
+			data_video.video = params.hasOwnProperty("video") ? params.video.split(",")[1] : null;
+			data_video.bypass_cropping = false;
+			data_video.slice_start = Math.abs(params.slice_start);
+			data_video.x_min = Math.abs(params.x_min);
+			data_video.x_max = Math.abs(params.x_max);
+			data_video.y_min = Math.abs(params.y_min);
+			data_video.y_max = Math.abs(params.y_max);
+			data_video.mute  = true;
+			return data_video;
+		}
+		return null;
 	}
 	onSubmit(e) {
 		e.preventDefault();
@@ -250,9 +253,9 @@ class PostJobContent extends React.Component {
 		// data.workdays		  = this.state.workdays;
 		data.top_job 		  = this.state.top_job;
 		data.image_list   	  = image_list;
-		data.preview_video 	  = data_video;
+		data.preview_video 	  = data_video ? data_video : null;
 		data.video 			  = {
-									video: data_video.video,
+									video: data_video ? data_video.video : null,
 									bypass_cropping: true,
 								}
 		this.setState({

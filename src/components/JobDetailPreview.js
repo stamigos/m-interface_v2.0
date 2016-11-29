@@ -7,8 +7,8 @@ import Video from 'react-html5video'
 import mixins from 'es6-mixins';
 import BackboneMixin from '../mixin/BackboneMixin';
 
-import CustomDecorators from './JobPost/JobPreviewDecorators'
-import CustomDecoratorsLarge from './JobPost/JobPreviewDecoratorsLarge'
+import CustomDecorators from './JobPreviewDecorators'
+import CustomDecoratorsLarge from './JobPreviewDecoratorsLarge'
 import Popup from './Popup'
 import '../JobPreview.css'
 

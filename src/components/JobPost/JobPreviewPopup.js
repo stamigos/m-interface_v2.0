@@ -41,11 +41,9 @@ const CarouselLarge = React.createClass({
 		}
 		if (data.video) {
 			image_list.unshift(
-					<div className="video-container">
+					<div key={image_list.length+1} className="video-container">
 						<Video>
 							<source type="video/mp4" src={"data:video/mp4;base64," + data.video.video} /> 
-							<source type="video/ogg" src={"data:video/ogg;base64," + data.video.video} /> 
-							<source type="video/webm" src={"data:video/webm;base64," + data.video.video} />
 						</Video>
 						<div className="video-controls">
 							<img width="30" height="30" src={require("../../img/play-button.png")} />
@@ -66,7 +64,9 @@ const CarouselLarge = React.createClass({
 								{subsidiary.company ? (
 									<div className="company">{subsidiary.company.name}</div>
 								) : null}
-								<div className="place">{data.address.city.name}</div>
+								{data.address ? (
+									<div className="place">{data.address.city.name}</div>
+								) : null}
 								{subsidiary.company ? (
 									<div className="avatar">
 										<img src={subsidiary.company.logo} alt="" />
@@ -150,7 +150,7 @@ const CarouselLarge = React.createClass({
 										<div className="clear"></div>
 									</li>
 								) : null}
-								{data.address.city.name ? (
+								{data.address ? (
 									<li>
 										<img width="15" src={require("../../img/popup-location.png")}/>
 										<div className="text">{data.address.city.name}</div>
