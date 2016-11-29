@@ -170,8 +170,6 @@ export default class VideoPreview extends React.Component {
 					<div id="videoFile" style={{marginTop: this.state.y_offset}}>
 				        <Video controls ref="video" onTimeUpdate={this.onTimeUpdate.bind(this)} onLoadedData={this.onLoadedData.bind(this)}>
 							  <source type="video/mp4" src={this.props.videoSrc} /> 
-							  <source type="video/ogg" src={this.props.videoSrc} /> 
-							  <source type="video/webm" src={this.props.videoSrc} /> 
 							  <Controls />
   				        </Video>
 					</div>

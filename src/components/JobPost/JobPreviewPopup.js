@@ -41,15 +41,16 @@ const CarouselLarge = React.createClass({
 		}
 		if (data.video) {
 			image_list.unshift(
-					<div key={image_list.length+1} className="video-container">
-						<Video>
-							<source type="video/mp4" src={"data:video/mp4;base64," + data.video.video} /> 
-						</Video>
-						<div className="video-controls">
-							<img width="30" height="30" src={require("../../img/play-button.png")} />
-							<img width="30" height="30" src={require("../../img/360.png")} />
-						</div>
-					</div>
+				<img key={image_list.length+1} className="image-slider-img" src={data.preview_video.video_capture} />
+					// <div key={image_list.length+1} className="video-container">
+					// 	<Video>
+					// 		<source type="video/mp4" src={"data:video/mp4;base64," + data.video.video} /> 
+					// 	</Video>
+					// 	<div className="video-controls">
+					// 		<img width="30" height="30" src={require("../../img/play-button.png")} />
+					// 		<img width="30" height="30" src={require("../../img/360.png")} />
+					// 	</div>
+					// </div>
 			)
 		}
 

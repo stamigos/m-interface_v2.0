@@ -2,6 +2,7 @@ import React from 'react';
 import DatePicker from 'react-datepicker'
 import TimePicker from 'rc-time-picker';
 import moment from 'moment'
+import jquery from 'jquery'
 
 // Custom imports
 import NormalTopJob from '../components/JobPost/NormalTopJob'
@@ -19,6 +20,7 @@ import { getMonth, formatCheckFromDate } from '../utils';
 import '../react-datepicker.css'
 import '../TimePicker.css'
 
+var $ = jquery;
 
 class PostJobContent extends React.Component {
 	constructor(props) {
@@ -85,6 +87,8 @@ class PostJobContent extends React.Component {
 		}
 		this.get_image_list = this.get_image_list.bind(this);
 		this.get_video = this.get_video.bind(this);
+		this.capture = this.capture.bind(this);
+		this.shoot = this.shoot.bind(this);
 	}
 	onScheduleClick() {
 		this.setState({scheduleClicked: !this.state.scheduleClicked})
@@ -195,23 +199,14 @@ class PostJobContent extends React.Component {
 			imageRight.index = 1;
 			image_list.push(imageRight);
 		}
-		console.log("in get_image_list:", image_list)
 		return image_list;
 	}
 	getVideoCropParams(params) {
-		// if ((isNaN(params.x_max) || isNaN(params.y_max)) && $("#videoFile video")[0].videoWidth) {
-		// 	params.x_max = $("#videoFile video")[0].videoWidth;
-		// 	params.y_max = $("#videoFile video")[0].videoHeight;
-		// }
-		console.log("fileVideo")
-		console.log("video crop params:", params)
-
 		this.setState({
 			video_crop_params: params
 		})
 	}
 	getSubsidiary(subsidiary) {
-		console.log("subsidiary:", subsidiary)
 		this.setState({
 			subsidiary: subsidiary
 		})
@@ -219,6 +214,7 @@ class PostJobContent extends React.Component {
 	get_video() {
 		var data_video = {};
 		var params = this.state.video_crop_params;
+		    params.video_capture = this.shoot();
 		if (params) {
 			data_video.video = params.hasOwnProperty("video") ? params.video.split(",")[1] : null;
 			data_video.bypass_cropping = false;
@@ -228,10 +224,50 @@ class PostJobContent extends React.Component {
 			data_video.y_min = Math.abs(params.y_min);
 			data_video.y_max = Math.abs(params.y_max);
 			data_video.mute  = true;
+			data_video.video_capture = params.video_capture;
 			return data_video;
 		}
 		return null;
 	}
+	/**
+ * Captures a image frame from the provided video element.
+ *
+ * @param {Video} video HTML5 video element from where the image frame will be captured.
+ * @param {Number} scaleFactor Factor to scale the canvas element that will be return. This is an optional parameter.
+ *
+ * @return {Canvas}
+ */
+ capture(video, scaleFactor) {
+    if(scaleFactor == null){
+        scaleFactor = 1;
+    }
+    var w = video.videoWidth * scaleFactor;
+    var h = video.videoHeight * scaleFactor;
+    var canvas = document.createElement('canvas');
+        canvas.width  = w;
+        canvas.height = h;
+    var ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, 0, w, h);
+    return canvas;
+} 
+ 
+/**
+ * Invokes the <code>capture</code> function and attaches the canvas element to the DOM.
+ */
+ shoot(){
+    var video  = $('#videoFile video')[0];
+    // var output = document.getElementById('output');
+    var canvas = this.capture(video, 1);
+    return canvas.toDataURL('image/png')
+    //     canvas.onclick = function(){
+    //         window.open(this.toDataURL());
+    //     };
+    // snapshots.unshift(canvas);
+    // output.innerHTML = '';
+    // for(var i=0; i<4; i++){
+    //     output.appendChild(snapshots[i]);
+    // }
+}
 	onSubmit(e) {
 		e.preventDefault();
 		var image_list = this.get_image_list();
