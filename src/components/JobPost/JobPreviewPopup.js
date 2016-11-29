@@ -7,8 +7,8 @@ import Video from 'react-html5video'
 import mixins from 'es6-mixins';
 import BackboneMixin from '../../mixin/BackboneMixin';
 
-import CustomDecorators from './JobPreviewDecorators'
-import CustomDecoratorsLarge from './JobPreviewDecoratorsLarge'
+import CustomDecorators from '../JobPreviewDecorators'
+import CustomDecoratorsLarge from '../JobPreviewDecoratorsLarge'
 import Popup from '../Popup'
 import '../../JobPreview.css'
 
@@ -41,17 +41,17 @@ const CarouselLarge = React.createClass({
 		}
 		if (data.video) {
 			image_list.unshift(
-				<div className="video-container">
-					<Video>
-						<source type="video/mp4" src={"data:video/mp4;base64," + data.video.video} /> 
-						<source type="video/ogg" src={"data:video/ogg;base64," + data.video.video} /> 
-						<source type="video/webm" src={"data:video/webm;base64," + data.video.video} />
-					</Video>
-					<div className="video-controls">
-						<img width="30" height="30" src={require("../../img/play-button.png")} />
-						<img width="30" height="30" src={require("../../img/360.png")} />
+					<div className="video-container">
+						<Video>
+							<source type="video/mp4" src={"data:video/mp4;base64," + data.video.video} /> 
+							<source type="video/ogg" src={"data:video/ogg;base64," + data.video.video} /> 
+							<source type="video/webm" src={"data:video/webm;base64," + data.video.video} />
+						</Video>
+						<div className="video-controls">
+							<img width="30" height="30" src={require("../../img/play-button.png")} />
+							<img width="30" height="30" src={require("../../img/360.png")} />
+						</div>
 					</div>
-				</div>
 			)
 		}
 
@@ -60,7 +60,7 @@ const CarouselLarge = React.createClass({
 				<div className="left-iphone-screen">
 					<div className="header-left"></div>
 					<div className="body-left">
-						<div className="box">
+						<div className="box">							
 							<div className="info">
 								<div className="name name-clickable" onClick={(e)=>this.handlesNext(e)}>{data.title}</div>
 								{subsidiary.company ? (
